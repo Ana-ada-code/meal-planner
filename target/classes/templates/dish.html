@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}" th:replace="~{fragments/layout :: layout(~{::.uk-container})}">
+<head>
+    <title th:text="${title}"></title>
+</head>
+
+<body>
+
+<div class="uk-container uk-margin-large-top uk-margin-large-bottom" uk-height-viewport="expand: true">
+    <div class="uk-grid" uk-grid>
+        <div class="uk-width-1-2">
+            <img th:src="${dish.image}" th:alt="${dish.name}" class="uk-text-center">
+        </div>
+        <div class="uk-width-1-2">
+            <h1 th:text="${dish.name}"></h1>
+            <div class="uk-margin-top">
+                <div th:if="!${dish.energy} and !${dish.protein} and !${dish.carbohydrates} and !${dish.fat} and
+                !${dish.fiber} and !${dish.salt}" class="uk-margin uk-text-lead uk-alert"
+                     th:text="'Brak danych o wartościach odżywczych'"></div>
+                <div th:if="${dish.energy} or ${dish.protein} or ${dish.carbohydrates} or ${dish.fat} or
+                ${dish.fiber} or ${dish.salt}" class="uk-margin uk-text-lead" th:text="'Wartości odżywcze'"></div>
+                <div th:if="${dish.energy}" class="uk-margin" th:text="'Kalorie: ' + ${dish.energy} + ' kcal'"></div>
+                <div th:if="${dish.protein}" class="uk-margin" th:text="'Białko: ' + ${dish.protein} + ' g'"></div>
+                <div th:if="${dish.carbohydrates}" class="uk-margin"
+                     th:text="'Węglowodany: '+ ${dish.carbohydrates} + ' g'"></div>
+                <div th:if="${dish.fat}" class="uk-margin" th:text="'Tłuszcz: '+ ${dish.fat} + ' g'"></div>
+                <div th:if="${dish.fiber}" class="uk-margin" th:text="'Błonnik: '+ ${dish.fiber} + ' g'"></div>
+                <div th:if="${dish.salt}" class="uk-margin" th:text="'Sól: '+ ${dish.salt} + ' g'"></div>
+                <div class="uk-margin-large-top">
+                    <a th:href="@{/selected-dish/add/{name}(name=${dish.name})}"
+                       class="uk-button uk-button-secondary uk-width-1-2">Wybierz danie</a>
+                </div>
+
+                <div class="uk-margin-top">
+                    <button class="uk-icon-button uk-button-secondary" uk-icon="menu"></button>
+                    <div uk-dropdown>
+                        <ul class="uk-nav uk-dropdown-nav">
+                            <li>
+
+                                <form action="#" th:action="@{/edit-dish/{name}(name=${dish.name})}" th:method="get">
+                                    <button class="uk-button uk-button-text" type="submit">Edytuj danie</button>
+                                </form>
+
+                            </li>
+                            <li>
+                                <form action="#" th:action="@{/selected-dish/remove-by-name/{name}(name=${dish.name})}"
+                                      th:method="delete">
+                                    <button class="uk-button uk-button-text" type="submit">Usuń danie z wybranych
+                                    </button>
+                                </form>
+                            </li>
+                            <li>
+                                <form action="#" th:action="@{/dish/{name}(name=${dish.name})}"
+                                      th:method="delete">
+                                    <button class="uk-button uk-button-text" type="submit">Usuń danie</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uk-grid" uk-grid>
+
+            <a th:if="${dish.source}" class="uk-margin uk-button" th:href="${dish.source}">Strona źródłowa</a>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

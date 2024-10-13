@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}" th:replace="~{fragments/layout :: layout(~{::.uk-container})}">
+<head>
+    <title th:text="${title}"></title>
+</head>
+
+<body>
+
+<div class="uk-container uk-margin-large-top uk-margin-large-bottom" uk-height-viewport="expand: true">
+    <form id="newDish" action="#" th:action="@{/dish}" th:object="${dish}" method="POST">
+        <fieldset class="uk-fieldset">
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="name">Nazwa dania</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input uk-form-width-large" id="name" type="text" th:field="*{name}"/>
+                </div>
+                <span class="uk-label uk-label-danger"
+                      th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="energy">Kalorie (kcal)</label>
+                <div class="uk-form-controls">
+                    <input name="energy" class="uk-input uk-form-width-small" id="energy" type="text" th:field="*{energy}"/>
+                </div>
+                <span class="uk-label uk-label-warning"
+                      th:if="${#fields.hasErrors('energy')}">Podaj nieujemną wartość numeryczną</span>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="protein">Białko (g)</label>
+                <div class="uk-form-controls">
+                    <input name="protein" class="uk-input uk-form-width-small" id="protein" type="text" th:field="*{protein}"/>
+                </div>
+                <span class="uk-label uk-label-warning"
+                      th:if="${#fields.hasErrors('protein')}">Podaj nieujemną wartość numeryczną</span>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="carbohydrates">Węglowodany (g)</label>
+                <div class="uk-form-controls">
+                    <input name="carbohydrates" class="uk-input uk-form-width-small" id="carbohydrates" type="text" th:field="*{carbohydrates}"/>
+                </div>
+                <span class="uk-label uk-label-warning" th:if="${#fields.hasErrors('carbohydrates')}">Podaj nieujemną wartość numeryczną</span>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="fat">Tłuszcz (g)</label>
+                <div class="uk-form-controls">
+                    <input name="fat" class="uk-input uk-form-width-small" id="fat" type="text" th:field="*{fat}"/>
+                </div>
+                <span class="uk-label uk-label-warning"
+                      th:if="${#fields.hasErrors('fat')}">Podaj nieujemną wartość numeryczną</span>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="fiber">Błonnik (g)</label>
+                <div class="uk-form-controls">
+                    <input name="fiber" class="uk-input uk-form-width-small" id="fiber" type="text" th:field="*{fiber}"/>
+                </div>
+                <span class="uk-label uk-label-warning"
+                      th:if="${#fields.hasErrors('fiber')}">Podaj nieujemną wartość numeryczną</span>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="salt">Sól (g)</label>
+                <div class="uk-form-controls">
+                    <input name="salt" class="uk-input uk-form-width-small" id="salt" type="text" th:field="*{salt}"/>
+                </div>
+                <span class="uk-label uk-label-warning"
+                      th:if="${#fields.hasErrors('salt')}">Podaj nieujemną wartość numeryczną</span>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="image">Grafika (adres url)</label>
+                <div class="uk-form-controls">
+                    <input name="image" class="uk-input uk-form-width-large" id="image" type="text">
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="source">Strona źródłowa (adres url)</label>
+                <div class="uk-form-controls">
+                    <input name="source" class="uk-input uk-form-width-large" id="source" type="text">
+                </div>
+            </div>
+
+            <div class="uk-text-right">
+                <input class="uk-button uk-button-secondary" type="submit" value="Zapisz">
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>

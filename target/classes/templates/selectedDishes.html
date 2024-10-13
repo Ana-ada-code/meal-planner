@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}" th:replace="~{fragments/layout :: layout(~{::.uk-container})}">
+<head>
+    <title th:text="${title}"></title>
+</head>
+
+<body>
+
+<div class="uk-container uk-container-small uk-margin-large-top uk-margin-large-bottom"
+     uk-height-viewport="expand: true">
+    <div th:if="${selectedDishes.isEmpty()}" class="uk-alert"><h4 class="uk-text-center">Nie wybrano żadnego dania</h4>
+    </div>
+    <table class="uk-table uk-table-divider">
+
+        <tbody>
+        <tr th:each="selectedDish : ${selectedDishes}">
+            <td class="uk-width-small">
+                <img th:data-src="${selectedDish.dish.image}" uk-img
+                     style="object-fit: cover; height: 150px !important; width: 150px">
+            </td>
+            <td>
+                <div>
+                    <div><a th:href="@{/dish/{name}(name=${selectedDish.dish.name})}" class="uk-link-text uk-text-bold"
+                            th:text="${selectedDish.dish.name}"></a></div>
+                    <div th:if="${selectedDish.dish.energy}"
+                         th:text="'Kalorie: ' + ${selectedDish.dish.energy} + ' kcal'"></div>
+                    <div th:if="${selectedDish.dish.protein}"
+                         th:text="'Białko: ' + ${selectedDish.dish.protein} + ' g'"></div>
+                    <div th:if="${selectedDish.dish.carbohydrates}"
+                         th:text="'Węglowodany: ' + ${selectedDish.dish.carbohydrates} + ' g'"></div>
+                    <div th:if="${selectedDish.dish.fat}" th:text="'Tłuszcz: ' + ${selectedDish.dish.fat} + ' g'"></div>
+                    <div th:if="${selectedDish.dish.fiber}"
+                         th:text="'Błonnik: ' + ${selectedDish.dish.fiber} + ' g'"></div>
+                    <div th:if="${selectedDish.dish.salt}" th:text="'Sól: ' + ${selectedDish.dish.salt} + ' g'"></div>
+                </div>
+            </td>
+            <td>
+
+            </td>
+
+            <td style="width: 30px">
+                <form action="#" th:action="@{/selected-dish/{id}(id=${selectedDish.id})}" th:method="delete">
+                    <button class="uk-icon-button uk-button-secondary" uk-icon="minus" type="submit"></button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${!selectedDishes.isEmpty}" class="uk-text-right">
+        <form action="#" th:action="@{/selected-dish}" th:method="delete">
+            <button class="uk-button uk-button-secondary" type="submit">Usuń wszystkie dania</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>
+

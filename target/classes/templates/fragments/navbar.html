@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<div th:fragment="navbar" class="uk-navbar-container uk-background-secondary" uk-navbar>
+    <div class="uk-navbar-center">
+        <ul class="uk-navbar-nav uk-text-large">
+            <li class="uk-navbar-item" th:classappend="${title == 'Lista dań' ? 'uk-active' : ''}">
+                <a th:href="@{/dishes}">Lista dań</a></li>
+            <li class="uk-navbar-item" th:classappend="${title == 'Wybrane dania' ? 'uk-active' : ''}">
+                <a th:href="@{/selected-dish}">Wybrane dania</a></li>
+            <li class="uk-navbar-item" th:classappend="${title == 'Wartości odżywcze' ? 'uk-active' : ''}">
+                <a th:href="@{/nutritional-values}">Wartości odżywcze</a></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

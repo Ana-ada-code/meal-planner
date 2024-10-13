@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:fragment="layout(container)">
+<head>
+    <meta charset="UTF-8">
+
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Planer posiłków</title>
+    <link rel="stylesheet" th:href="@{/css/uikit.min.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script th:src="@{/js/uikit.min.js}"></script>
+    <script th:src="@{/js/uikit-icons.min.js}"></script>
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div th:replace="${container}"></div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

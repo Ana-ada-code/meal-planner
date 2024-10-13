@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}" th:replace="~{fragments/layout :: layout(~{::.uk-container})}">
+<head>
+    <title th:text="${title}"></title>
+</head>
+
+<body>
+
+<div class="uk-container uk-margin-large-top" uk-height-viewport="expand: true">
+    <div class="uk-grid-large" uk-grid="masonry: true">
+        <div class="uk-width-1-4 uk-padding-small">
+            <div>
+                <a th:href="@{/add-new-dish}"
+                   class="uk-button uk-button-secondary uk-margin uk-text-center">Dodaj nowe danie</a>
+            </div>
+        </div>
+        <div class="uk-width-3-4">
+            <div>
+                <div th:each="dish : ${dishes}" class="uk-card uk-margin-medium gray-card-border" uk-grid>
+                    <div class="uk-card-media-left uk-cover-container uk-width-1-5">
+                        <img th:src="${dish.image}" uk-cover th:alt="${dish.name}" class="uk-text-center">
+                        <canvas width="" height=""></canvas>
+                    </div>
+                    <div class="uk-width-4-5">
+                        <div class="uk-card-body">
+                            <div class="uk-flex">
+                                <div class="uk-width-5-6">
+
+                                    <h4><a th:href="@{/dish/{name}(name=${dish.name})}" class="uk-link-text"
+                                           th:text="${dish.name}"></a></h4>
+                                    <p th:if="${dish.energy}" th:text="${dish.energy} + ' kcal'"></p>
+                                </div>
+                                <div class="uk-width-1-6 uk-text-center">
+
+                                    <a th:href="@{/selected-dish/add/{name}(name=${dish.name})}"
+                                       class="uk-icon-button uk-button-secondary uk-margin" uk-icon="plus"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
