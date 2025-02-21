@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${title}">Lista dań</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+<div id="wrapper">
+<!-- Nawigacja -->
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand mb-0 h1 fs-2" th:href="@{/}" href="#">
+      <i class="fa-solid fa-utensils"></i> Meal Planner</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+            aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav ms-auto text-end">
+        <li class="nav-item"><a class="nav-link" href="#">Kategorie</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Top10</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Zaloguj</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<!-- Główna zawartość -->
+
+<main class="main-content">
+
+<div class="container mt-5">
+  <div class="row">
+
+
+    <!-- Prawa kolumna z listą dań -->
+    <div class="col-md-9 mx-auto d-flex flex-column align-items-center">
+      <div class="row w-100">
+        <!-- Dane testowe -->
+        <div th:each="dish : ${dishes}" class="col-md-12 mb-4">
+          <div class="card shadow-sm w-100">
+            <div class="row g-0 w-100">
+              <div class="col-md-2 d-flex align-items-center justify-content-center p-2">
+                <img th:src="${dish.image}" src="../static/img/dish-placeholder.png" class="img-fluid rounded"
+                     th:alt="${dish.name}" alt="Pizza">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h3 class="card-title">
+                    <a th:href="@{/dish/{name}(name=${dish.name})}" class="text-dark text-decoration-none"
+                       th:text="${dish.name}">Pizza Margherita</a>
+                  </h3>
+                  <p th:if="${dish.energy}" class="text-muted" th:text="${dish.energy} + ' kcal'">Danie główne</p>
+                  <p th:if="${dish.energy}" class="text-muted" th:text="${dish.energy} + ' kcal'"><i class="fas fa-star"></i>8.7</p>
+
+                </div>
+<!--                <div class="dish-list-item-rating">-->
+<!--                  <i class="fas fa-star"></i>-->
+<!--                  <span>8.7</span>-->
+<!--                </div>-->
+              </div>
+<!--              <div class="col-md-2 d-flex align-items-center justify-content-center">-->
+<!--                <a th:href="@{/selected-dish/add/{name}(name=${dish.name})}"-->
+<!--                   class="btn btn-secondary btn-sm">-->
+<!--                  <i class="fas fa-plus"></i>-->
+<!--                </a>-->
+<!--              </div>  -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mb-4">
+          <div class="card shadow-sm w-100">
+            <div class="row g-0 w-100">
+              <div class="col-md-2 d-flex align-items-center justify-content-center p-2">
+                <img src="../static/img/dish-placeholder.png" class="img-fluid rounded"
+                     alt="Sałatka Grecka">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h3 class="card-title">
+                    <a href="#" class="text-dark text-decoration-none">Sałatka Grecka</a>
+                  </h3>
+                  <p class="text-muted">Danie główne</p>
+                  <p class="text-muted"><i class="fas fa-star"></i>8.3</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mb-4">
+          <div class="card shadow-sm w-100">
+            <div class="row g-0 w-100">
+              <div class="col-md-2 d-flex align-items-center justify-content-center p-2">
+                <img src="../static/img/dish-placeholder.png" class="img-fluid rounded"
+                     alt="Spaghetti Carbonara">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h3 class="card-title">
+                    <a href="#" class="text-dark text-decoration-none">Spaghetti Carbonara</a>
+                  </h3>
+                  <p class="text-muted">Danie główne</p>
+                  <p class="text-muted"><i class="fas fa-star"></i>7.3</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mb-4">
+          <div class="card shadow-sm w-100">
+            <div class="row g-0 w-100">
+              <div class="col-md-2 d-flex align-items-center justify-content-center p-2">
+                <img src="../static/img/dish-placeholder.png" class="img-fluid rounded"
+                     alt="Stek wołowy">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h3 class="card-title">
+                    <a href="#" class="text-dark text-decoration-none">Stek wołowy</a>
+                  </h3>
+                  <p class="text-muted">Danie główne</p>
+                  <p class="text-muted"><i class="fas fa-star"></i>5.8</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+  </div> <!-- Koniec row -->
+</div> <!-- Koniec container -->
+
+</main>
+<!-- Stopka -->
+<!--<footer class="container py-5 text-center">-->
+<!--  <p class="text-muted">&copy; 2024 Meal Planner. All rights reserved.</p>-->
+<!--</footer>-->
+<footer class="bg-body-tertiary text-center text-lg-start">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+     2025
+    <a class="text-body"  th:href="@{/}" href="#">MealPlanner</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+</div>
+
+<!-- Bootstrap 5 JavaScript -->
+
+
+</body>
+</html>
