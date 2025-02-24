@@ -7,6 +7,8 @@ class DishDtoMapper {
         return new DishDto(
                 dish.getId(),
                 dish.getName(),
+                dish.getIngredients(),
+                dish.getRecipe(),
                 dish.getCategory().getName()
         );
     }

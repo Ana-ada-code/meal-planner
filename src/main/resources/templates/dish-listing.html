@@ -35,7 +35,7 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <h3 class="card-title">
-                    <a th:href="@{/dish/{name}(name=${dish.name})}" class="text-dark text-decoration-none"
+                    <a href="#" th:href="@{|/danie/${dish.id}|}" class="text-dark text-decoration-none"
                        th:text="${dish.name}">Pizza Margherita</a>
                   </h3>
                   <p class="text-muted" th:text="${dish.category}">Danie główne</p>

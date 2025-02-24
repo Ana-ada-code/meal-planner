@@ -12,7 +12,7 @@ class DishDtoMapperTest {
     void shouldMapDishToDishDto() {
         // Given
         Category italianCategory = new Category(1L, "Italian");
-        Dish dish = new Dish(1L, "Pizza", italianCategory);
+        Dish dish = new Dish(1L, "Pizza", "mąka, oliwa", "połącz składniaki", italianCategory);
 
         // When
         DishDto dishDto = DishDtoMapper.map(dish);
@@ -21,6 +21,8 @@ class DishDtoMapperTest {
         assertThat(dishDto).isNotNull();
         assertThat(dishDto.getId()).isEqualTo(dish.getId());
         assertThat(dishDto.getName()).isEqualTo(dish.getName());
+        assertThat(dishDto.getIngredients()).isEqualTo(dish.getIngredients());
+        assertThat(dishDto.getRecipe()).isEqualTo(dish.getRecipe());
         assertThat(dishDto.getCategory()).isEqualTo(dish.getCategory().getName());
     }
 

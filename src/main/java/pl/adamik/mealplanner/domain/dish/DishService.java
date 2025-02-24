@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.adamik.mealplanner.domain.dish.dto.DishDto;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DishService {
@@ -17,5 +18,9 @@ public class DishService {
         return dishRepository.findAll().stream()
                 .map(DishDtoMapper::map)
                 .toList();
+    }
+
+    public Optional<DishDto> findDishById(Long id) {
+        return dishRepository.findById(id).map(DishDtoMapper::map);
     }
 }
