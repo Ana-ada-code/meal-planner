@@ -23,4 +23,10 @@ public class DishService {
     public Optional<DishDto> findDishById(Long id) {
         return dishRepository.findById(id).map(DishDtoMapper::map);
     }
+
+    public List<DishDto> findDishesByCategoryName(String category) {
+        return dishRepository.findAllByCategory_NameIgnoreCase(category).stream()
+                .map(DishDtoMapper::map)
+                .toList();
+    }
 }
