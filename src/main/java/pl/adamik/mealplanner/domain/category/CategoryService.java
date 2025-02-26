@@ -1,6 +1,7 @@
 package pl.adamik.mealplanner.domain.category;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.adamik.mealplanner.domain.category.dto.CategoryDto;
 
 import java.util.List;
@@ -24,5 +25,12 @@ public class CategoryService {
         return StreamSupport.stream(categoryRepository.findAll().spliterator(), false)
                 .map(CategoryDtoMapper::map)
                 .toList();
+    }
+
+    @Transactional
+    public void addCategory(CategoryDto category) {
+        Category categoryToSave = new Category();
+        categoryToSave.setName(category.getName());
+        categoryRepository.save(categoryToSave);
     }
 }
