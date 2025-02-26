@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj nowe danie - MealPlanner</title>
+</head>
+<body>
+<div id="wrapper">
+    <main class="main-content" layout:fragment="content">
+        <div class="container mt-4">
+            <h2 class="list-heading text-center mb-3">Dodaj nowe danie</h2>
+            <div class="row" >
+                <div class="col-md-9 mx-auto d-flex flex-column align-items-center">
+                    <div class="row w-100">
+                        <!-- Dane testowe -->
+                        <div class="col-md-12 mb-4">
+                            <!--                            <div class="card shadow-sm w-100">-->
+                            <form action="" method="post" class="mc-form" enctype="multipart/form-data" th:object="${dish}">
+                                <fieldset>
+                                    <div class="mb-3">
+                                        <label for="dishName" class="form-label">Nazwa dania</label>
+                                        <input type="text" class="form-control" id="dishName" th:field="*{name}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="dishIngredients" class="form-label">Składniki</label>
+                                        <textarea class="form-control" id="dishIngredients" rows="5" th:field="*{ingredients}"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="dishRecipe" class="form-label">Przepis</label>
+                                        <textarea class="form-control" id="dishRecipe" rows="5" th:field="*{recipe}"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <select id="dishCategory" class="form-select" aria-label="Wybór kategorii" th:field="*{category}" required>
+                                            <option value="" hidden>Wybierz Kategorie</option>
+                                            <option th:each="category: ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="dishImage" class="form-label">Grafika</label>
+                                        <input class="form-control" type="file" id="dishImage" th:field="*{image}" accept="image/png, image/jpeg">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Dodaj danie</button>
+                                </fieldset>
+                            </form>
+                            <!--                            </div>-->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

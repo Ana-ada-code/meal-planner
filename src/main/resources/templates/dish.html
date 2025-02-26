@@ -13,7 +13,11 @@
     <div class="container my-5 min-vh-100">
       <div class="row">
         <div class="col-md-4 text-center">
-          <img  src="../static/img/dish-placeholder.png" alt="Nazwa dania" th:src="@{/img/dish-placeholder.png}" th:alt="${dish.name}" class="img-fluid">
+          <img  src="../static/img/dish-placeholder.png"
+                th:src="${dish.image ne null} ? @{|/img/${dish.image}|} : @{/img/dish-placeholder.png}"
+                alt="Nazwa dania"
+                th:alt="${dish.name}"
+                class="img-fluid">
           <div class="container mt-4 p-4 border rounded w-75 mx-auto">
             <h2 class="text-center">Ocena</h2>
 

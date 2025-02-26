@@ -1,21 +1,14 @@
 package pl.adamik.mealplanner.domain.dish.dto;
 
-public class DishDto {
+import org.springframework.web.multipart.MultipartFile;
+
+public class DishSaveDto {
     private Long id;
     private String name;
     private String ingredients;
     private String recipe;
     private String category;
-    private String image;
-
-    public DishDto(Long id, String name, String ingredients, String recipe, String category, String image) {
-        this.id = id;
-        this.name = name;
-        this.ingredients = ingredients;
-        this.recipe = recipe;
-        this.category = category;
-        this.image = image;
-    }
+    private MultipartFile image;
 
     public Long getId() {
         return id;
@@ -31,14 +24,6 @@ public class DishDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getIngredients() {
@@ -57,11 +42,19 @@ public class DishDto {
         this.recipe = recipe;
     }
 
-    public String getImage() {
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public MultipartFile getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(MultipartFile image) {
         this.image = image;
     }
 }

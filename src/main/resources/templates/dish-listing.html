@@ -25,9 +25,10 @@
             <div class="row g-0 w-100">
               <div class="col-md-2 d-flex align-items-center justify-content-center p-2">
                 <img  src="../static/img/dish-placeholder.png"
-                      th:src="@{/img/dish-placeholder.png}"
+                      th:src="${dish.image ne null} ? @{|/img/${dish.image}|} : @{/img/dish-placeholder.png}"
                       class="img-fluid rounded"
-                     th:alt="${dish.name}" alt="Pizza">
+                     th:alt="${dish.name}"
+                      alt="Pizza">
 <!--                <img th:src="${dish.image}" src="../static/img/dish-placeholder.png" class="img-fluid rounded"-->
 <!--                     th:alt="${dish.name}" alt="Pizza">-->
 

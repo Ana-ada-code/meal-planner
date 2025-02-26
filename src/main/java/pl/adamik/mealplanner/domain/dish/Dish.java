@@ -14,16 +14,18 @@ public class Dish {
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
+    private String image;
 
     public Dish() {
     }
 
-    Dish(Long id, String name, String ingredients, String recipe, Category category) {
+    Dish(Long id, String name, String ingredients, String recipe, Category category, String image) {
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
         this.recipe = recipe;
         this.category = category;
+        this.image = image;
     }
 
     public Long getId() {
@@ -64,5 +66,13 @@ public class Dish {
 
     public void setRecipe(String recipe) {
         this.recipe = recipe;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
