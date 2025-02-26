@@ -80,4 +80,44 @@ class CategoryServiceTest {
         assertThat(result).isEmpty();
         verify(categoryRepository, times(1)).findAll();
     }
+
+    @Test
+    void shouldAddCategory_whenCategoryIsValid() {
+        // Given
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setName("Mexican");
+
+        // When
+        categoryService.addCategory(categoryDto);
+
+        // Then
+        verify(categoryRepository, times(1)).save(argThat(category ->
+                category.getName().equals("Mexican")
+        ));
+    }
+
+//    @Test
+//    void shouldNotThrowException_whenAddingNullCategory() {
+//        // Given
+//        CategoryDto categoryDto = null;
+//
+//        // When & Then
+//        categoryService.addCategory(categoryDto);
+//        verify(categoryRepository, never()).save(any());
+//    }
+
+    @Test
+    void shouldAddCategory_whenCategoryHasLeadingOrTrailingSpaces() {
+        // Given
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setName("  Thai  ");
+
+        // When
+        categoryService.addCategory(categoryDto);
+
+        // Then
+        verify(categoryRepository, times(1)).save(argThat(category ->
+                category.getName().trim().equals("Thai")
+        ));
+    }
 }
