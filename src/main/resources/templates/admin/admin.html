@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel administracyjny - MealPlanner</title>
+</head>
+<body>
+    <div id="wrapper">
+        <main class="main-content" layout:fragment="content">
+            <div class="container mt-4">
+                <h2 class="list-heading text-center mb-3">Panel administracyjny</h2>
+                <div class="row" >
+                    <div class="col-md-9 mx-auto d-flex flex-column align-items-center">
+                        <div class="row w-100">
+                        <!-- Dane testowe -->
+                            <div class="col-md-12 mb-4">
+                                <div class="card shadow-sm w-100">
+                                    <a href="#" class="text-decoration-none text-dark"
+                                       th:href="@{|/admin/dodaj-danie|}">
+                                        <div class="row g-0 w-100 col-md-8 offset-md-1 card-body">
+                                            <h3 class="card-title">Dodaj danie</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-4">
+                                <div class="card shadow-sm w-100">
+                                    <a href="#" class="text-decoration-none text-dark"
+                                       th:href="@{|/admin/dodaj-kategorie|}">
+                                        <div class="row g-0 w-100 col-md-8 offset-md-1 card-body">
+                                            <h3 class="card-title">Dodaj kategorie</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
