@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title>Kategorie dań - MealPlanner</title>
+</head>
+<body>
+  <div id="wrapper">
+    <main class="main-content" layout:fragment="content">
+      <div class="container mt-4">
+        <h2 class="list-heading text-center mb-3">Kategorie dań</h2>
+        <div class="row" >
+      <div class="col-md-9 mx-auto d-flex flex-column align-items-center">
+        <div class="row w-100" th:remove="all-but-first">
+          <!-- Dane testowe -->
+          <div th:each="category : ${categories}" class="col-md-12 mb-4">
+            <div class="card shadow-sm w-100">
+              <a href="#" class="text-decoration-none text-dark"
+              th:href="@{|kategoria/${category.name}|}">
+
+              <div class="row g-0 w-100">
+                <div class="col-md-8 offset-md-1">
+                  <div class="card-body">
+                    <h3 class="card-title" th:text="${category.name}">Pizza Margherita</h3>
+                  </div>
+                </div>
+              </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+
+</body>
+</html>

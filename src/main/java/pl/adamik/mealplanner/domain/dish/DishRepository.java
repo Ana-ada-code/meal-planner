@@ -1,9 +1,9 @@
 package pl.adamik.mealplanner.domain.dish;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface DishRepository extends JpaRepository<Dish, Long> {
+public interface DishRepository extends CrudRepository<Dish, Long> {
     List<Dish> findAllByCategory_NameIgnoreCase(String category);
 }

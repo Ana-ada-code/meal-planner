@@ -5,6 +5,7 @@ import pl.adamik.mealplanner.domain.dish.dto.DishDto;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @Service
 public class DishService {
@@ -14,8 +15,9 @@ public class DishService {
         this.dishRepository = dishRepository;
     }
 
+
     public List<DishDto> findAllDishes() {
-        return dishRepository.findAll().stream()
+        return StreamSupport.stream(dishRepository.findAll().spliterator(), false)
                 .map(DishDtoMapper::map)
                 .toList();
     }
