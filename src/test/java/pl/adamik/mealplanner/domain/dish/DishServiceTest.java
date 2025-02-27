@@ -76,7 +76,6 @@ class DishServiceTest {
         // Given
         Category italianCategory = new Category(1L, "Italian");
         Dish dish = new Dish(1L, "Pizza", "mąka, oliwa", "połącz składniki", italianCategory, "https://example.com/image.jpg");
-        DishDto expectedDishDto = new DishDto(1L, "Pizza", "mąka, oliwa", "połącz składniki","Italian", "https://example.com/image.jpg");
 
         when(dishRepository.findById(1L)).thenReturn(Optional.of(dish));
 
