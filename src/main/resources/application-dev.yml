@@ -10,3 +10,9 @@ spring:
 app:
   storage:
     location: uploads
+
+logging:
+  level:
+    org:
+      springframework:
+        security=DEBUG:
