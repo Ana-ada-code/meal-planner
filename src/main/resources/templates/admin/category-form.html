@@ -18,7 +18,7 @@
                         <!-- Dane testowe -->
                         <div class="col-md-12 mb-4">
 <!--                            <div class="card shadow-sm w-100">-->
-                                <form action="" method="post" class="mc-form" th:object="${category}">
+                                <form action="#" th:action="@{/admin/dodaj-kategorie}" method="post" class="mc-form" th:object="${category}">
                                     <div class="mb-3">
                                         <label for="categoryName" class="form-label">Nazwa kategorii</label>
                                         <input type="text" class="form-control w-50" id="categoryName" placeholder="np. Obiad" th:field="*{name}">
