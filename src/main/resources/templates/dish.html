@@ -22,26 +22,22 @@
             <h2 class="text-center">Ocena</h2>
 
             <!-- Jeżeli nie oddano żadnego głosu -->
-            <p class="text-center">Brak głosów</p>
-<!--            <p class="text-center" th:unless="${dish.ratingCount}">Brak głosów</p>-->
+            <p class="text-center" th:unless="${dish.ratingCount}">Brak głosów</p>
 
             <!-- Jeżeli oddano głos -->
-            <div class="text-center">
-<!--            <div class="text-center" th:if="${dish.ratingCount}">-->
-              <p class="fs-1 fw-bold">4.0</p>
-<!--              <p class="fs-1 fw-bold" th:text="${#numbers.formatDecimal(dish.avgRating, 1, 1)}">4.0</p>-->
-              <p>Liczba ocen: 134</p>
-<!--              <p th:text="|Liczba ocen: ${dish.ratingCount}|">Liczba ocen: 134</p>-->
+            <div class="text-center" th:if="${dish.ratingCount}">
+              <p class="fs-1 fw-bold" th:text="${#numbers.formatDecimal(dish.avgRating, 1, 1)}">4.0</p>
+              <p th:text="|Liczba ocen: ${dish.ratingCount}|">Liczba ocen: 134</p>
             </div>
 
             <!-- Formularz oceny (widoczny tylko dla zalogowanych) -->
             <form action="#" th:action="@{/ocen-film}" method="post" sec:authorize="isAuthenticated()" class="text-center">
               <p class="fw-bold">Twoja ocena</p>
-<!--              <input type="hidden" name="dishId" th:value="${dish.id}">-->
-              <input type="hidden" name="dishId">
+              <input type="hidden" name="dishId" th:value="${dish.id}">
+<!--              <input type="hidden" name="dishId">-->
               <div class="d-flex justify-content-center gap-2" th:remove="all-but-first">
                 <button class="btn btn-primary" name="rating" th:each="i: ${#numbers.sequence(1, 5)}" th:value="${i}">
-                  <i class="fa-star fa-solid" th:classappend="${i <= userRating ? 'fa-solid' : 'fa-regular'}"></i>
+                  <i class="fa-star" th:classappend="${i <= userRating ? 'fa-solid' : 'fa-regular'}"></i>
                 </button>
                 <button class="btn btn-primary" name="rating" value="2">
                   <i class="fa-star fa-solid"></i>

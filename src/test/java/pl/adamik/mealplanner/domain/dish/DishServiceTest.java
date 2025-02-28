@@ -39,11 +39,29 @@ class DishServiceTest {
     @Test
     void shouldReturnAllDishes_whenDishesExist() {
         // Given
-        Category italianCategory = new Category(1L, "Italian");
-        Category japaneseCategory = new Category(2L, "Japanese");
+        Category italianCategory = new Category();
+        italianCategory.setId(1L);
+        italianCategory.setName("Italian");
 
-        Dish dish1 = new Dish(1L, "Pizza", "mąka, oliwa", "połącz składniaki", italianCategory, "https://example.com/image.jpg");
-        Dish dish2 = new Dish(2L, "Sushi", "ryż, ryba", "połącz składniki",japaneseCategory, "https://example.com/image2.jpg");
+        Category japaneseCategory = new Category();
+        japaneseCategory.setId(2L);
+        japaneseCategory.setName("Japanese");
+
+        Dish dish1 = new Dish();
+        dish1.setId(1L);
+        dish1.setName("Pizza");
+        dish1.setIngredients("mąka, oliwa");
+        dish1.setRecipe("połącz składniaki");
+        dish1.setCategory(italianCategory);
+        dish1.setImage("https://example.com/image.jpg");
+
+        Dish dish2 = new Dish();
+        dish2.setId(2L);
+        dish2.setName("Sushi");
+        dish2.setIngredients("ryż, ryba");
+        dish2.setRecipe("połącz składniki");
+        dish2.setCategory(japaneseCategory);
+        dish2.setImage("https://example.com/image2.jpg");
 
         when(dishRepository.findAll()).thenReturn(List.of(dish1, dish2));
 
@@ -74,8 +92,17 @@ class DishServiceTest {
     @Test
     void shouldReturnDish_whenDishExists() {
         // Given
-        Category italianCategory = new Category(1L, "Italian");
-        Dish dish = new Dish(1L, "Pizza", "mąka, oliwa", "połącz składniki", italianCategory, "https://example.com/image.jpg");
+        Category italianCategory = new Category();
+        italianCategory.setId(1L);
+        italianCategory.setName("Italian");
+
+        Dish dish = new Dish();
+        dish.setId(1L);
+        dish.setName("Pizza");
+        dish.setIngredients("mąka, oliwa");
+        dish.setRecipe("połącz składniki");
+        dish.setCategory(italianCategory);
+        dish.setImage("https://example.com/image.jpg");
 
         when(dishRepository.findById(1L)).thenReturn(Optional.of(dish));
 
@@ -88,6 +115,7 @@ class DishServiceTest {
         assertThat(result.get().getCategory()).isEqualTo("Italian");
         verify(dishRepository, times(1)).findById(1L);
     }
+
 
     @Test
     void shouldReturnEmptyOptional_whenDishDoesNotExist() {

@@ -1,7 +1,11 @@
 package pl.adamik.mealplanner.domain.dish;
 
-import pl.adamik.mealplanner.domain.category.Category;
 import jakarta.persistence.*;
+import pl.adamik.mealplanner.domain.category.Category;
+import pl.adamik.mealplanner.domain.rating.Rating;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Dish {
@@ -14,18 +18,11 @@ public class Dish {
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
+    @OneToMany(mappedBy = "dish")
+    private Set<Rating> ratings = new HashSet<>();
     private String image;
 
     public Dish() {
-    }
-
-    Dish(Long id, String name, String ingredients, String recipe, Category category, String image) {
-        this.id = id;
-        this.name = name;
-        this.ingredients = ingredients;
-        this.recipe = recipe;
-        this.category = category;
-        this.image = image;
     }
 
     public Long getId() {
@@ -74,5 +71,13 @@ public class Dish {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
     }
 }

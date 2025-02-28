@@ -11,8 +11,17 @@ class DishDtoMapperTest {
     @Test
     void shouldMapDishToDishDto() {
         // Given
-        Category italianCategory = new Category(1L, "Italian");
-        Dish dish = new Dish(1L, "Pizza", "mąka, oliwa", "połącz składniaki", italianCategory, "https://example.com/image.jpg");
+        Category italianCategory = new Category();
+        italianCategory.setId(1L);
+        italianCategory.setName("Italian");
+
+        Dish dish = new Dish();
+        dish.setId(1L);
+        dish.setName("Pizza");
+        dish.setIngredients("mąka, oliwa");
+        dish.setRecipe("połącz składniaki");
+        dish.setCategory(italianCategory);
+        dish.setImage("https://example.com/image.jpg");
 
         // When
         DishDto dishDto = DishDtoMapper.map(dish);
@@ -26,5 +35,6 @@ class DishDtoMapperTest {
         assertThat(dishDto.getCategory()).isEqualTo(dish.getCategory().getName());
         assertThat(dishDto.getImage()).isEqualTo(dish.getImage());
     }
+
 
 }
