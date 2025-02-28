@@ -1,5 +1,6 @@
 package pl.adamik.mealplanner.domain.dish;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.adamik.mealplanner.domain.category.Category;
 import pl.adamik.mealplanner.domain.category.CategoryRepository;
@@ -52,5 +53,12 @@ public class DishService {
             dish.setImage(savedFileName);
         }
         dishRepository.save(dish);
+    }
+
+    public List<DishDto> findTopDishes(int size) {
+        Pageable page = Pageable.ofSize(size);
+        return dishRepository.findTopByRating(page).stream()
+                .map(DishDtoMapper::map)
+                .toList();
     }
 }

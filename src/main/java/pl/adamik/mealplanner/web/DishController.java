@@ -11,6 +11,8 @@ import pl.adamik.mealplanner.domain.dish.DishService;
 import pl.adamik.mealplanner.domain.dish.dto.DishDto;
 import pl.adamik.mealplanner.domain.rating.RatingService;
 
+import java.util.List;
+
 @Controller
 public class DishController {
     private final DishService dishService;
@@ -32,5 +34,13 @@ public class DishController {
             model.addAttribute("userRating", rating);
         }
         return "dish";
+    }
+
+    @GetMapping("/top10")
+    public String findTop10(Model model) {
+        List<DishDto> top10Dishes = dishService.findTopDishes(10);
+        model.addAttribute("heading", "Najlepsze 10 dań");
+        model.addAttribute("dishes", top10Dishes);
+        return "dish-listing";
     }
 }
