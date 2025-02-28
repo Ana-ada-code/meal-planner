@@ -4,13 +4,13 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <title>Zaloguj się - MealPlanner</title>
+    <title>Zarejestruj się - MealPlanner</title>
 </head>
 <body>
 <div id="wrapper">
     <main class="main-content" layout:fragment="content">
         <div class="container mt-4">
-            <h2 class="list-heading text-center mb-3">Zaloguj się</h2>
+            <h2 class="list-heading text-center mb-3">Zarejestruj się</h2>
             <div class="row" >
                 <div class="col-md-6 mx-auto d-flex flex-column align-items-center">
                     <div class="row w-100">
@@ -18,34 +18,28 @@
                             <div class="card shadow-sm w-100">
                                 <div class="row g-0 w-100">
                                     <div class="d-flex align-items-center justify-content-center p-2">
-                                        <form action="" th:action="@{/login}" method="post" class="mc-form">
+                                        <form action="" th:action="@{/rejestracja}" method="post" class="mc-form"
+                                              th:object="${user}">
                                             <p class="alert alert-primary text-center mc-form-message" th:if="${param.error}"
                                                th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
                                                 Belka z powiadomieniami
                                             </p>
                                             <p class="alert alert-primary text-center mc-form-message" th:if="${param.logout}"
-                                               >
-                                                Zostałeś wylogowany
-                                            </p>
-                                            <p class="alert alert-primary text-center mc-form-message" th:if="${param.register}"
                                             >
-                                                Zostałeś zarejestrowany, możesz się teraz zalogować
+                                                Zostałeś wylogowany
                                             </p>
                                             <div class="mb-3">
                                                 <label for="username" class="form-label">Adres email</label>
                                                 <input type="email" class="form-control" id="username" name="username"
-                                                       placeholder="nazwa użytkownika">
+                                                       placeholder="nazwa użytkownika" th:field="*{email}">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="password" class="form-label">Hasło</label>
                                                 <input type="password" class="form-control" id="password" name="password"
-                                                       placeholder="hasło">
+                                                       placeholder="hasło" th:field="*{password}">
                                             </div>
                                             <div class="mb-3">
-                                                <button type="submit" class="btn btn-primary">Zaloguj się</button>
-                                            </div>
-                                            <div class="mb-3">
-                                                <p class="registration-link">Nie masz jeszcze konta? <a href="#" th:href="@{/rejestracja}">Zarejestruj się</a></p>
+                                                <button type="submit" class="btn btn-primary">Zarejestruj się</button>
                                             </div>
                                         </form>
                                     </div>
