@@ -23,6 +23,10 @@
                                                th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
                                                 Belka z powiadomieniami
                                             </p>
+                                            <p class="alert alert-primary text-center mc-form-message" th:if="${param.logout}"
+                                               >
+                                                Zostałeś wylogowany
+                                            </p>
                                             <div class="mb-3">
                                                 <label for="username" class="form-label">Adres email</label>
                                                 <input type="email" class="form-control" id="username" name="username"
