@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 import pl.adamik.mealplanner.domain.category.Category;
@@ -208,6 +209,79 @@ class DishServiceTest {
         ));
     }
 
+    @Test
+    void shouldReturnTopDishes_whenDishesExist() {
+        // Given
+        Category italianCategory = new Category();
+        italianCategory.setId(1L);
+        italianCategory.setName("Italian");
+
+        Dish dish1 = new Dish();
+        dish1.setId(1L);
+        dish1.setName("Pizza");
+        dish1.setIngredients("mąka, oliwa");
+        dish1.setRecipe("połącz składniki");
+        dish1.setCategory(italianCategory);
+        dish1.setImage("https://example.com/image.jpg");
+
+        Dish dish2 = new Dish();
+        dish2.setId(2L);
+        dish2.setName("Pasta");
+        dish2.setIngredients("mąka, woda");
+        dish2.setRecipe("ugotuj makaron");
+        dish2.setCategory(italianCategory);
+        dish2.setImage("https://example.com/image2.jpg");
+
+        when(dishRepository.findTopByRating(Pageable.ofSize(2))).thenReturn(List.of(dish1, dish2));
+
+        // When
+        List<DishDto> result = dishService.findTopDishes(2);
+
+        // Then
+        assertThat(result).hasSize(2);
+        assertThat(result.get(0).getName()).isEqualTo("Pizza");
+        assertThat(result.get(1).getName()).isEqualTo("Pasta");
+        verify(dishRepository, times(1)).findTopByRating(Pageable.ofSize(2));
+    }
+
+    @Test
+    void shouldReturnEmptyList_whenNoTopDishesExist() {
+        // Given
+        when(dishRepository.findTopByRating(Pageable.ofSize(3))).thenReturn(Collections.emptyList());
+
+        // When
+        List<DishDto> result = dishService.findTopDishes(3);
+
+        // Then
+        assertThat(result).isEmpty();
+        verify(dishRepository, times(1)).findTopByRating(Pageable.ofSize(3));
+    }
+
+    @Test
+    void shouldReturnCorrectNumberOfTopDishes() {
+        // Given
+        Category italianCategory = new Category();
+        italianCategory.setId(1L);
+        italianCategory.setName("Italian");
+
+        Dish dish1 = new Dish();
+        dish1.setId(1L);
+        dish1.setName("Pizza");
+        dish1.setIngredients("mąka, oliwa");
+        dish1.setRecipe("połącz składniki");
+        dish1.setCategory(italianCategory);
+        dish1.setImage("https://example.com/image.jpg");
+
+        when(dishRepository.findTopByRating(Pageable.ofSize(1))).thenReturn(List.of(dish1));
+
+        // When
+        List<DishDto> result = dishService.findTopDishes(1);
+
+        // Then
+        assertThat(result).hasSize(1);
+        assertThat(result.get(0).getName()).isEqualTo("Pizza");
+        verify(dishRepository, times(1)).findTopByRating(Pageable.ofSize(1));
+    }
 
 
 }
