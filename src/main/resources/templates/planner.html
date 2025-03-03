@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<body>
+<div id="wrapper">
+    <main class="main-content" layout:fragment="content">
+        <div class="container mt-4">
+            <h2 class="list-heading text-center mb-3">Plan posiłków na najbliższy tydzień</h2>
+            <div class="row">
+                <div class="col-md-10 mx-auto">
+                    <div th:each="entry : ${dishSelection}" class="mb-4">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="mb-0" th:text="${#temporals.format(entry.date, 'EEEE, dd MMMM yyyy')}">
+                                    Data
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <div th:each="category : ${entry.categories}" class="mb-3">
+                                    <h5 class="text-secondary" th:text="${category.name}">Kategoria</h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item" th:each="dish : ${category.dishes}">
+                                            <a class="text-dark text-decoration-none" th:href="@{|/danie/${dish.id}|}"
+                                               th:text="${dish.name} ">Nazwa dania</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

@@ -5,8 +5,8 @@ import pl.adamik.mealplanner.domain.user.dto.UserCredentialsDto;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-class UserCredentialsDtoMapper {
-    static UserCredentialsDto map(User user) {
+class UserDtoMapper {
+    static UserCredentialsDto mapCredentials(User user) {
         String email = user.getEmail();
         String password = user.getPassword();
         Set<String> roles = user.getRoles()
@@ -15,4 +15,5 @@ class UserCredentialsDtoMapper {
                 .collect(Collectors.toSet());
         return new UserCredentialsDto(email, password, roles);
     }
+
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="https://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <title>MealPlanner</title>
@@ -30,7 +30,12 @@
         <ul class="navbar-nav ms-auto text-end">
           <li class="nav-item"><a class="nav-link" href="#" th:href="@{/kategorie-dan}">Kategorie</a></li>
           <li class="nav-item"><a class="nav-link" href="#" th:href="@{/top10}">Top10</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" th:href="@{/admin}" sec:authorize="hasAnyRole('ADMIN', 'EDITOR')">Administracja</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/planer}" sec:authorize="isAuthenticated()">Planer</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/admin}" sec:authorize="hasAnyRole('ADMIN', 'EDITOR')">Administracja</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="#" th:href="@{/login}" sec:authorize="!isAuthenticated()">Zaloguj się</a>
             <a class="nav-link" href="#" th:href="@{/logout}" sec:authorize="isAuthenticated()">Wyloguj się</a>

@@ -1,7 +1,11 @@
 package pl.adamik.mealplanner.domain.user;
 
 import jakarta.persistence.*;
+import pl.adamik.mealplanner.domain.dishselection.DishSelection;
+
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,6 +23,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<UserRole> roles = new HashSet<>();
+    @OneToMany(mappedBy = "user")
+    private List<DishSelection> dishSelections = new ArrayList<>();
+
 
     public Long getId() {
         return id;
@@ -50,5 +57,13 @@ public class User {
 
     public void setRoles(Set<UserRole> roles) {
         this.roles = roles;
+    }
+
+    public List<DishSelection> getDishSelections() {
+        return dishSelections;
+    }
+
+    public void setDishSelections(List<DishSelection> dishSelections) {
+        this.dishSelections = dishSelections;
     }
 }

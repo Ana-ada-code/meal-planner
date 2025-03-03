@@ -19,6 +19,7 @@ public class CustomSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/ocen-film").authenticated()
+                        .requestMatchers("/planer").authenticated()
                         .requestMatchers("/admin/**").hasAnyRole(EDITOR_ROLE, ADMIN_ROLE)
                         .anyRequest().permitAll()
                 )
@@ -29,6 +30,8 @@ public class CustomSecurityConfig {
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout/**", HttpMethod.GET.name()))
                         .logoutSuccessUrl("/login?logout").permitAll()
                 );
+        http.csrf().ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"));
+        http.headers().frameOptions().sameOrigin();
         return http.build();
     }
 

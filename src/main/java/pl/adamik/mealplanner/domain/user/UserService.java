@@ -15,7 +15,9 @@ public class UserService {
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder) {
+
+    public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository,
+                       PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
@@ -23,7 +25,7 @@ public class UserService {
 
     public Optional<UserCredentialsDto> findCredentialsByEmail(String email) {
         return userRepository.findByEmail(email)
-                .map(UserCredentialsDtoMapper::map);
+                .map(UserDtoMapper::mapCredentials);
     }
 
     @Transactional
@@ -35,4 +37,6 @@ public class UserService {
         user.getRoles().add(defaultRole);
         userRepository.save(user);
     }
+
+
 }

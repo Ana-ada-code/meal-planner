@@ -2,6 +2,7 @@ package pl.adamik.mealplanner.domain.dish;
 
 import jakarta.persistence.*;
 import pl.adamik.mealplanner.domain.category.Category;
+import pl.adamik.mealplanner.domain.dishselection.DishSelection;
 import pl.adamik.mealplanner.domain.rating.Rating;
 
 import java.util.HashSet;
@@ -21,6 +22,8 @@ public class Dish {
     @OneToMany(mappedBy = "dish")
     private Set<Rating> ratings = new HashSet<>();
     private String image;
+    @OneToMany(mappedBy = "dish")
+    private Set<DishSelection> dishSelections = new HashSet<>();
 
     public Dish() {
     }
@@ -79,5 +82,13 @@ public class Dish {
 
     public void setRatings(Set<Rating> ratings) {
         this.ratings = ratings;
+    }
+
+    public Set<DishSelection> getDishSelections() {
+        return dishSelections;
+    }
+
+    public void setDishSelections(Set<DishSelection> dishSelections) {
+        this.dishSelections = dishSelections;
     }
 }
