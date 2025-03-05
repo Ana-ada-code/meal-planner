@@ -9,6 +9,9 @@
         <div class="container mt-4">
             <h2 class="list-heading text-center mb-3">Plan posiłków na najbliższy tydzień</h2>
             <div class="row">
+                <p class="alert alert-primary text-center" th:if="${notification}" th:text="${notification}">
+                    Belka z powiadomieniami
+                </p>
                 <div class="col-md-10 mx-auto">
                     <div th:each="entry : ${dishSelection}" class="mb-4">
                         <div class="card shadow-sm">

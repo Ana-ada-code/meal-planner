@@ -4,13 +4,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.adamik.mealplanner.domain.dishselection.DishSelectionService;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionDto;
+import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionSaveDto;
 
 import java.util.List;
 
 @Controller
 public class DishSelectionController {
+    public static final String NOTIFICATION_ATTRIBUTE = "notification";
     private final DishSelectionService dishSelectionService;
 
     public DishSelectionController(DishSelectionService dishSelectionService) {
@@ -27,5 +31,15 @@ public class DishSelectionController {
         model.addAttribute("dishSelection", dishSelection);
         return "planner";
     }
+
+    @PostMapping("/planer")
+    public String addToPlanner(DishSelectionSaveDto dishSelection, Authentication authentication,
+                               RedirectAttributes redirectAttributes) {
+        String currentUserEmail = authentication.getName();
+        boolean isAdded = dishSelectionService.addDishToPlanner(dishSelection, currentUserEmail);
+        redirectAttributes.addFlashAttribute(NOTIFICATION_ATTRIBUTE, "Danie zostało dodane do planera");
+        return "redirect:/planer";
+    }
+
 
 }

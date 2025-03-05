@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 import pl.adamik.mealplanner.domain.dish.DishService;
 import pl.adamik.mealplanner.domain.dish.dto.DishDto;
+import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionSaveDto;
 import pl.adamik.mealplanner.domain.rating.RatingService;
 
 import java.util.List;
@@ -33,6 +34,8 @@ public class DishController {
             Integer rating = ratingService.getUserRatingForDish(currentUserEmail,id).orElse(0);
             model.addAttribute("userRating", rating);
         }
+        model.addAttribute("dishSelection", new DishSelectionSaveDto());
+
         return "dish";
     }
 
