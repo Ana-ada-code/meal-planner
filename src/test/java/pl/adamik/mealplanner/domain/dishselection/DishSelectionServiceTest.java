@@ -113,4 +113,32 @@ class DishSelectionServiceTest {
         verify(dishRepository).findById(10L);
         verifyNoInteractions(dishSelectionRepository);
     }
+
+    @Test
+    void testRemoveAll() {
+        boolean result = dishSelectionService.removeAll();
+
+        assertTrue(result);
+        verify(dishSelectionRepository).deleteAll();
+    }
+
+    @Test
+    void testRemoveDay() {
+        LocalDate date = LocalDate.of(2025, 3, 19);
+
+        boolean result = dishSelectionService.removeDay(date);
+
+        assertTrue(result);
+        verify(dishSelectionRepository).deleteAllByDate(date);
+    }
+
+    @Test
+    void testRemoveDish() {
+        Long dishId = 10L;
+
+        boolean result = dishSelectionService.removeDish(dishId);
+
+        assertTrue(result);
+        verify(dishSelectionRepository).deleteById(dishId);
+    }
 }
