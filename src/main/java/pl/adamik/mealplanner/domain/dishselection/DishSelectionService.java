@@ -65,6 +65,12 @@ public class DishSelectionService {
     @Transactional
     public boolean removeDay(LocalDate date) {
         dishSelectionRepository.deleteAllByDate(date);
-        return false;
+        return true;
+    }
+
+    @Transactional
+    public boolean removeDish(Long id) {
+        dishSelectionRepository.deleteById(id);
+        return true;
     }
 }

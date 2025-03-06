@@ -40,10 +40,12 @@ public class CategorySelectionDto {
     public static class DishDto {
         private Long id;
         private String name;
+        private Long selectionId;
 
-        public DishDto(Long id, String name) {
+        public DishDto(Long id, String name, Long selectionId) {
             this.id = id;
             this.name = name;
+            this.selectionId = selectionId;
         }
 
         public Long getId() {
@@ -60,6 +62,14 @@ public class CategorySelectionDto {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        public Long getSelectionId() {
+            return selectionId;
+        }
+
+        public void setSelectionId(Long selectionId) {
+            this.selectionId = selectionId;
         }
     }
 }

@@ -17,8 +17,8 @@ public interface DishSelectionRepository extends CrudRepository<DishSelection, L
             @Param("userId") Long userId
     );
 
-
     void deleteAllByDate(LocalDate date);
+
 }
 
 

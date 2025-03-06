@@ -18,6 +18,7 @@ public class DishSelectionController {
     public static final String NOTIFICATION_ATTRIBUTE = "notification";
     private final DishSelectionService dishSelectionService;
 
+
     public DishSelectionController(DishSelectionService dishSelectionService) {
         this.dishSelectionService = dishSelectionService;
     }
@@ -54,6 +55,13 @@ public class DishSelectionController {
         LocalDate localDate = LocalDate.parse(date);
         dishSelectionService.removeDay(localDate);
         redirectAttributes.addFlashAttribute(NOTIFICATION_ATTRIBUTE, "Wszystkie zaplanowane dania na dzień %s zostały usunięte".formatted(date));
+        return "redirect:/planer";
+    }
+
+    @DeleteMapping("/by-id/{id}")
+    public String remove(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        dishSelectionService.removeDish(id);
+        redirectAttributes.addFlashAttribute(NOTIFICATION_ATTRIBUTE, "Wybrane danie zostało usunięte z planera");
         return "redirect:/planer";
     }
 

@@ -32,7 +32,7 @@ public class DishSelectionMapper {
         Map<Long, List<CategorySelectionDto.DishDto>> categoriesMap = dishSelections.stream()
                 .collect(Collectors.groupingBy(ds -> ds.getDish().getCategory().getId(),
                         Collectors.mapping(ds -> new CategorySelectionDto.DishDto(
-                                ds.getDish().getId(), ds.getDish().getName()), Collectors.toList())));
+                                ds.getDish().getId(), ds.getDish().getName(), ds.getId()), Collectors.toList())));
 
         return categories.stream()
                 .filter(category -> categoriesMap.containsKey(category.getId()))
