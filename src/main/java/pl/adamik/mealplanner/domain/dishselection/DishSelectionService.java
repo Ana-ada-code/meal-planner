@@ -56,13 +56,14 @@ public class DishSelectionService {
     }
 
     @Transactional
-    public void removeAll() {
+    public boolean removeAll() {
         dishSelectionRepository.deleteAll();
+        return true;
     }
 
 
     @Transactional
-    public boolean removeDayFromPlanner(LocalDate date) {
+    public boolean removeDay(LocalDate date) {
         dishSelectionRepository.deleteAllByDate(date);
         return false;
     }

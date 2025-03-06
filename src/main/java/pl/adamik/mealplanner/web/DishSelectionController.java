@@ -3,15 +3,13 @@ package pl.adamik.mealplanner.web;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.adamik.mealplanner.domain.dishselection.DishSelectionService;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionDto;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionSaveDto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -50,6 +48,15 @@ public class DishSelectionController {
         redirectAttributes.addFlashAttribute(NOTIFICATION_ATTRIBUTE, "Wszystkie zaplanowane dania zostały usunięte");
         return "redirect:/planer";
     }
+
+    @DeleteMapping("/{date}")
+    public String remove(@PathVariable String date, RedirectAttributes redirectAttributes) {
+        LocalDate localDate = LocalDate.parse(date);
+        dishSelectionService.removeDay(localDate);
+        redirectAttributes.addFlashAttribute(NOTIFICATION_ATTRIBUTE, "Wszystkie zaplanowane dania na dzień %s zostały usunięte".formatted(date));
+        return "redirect:/planer";
+    }
+
 
 
 
