@@ -8,25 +8,38 @@
     <main class="main-content" layout:fragment="content">
         <div class="container mt-4">
             <h2 class="list-heading text-center mb-3">Plan posiłków na najbliższy tydzień</h2>
+
             <div class="row">
                 <p class="alert alert-primary text-center" th:if="${notification}" th:text="${notification}">
                     Belka z powiadomieniami
                 </p>
                 <div class="col-md-10 mx-auto">
+
+                    <div th:if="${!dishSelection.isEmpty}" class="mt-3 dropdown text-end">
+                        <form action="#" th:action="@{/planer}" method="post">
+                            <input type="hidden" name="_method" value="delete"/>
+                            <button type="submit" class="btn btn-primary">Usuń wszystkie dania</button>
+                        </form>
+                    </div>
+
+
                     <div th:each="entry : ${dishSelection}" class="mb-4">
                         <div class="card shadow-sm">
-                            <div class="card-header bg-primary text-white">
+                            <div class="card-header bg-primary text-white d-flex align-items-center">
                                 <h4 class="mb-0" th:text="${#temporals.format(entry.date, 'EEEE, dd MMMM yyyy')}">
                                     Data
                                 </h4>
+                                <i class="remove-dish fa-solid fa-circle-minus text-white ms-auto"></i>
                             </div>
+
                             <div class="card-body">
                                 <div th:each="category : ${entry.categories}" class="mb-3">
                                     <h5 class="text-secondary" th:text="${category.name}">Kategoria</h5>
                                     <ul class="list-group">
-                                        <li class="list-group-item" th:each="dish : ${category.dishes}">
+                                        <li class="list-group-item d-flex align-items-center" th:each="dish : ${category.dishes}">
                                             <a class="text-dark text-decoration-none" th:href="@{|/danie/${dish.id}|}"
                                                th:text="${dish.name} ">Nazwa dania</a>
+                                            <i class="remove-day fa-solid fa-circle-minus text-primary ms-auto"></i>
                                         </li>
                                     </ul>
                                 </div>
@@ -38,5 +51,8 @@
         </div>
     </main>
 </div>
+
+
+
 </body>
 </html>

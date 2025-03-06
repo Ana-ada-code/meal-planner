@@ -64,7 +64,7 @@ class DishSelectionServiceTest {
     @Test
     void testGetSelectionsGroupedByDateAndCategory() {
         when(userRepository.findByEmail("test@example.com")).thenReturn(Optional.of(mockUser));
-        when(dishSelectionRepository.findDishSelectionByUser_IdForNext7Days(mockUser.getId())).thenReturn(Collections.emptyList());
+        when(dishSelectionRepository.findDishSelectionByUser_IdFromToday(mockUser.getId())).thenReturn(Collections.emptyList());
         when(categoryRepository.findAllByOrderByIdAsc()).thenReturn(Collections.emptyList());
         when(dishSelectionMapper.map(Collections.emptyList(), Collections.emptyList())).thenReturn(Collections.emptyList());
 
@@ -73,7 +73,7 @@ class DishSelectionServiceTest {
         assertNotNull(result);
         assertTrue(result.isEmpty());
         verify(userRepository).findByEmail("test@example.com");
-        verify(dishSelectionRepository).findDishSelectionByUser_IdForNext7Days(mockUser.getId());
+        verify(dishSelectionRepository).findDishSelectionByUser_IdFromToday(mockUser.getId());
         verify(categoryRepository).findAllByOrderByIdAsc();
         verify(dishSelectionMapper).map(Collections.emptyList(), Collections.emptyList());
     }

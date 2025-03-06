@@ -11,6 +11,7 @@ import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionSaveDto;
 import pl.adamik.mealplanner.domain.user.User;
 import pl.adamik.mealplanner.domain.user.UserRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -33,7 +34,7 @@ public class DishSelectionService {
 
     public List<DishSelectionDto> getSelectionsGroupedByDateAndCategory(String userEmail) {
         User user = userRepository.findByEmail(userEmail).orElseThrow();
-        List<DishSelection> dishSelections = dishSelectionRepository.findDishSelectionByUser_IdForNext7Days(user.getId());
+        List<DishSelection> dishSelections = dishSelectionRepository.findDishSelectionByUser_IdFromToday(user.getId());
 
         List<Category> categories = categoryRepository.findAllByOrderByIdAsc();
 
@@ -52,5 +53,17 @@ public class DishSelectionService {
 
         dishSelectionRepository.save(dishSelection);
         return true;
+    }
+
+    @Transactional
+    public void removeAll() {
+        dishSelectionRepository.deleteAll();
+    }
+
+
+    @Transactional
+    public boolean removeDayFromPlanner(LocalDate date) {
+        dishSelectionRepository.deleteAllByDate(date);
+        return false;
     }
 }
