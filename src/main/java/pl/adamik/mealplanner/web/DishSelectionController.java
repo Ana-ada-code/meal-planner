@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.adamik.mealplanner.domain.dishselection.DishSelectionService;
+import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionChangeDto;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionDto;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionSaveDto;
 
@@ -58,10 +59,17 @@ public class DishSelectionController {
         return "redirect:/planer";
     }
 
-    @DeleteMapping("/by-id/{id}")
+    @DeleteMapping("/remove/{id}")
     public String remove(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         dishSelectionService.removeDish(id);
         redirectAttributes.addFlashAttribute(NOTIFICATION_ATTRIBUTE, "Wybrane danie zostało usunięte z planera");
+        return "redirect:/planer";
+    }
+
+    @PatchMapping
+    public String change(DishSelectionChangeDto dishSelection, RedirectAttributes redirectAttributes) {
+        dishSelectionService.update(dishSelection);
+        redirectAttributes.addFlashAttribute(NOTIFICATION_ATTRIBUTE, "Wybrana data została zmieniona");
         return "redirect:/planer";
     }
 

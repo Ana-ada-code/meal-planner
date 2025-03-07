@@ -26,7 +26,6 @@ public class DishSelectionMapper {
                 .collect(Collectors.toList());
     }
 
-
     private List<CategorySelectionDto> mapCategories(List<DishSelection> dishSelections, List<Category> categories) {
 
         Map<Long, List<CategorySelectionDto.DishDto>> categoriesMap = dishSelections.stream()
@@ -39,4 +38,6 @@ public class DishSelectionMapper {
                 .map(category -> new CategorySelectionDto(category.getId(), category.getName(), categoriesMap.get(category.getId())))
                 .collect(Collectors.toList());
     }
+
+
 }
