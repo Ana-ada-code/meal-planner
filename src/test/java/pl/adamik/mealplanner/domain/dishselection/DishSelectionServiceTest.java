@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import pl.adamik.mealplanner.domain.category.CategoryRepository;
 import pl.adamik.mealplanner.domain.dish.Dish;
 import pl.adamik.mealplanner.domain.dish.DishRepository;
+import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionChangeDto;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionDto;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionSaveDto;
 import pl.adamik.mealplanner.domain.user.User;
@@ -140,5 +141,60 @@ class DishSelectionServiceTest {
 
         assertTrue(result);
         verify(dishSelectionRepository).deleteById(dishId);
+    }
+
+
+    @Test
+    void testUpdate_Success() {
+        DishSelectionChangeDto dto = new DishSelectionChangeDto();
+        dto.setSelectedDishId(1L);
+        dto.setSelectedDate(LocalDate.of(2025, 3, 20));
+
+        DishSelection dishSelection = new DishSelection();
+        dishSelection.setId(1L);
+        dishSelection.setDate(LocalDate.of(2025, 3, 19));
+
+        when(dishSelectionRepository.findById(1L)).thenReturn(Optional.of(dishSelection));
+
+        boolean result = dishSelectionService.update(dto);
+
+        assertTrue(result);
+        assertEquals(LocalDate.of(2025, 3, 20), dishSelection.getDate());
+        verify(dishSelectionRepository).findById(1L);
+        verify(dishSelectionRepository).save(dishSelection);
+    }
+
+    @Test
+    void testUpdate_DishSelectionNotFound() {
+        DishSelectionChangeDto dto = new DishSelectionChangeDto();
+        dto.setSelectedDishId(1L);
+        dto.setSelectedDate(LocalDate.of(2025, 3, 20));
+
+        when(dishSelectionRepository.findById(1L)).thenReturn(Optional.empty());
+
+        assertThrows(RuntimeException.class, () -> dishSelectionService.update(dto));
+
+        verify(dishSelectionRepository).findById(1L);
+        verifyNoMoreInteractions(dishSelectionRepository);
+    }
+
+    @Test
+    void testUpdate_NullDate_NoUpdate() {
+        DishSelectionChangeDto dto = new DishSelectionChangeDto();
+        dto.setSelectedDishId(1L);
+        dto.setSelectedDate(null);
+
+        DishSelection dishSelection = new DishSelection();
+        dishSelection.setId(1L);
+        dishSelection.setDate(LocalDate.of(2025, 3, 19));
+
+        when(dishSelectionRepository.findById(1L)).thenReturn(Optional.of(dishSelection));
+
+        boolean result = dishSelectionService.update(dto);
+
+        assertTrue(result);
+        assertEquals(LocalDate.of(2025, 3, 19), dishSelection.getDate());
+        verify(dishSelectionRepository).findById(1L);
+        verify(dishSelectionRepository).save(dishSelection);
     }
 }
