@@ -96,15 +96,6 @@ class CategoryServiceTest {
         ));
     }
 
-//    @Test
-//    void shouldNotThrowException_whenAddingNullCategory() {
-//        // Given
-//        CategoryDto categoryDto = null;
-//
-//        // When & Then
-//        categoryService.addCategory(categoryDto);
-//        verify(categoryRepository, never()).save(any());
-//    }
 
     @Test
     void shouldAddCategory_whenCategoryHasLeadingOrTrailingSpaces() {
@@ -120,4 +111,47 @@ class CategoryServiceTest {
                 category.getName().trim().equals("Thai")
         ));
     }
+
+    @Test
+    void shouldRemoveCategory_whenCategoryExists() {
+        // Given
+        Category category = new Category(1L, "Italian");
+        when(categoryRepository.findByNameIgnoreCase("Italian")).thenReturn(Optional.of(category));
+
+        // When
+        boolean result = categoryService.removeCategory("Italian");
+
+        // Then
+        assertThat(result).isTrue();
+        verify(categoryRepository, times(1)).findByNameIgnoreCase("Italian");
+        verify(categoryRepository, times(1)).delete(category);
+    }
+
+    @Test
+    void shouldReturnFalse_whenCategoryDoesNotExist() {
+        // Given
+        when(categoryRepository.findByNameIgnoreCase("Italian")).thenReturn(Optional.empty());
+
+        // When
+        boolean result = categoryService.removeCategory("Italian");
+
+        // Then
+        assertThat(result).isFalse();
+        verify(categoryRepository, times(1)).findByNameIgnoreCase("Italian");
+        verify(categoryRepository, never()).delete(any());
+    }
+
+    @Test
+    void shouldNotThrowException_whenCategoryIsNull() {
+        // Given
+        when(categoryRepository.findByNameIgnoreCase(null)).thenReturn(Optional.empty());
+
+        // When
+        boolean result = categoryService.removeCategory(null);
+
+        // Then
+        assertThat(result).isFalse();
+        verify(categoryRepository, never()).delete(any());
+    }
+
 }
