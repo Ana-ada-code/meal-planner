@@ -33,4 +33,17 @@ public class CategoryService {
         categoryToSave.setName(category.getName());
         categoryRepository.save(categoryToSave);
     }
+
+    @Transactional
+    public boolean removeCategory(String name) {
+        Optional<Category> categoryOpt = categoryRepository.findByNameIgnoreCase(name);
+
+        if (categoryOpt.isPresent()) {
+            Category category = categoryOpt.get();
+
+            categoryRepository.delete(category);
+            return true;
+        }
+        return false;
+    }
 }

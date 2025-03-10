@@ -19,10 +19,10 @@ public class Dish {
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
-    @OneToMany(mappedBy = "dish")
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.REMOVE)
     private Set<Rating> ratings = new HashSet<>();
     private String image;
-    @OneToMany(mappedBy = "dish")
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.REMOVE)
     private Set<DishSelection> dishSelections = new HashSet<>();
 
     public Dish() {
