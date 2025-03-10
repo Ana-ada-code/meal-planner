@@ -61,4 +61,13 @@ public class DishService {
                 .map(DishDtoMapper::map)
                 .toList();
     }
+
+    public List<DishDto> searchDishes(String keyword) {
+        if (keyword == null || keyword.isBlank()) {
+            return findAllDishes();
+        }
+        return StreamSupport.stream(dishRepository.findByNameContainingIgnoreCase(keyword).spliterator(), false)
+                .map(DishDtoMapper::map)
+                .toList();
+    }
 }

@@ -10,4 +10,5 @@ public interface DishRepository extends CrudRepository<Dish, Long> {
     List<Dish> findAllByCategory_NameIgnoreCase(String category);
     @Query("select d from Dish d join d.ratings r group by d order by avg(r.rating) desc")
     List<Dish> findTopByRating(Pageable pageable);
+    List<Dish> findByNameContainingIgnoreCase(String name);
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 import pl.adamik.mealplanner.domain.dish.DishService;
 import pl.adamik.mealplanner.domain.dish.dto.DishDto;
@@ -46,4 +47,15 @@ public class DishController {
         model.addAttribute("dishes", top10Dishes);
         return "dish-listing";
     }
+
+    @GetMapping("/szukaj")
+    public String searchDishes(@RequestParam(required = false) String keyword, Model model) {
+        List<DishDto> foundDishes = dishService.searchDishes(keyword);
+        String heading = "Wyniki wyszukiwania dla:  " + keyword;
+        model.addAttribute("dishes", foundDishes);
+        model.addAttribute("heading", heading);
+        return "dish-listing";
+    }
+
+
 }
