@@ -2,6 +2,8 @@ package pl.adamik.mealplanner.domain.dish;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -282,6 +284,128 @@ class DishServiceTest {
         assertThat(result.get(0).getName()).isEqualTo("Pizza");
         verify(dishRepository, times(1)).findTopByRating(Pageable.ofSize(1));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"", "null"})
+    void shouldReturnAllDishes_whenKeywordIsNullOrEmpty(String keyword) {
+        // Given
+        Category italianCategory = new Category();
+        italianCategory.setId(1L);
+        italianCategory.setName("Italian");
+
+        Dish dish1 = new Dish();
+        dish1.setId(1L);
+        dish1.setName("Pizza");
+        dish1.setIngredients("mąka, oliwa");
+        dish1.setRecipe("połącz składniki");
+        dish1.setCategory(italianCategory);
+        dish1.setImage("https://example.com/image.jpg");
+
+        Dish dish2 = new Dish();
+        dish2.setId(2L);
+        dish2.setName("Pasta");
+        dish2.setIngredients("mąka, woda");
+        dish2.setRecipe("ugotuj makaron");
+        dish2.setCategory(italianCategory);
+        dish2.setImage("https://example.com/image2.jpg");
+
+        when(dishRepository.findAll()).thenReturn(List.of(dish1, dish2));
+
+        // When
+        List<DishDto> result = dishService.searchDishes(keyword.equals("null") ? null : keyword);
+
+        // Then
+        assertThat(result).hasSize(2);
+        assertThat(result.get(0).getName()).isEqualTo("Pizza");
+        assertThat(result.get(1).getName()).isEqualTo("Pasta");
+
+        verify(dishRepository, times(1)).findAll();
+    }
+
+
+    @Test
+    void shouldReturnFilteredDishes_whenKeywordMatchesPartOfName() {
+        // Given
+        Category italianCategory = new Category();
+        italianCategory.setId(1L);
+        italianCategory.setName("Italian");
+
+        Dish dish1 = new Dish();
+        dish1.setId(1L);
+        dish1.setName("Pizza");
+        dish1.setIngredients("mąka, oliwa");
+        dish1.setRecipe("połącz składniki");
+        dish1.setCategory(italianCategory);
+        dish1.setImage("https://example.com/image.jpg");
+
+        Dish dish2 = new Dish();
+        dish2.setId(2L);
+        dish2.setName("Pasta");
+        dish2.setIngredients("mąka, woda");
+        dish2.setRecipe("ugotuj makaron");
+        dish2.setCategory(italianCategory);
+        dish2.setImage("https://example.com/image2.jpg");
+
+        when(dishRepository.findByNameContainingIgnoreCase("Pi")).thenReturn(List.of(dish1));
+
+        // When
+        List<DishDto> result = dishService.searchDishes("Pi");
+
+        // Then
+        assertThat(result).hasSize(1);
+        assertThat(result.get(0).getName()).isEqualTo("Pizza");
+
+        verify(dishRepository, times(1)).findByNameContainingIgnoreCase("Pi");
+    }
+
+    @Test
+    void shouldReturnEmptyList_whenNoDishesMatchKeyword() {
+        // Given
+        when(dishRepository.findByNameContainingIgnoreCase("NonExistentDish")).thenReturn(Collections.emptyList());
+
+        // When
+        List<DishDto> result = dishService.searchDishes("NonExistentDish");
+
+        // Then
+        assertThat(result).isEmpty();
+        verify(dishRepository, times(1)).findByNameContainingIgnoreCase("NonExistentDish");
+    }
+
+    @Test
+    void shouldReturnFilteredDishes_whenKeywordContainsSpecialCharacters() {
+        // Given
+        Category italianCategory = new Category();
+        italianCategory.setId(1L);
+        italianCategory.setName("Italian");
+
+        Dish dish1 = new Dish();
+        dish1.setId(1L);
+        dish1.setName("Pizza Margherita");
+        dish1.setIngredients("mąka, oliwa");
+        dish1.setRecipe("połącz składniki");
+        dish1.setCategory(italianCategory);
+        dish1.setImage("https://example.com/image.jpg");
+
+        Dish dish2 = new Dish();
+        dish2.setId(2L);
+        dish2.setName("Pasta Carbonara");
+        dish2.setIngredients("mąka, jajka");
+        dish2.setRecipe("ugotuj makaron");
+        dish2.setCategory(italianCategory);
+        dish2.setImage("https://example.com/image2.jpg");
+
+        when(dishRepository.findByNameContainingIgnoreCase("Pasta C")).thenReturn(List.of(dish2));
+
+        // When
+        List<DishDto> result = dishService.searchDishes("Pasta C");
+
+        // Then
+        assertThat(result).hasSize(1);
+        assertThat(result.get(0).getName()).isEqualTo("Pasta Carbonara");
+
+        verify(dishRepository, times(1)).findByNameContainingIgnoreCase("Pasta C");
+    }
+
 
 
 }
