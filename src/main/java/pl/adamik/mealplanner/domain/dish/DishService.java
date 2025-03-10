@@ -2,6 +2,7 @@ package pl.adamik.mealplanner.domain.dish;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.adamik.mealplanner.domain.category.Category;
 import pl.adamik.mealplanner.domain.category.CategoryRepository;
 import pl.adamik.mealplanner.domain.dish.dto.DishDto;
@@ -41,6 +42,7 @@ public class DishService {
                 .toList();
     }
 
+    @Transactional
     public void addDish(DishSaveDto dishToSave) {
         Dish dish = new Dish();
         dish.setName(dishToSave.getName());
@@ -69,5 +71,11 @@ public class DishService {
         return StreamSupport.stream(dishRepository.findByNameContainingIgnoreCase(keyword).spliterator(), false)
                 .map(DishDtoMapper::map)
                 .toList();
+    }
+
+    @Transactional
+    public boolean deleteDish(Long id) {
+        dishRepository.deleteById(id);
+        return true;
     }
 }

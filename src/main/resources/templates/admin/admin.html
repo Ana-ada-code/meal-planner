@@ -30,6 +30,55 @@
                         </div>
 
                         <div class="col-md-12 mb-4">
+                            <button class="card shadow-sm w-100"
+                                    data-bs-toggle="modal" data-bs-target="#deleteDishModal"
+                                    style="text-align: left;">
+                                <div class="row g-0 w-100 col-md-8 offset-md-1 card-body">
+                                    <h3 class="card-title">Usuń danie</h3>
+                                </div>
+                            </button>
+                        </div>
+
+                        <div class="modal fade" id="deleteDishModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Usuń danie</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/admin/usun-danie}" method="post">
+                                            <input type="hidden" name="_method" value="delete"/>
+                                            <div class="mb-3">
+                                                <p class="alert alert-primary text-center">Wybrane danie zostanie usunięte</p>
+                                                <label for="dishCat" class="form-label">Wybierz kategorię:</label>
+                                                <select id="dishCat" class="form-select" name="categoryName" required>
+                                                    <option value="" hidden>Wybierz Kategorie</option>
+                                                    <option th:each="category: ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
+                                                </select>
+
+
+                                                <label for="dish" class="form-label">Wybierz danie:</label>
+                                                <select id="dish" class="form-select" name="dishName" required>
+                                                    <option value="" hidden>Wybierz Danie</option>
+                                                </select>
+
+                                                <input type="hidden" id="dishId" name="dishId" />
+
+
+
+                                            </div>
+                                            <div class="d-flex justify-content-center">
+                                                <button type="submit" class="btn btn-primary">Usuń danie</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12 mb-4">
                             <div class="card shadow-sm w-100">
                                 <a href="#" class="text-decoration-none text-dark"
                                    th:href="@{|/admin/dodaj-kategorie|}">
@@ -50,7 +99,6 @@
                             </button>
                         </div>
 
-                        <!-- Modal do usuwania kategorii -->
                         <div class="modal fade" id="deleteCategoryModal" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -110,7 +158,6 @@
                                             <div class="mb-3">
                                                 <label for="categoryName" class="form-label">Nowa nazwa kategorii</label>
                                                 <input type="text" class="form-control" id="categoryName" name="categoryName" required>
-<!--                                                <input type="hidden" name="categoryId" id="categoryId"  th:value="${category.id}">-->
                                             </div>
                                             <div class="d-flex justify-content-center">
                                                 <button type="submit" class="btn btn-primary">Zmień nazwę</button>
