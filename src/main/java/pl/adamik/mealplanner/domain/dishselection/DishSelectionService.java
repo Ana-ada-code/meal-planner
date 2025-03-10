@@ -75,6 +75,7 @@ public class DishSelectionService {
         return true;
     }
 
+    @Transactional
     public boolean update(DishSelectionChangeDto dishSelectionDto) {
         DishSelection dishSelection = dishSelectionRepository.findById(dishSelectionDto.getSelectedDishId()).orElseThrow();
 

@@ -46,4 +46,16 @@ public class CategoryService {
         }
         return false;
     }
+
+    @Transactional
+    public boolean update(Long id, String name) {
+        Optional<Category> category = categoryRepository.findById(id);
+
+        if (name != null) {
+            category.get().setName(name);
+        }
+
+        categoryRepository.save(category.get());
+        return true;
+    }
 }
