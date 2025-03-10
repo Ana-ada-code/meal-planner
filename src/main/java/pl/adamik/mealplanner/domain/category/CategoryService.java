@@ -51,11 +51,14 @@ public class CategoryService {
     public boolean update(Long id, String name) {
         Optional<Category> category = categoryRepository.findById(id);
 
-        if (name != null) {
+        if (name != null && category.isPresent()) {
             category.get().setName(name);
+            categoryRepository.save(category.get());
+            return true;
         }
 
-        categoryRepository.save(category.get());
-        return true;
+        return false;
+
+
     }
 }

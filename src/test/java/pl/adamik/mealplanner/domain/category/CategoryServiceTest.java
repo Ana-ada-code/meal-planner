@@ -154,4 +154,57 @@ class CategoryServiceTest {
         verify(categoryRepository, never()).delete(any());
     }
 
+    @Test
+    void shouldUpdateCategory_whenCategoryExists() {
+        // Given
+        Long categoryId = 1L;
+        String newName = "Updated Name";
+        Category category = new Category(categoryId, "Old Name");
+
+        when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
+
+        // When
+        boolean result = categoryService.update(categoryId, newName);
+
+        // Then
+        assertThat(result).isTrue();
+        assertThat(category.getName()).isEqualTo(newName);
+        verify(categoryRepository, times(1)).findById(categoryId);
+        verify(categoryRepository, times(1)).save(category);
+    }
+
+    @Test
+    void shouldReturnFalse_whenCategoryDoesNotExist_UpdateCategory() {
+        // Given
+        Long categoryId = 1L;
+        String newName = "Updated Name";
+
+        when(categoryRepository.findById(categoryId)).thenReturn(Optional.empty());
+
+        // When
+        boolean result = categoryService.update(categoryId, newName);
+
+        // Then
+        assertThat(result).isFalse();
+        verify(categoryRepository, times(1)).findById(categoryId);
+        verify(categoryRepository, never()).save(any());
+    }
+
+    @Test
+    void shouldReturnFalse_whenNewNameIsNull() {
+        // Given
+        Long categoryId = 1L;
+        Category category = new Category(categoryId, "Old Name");
+
+        when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
+
+        // When
+        boolean result = categoryService.update(categoryId, null);
+
+        // Then
+        assertThat(result).isFalse();
+        verify(categoryRepository, times(1)).findById(categoryId);
+        verify(categoryRepository, never()).save(any());
+    }
+
 }
