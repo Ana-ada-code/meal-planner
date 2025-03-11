@@ -473,6 +473,32 @@ class DishServiceTest {
         verify(dishRepository, times(1)).deleteById(dishId);
     }
 
+    @Test
+    void shouldUpdateDish_whenDishExists() {
+        // Given
+        Long dishId = 1L;
+        Dish existingDish = new Dish();
+        existingDish.setId(dishId);
+        existingDish.setName("Old Name");
+
+        DishSaveDto dishSaveDto = new DishSaveDto();
+        dishSaveDto.setName("New Name");
+        dishSaveDto.setIngredients("New Ingredients");
+        dishSaveDto.setRecipe("New Recipe");
+        dishSaveDto.setCategory("Italian");
+
+        Category category = new Category(1L, "Italian");
+
+        when(dishRepository.findById(dishId)).thenReturn(Optional.of(existingDish));
+        when(categoryRepository.findByNameIgnoreCase("Italian")).thenReturn(Optional.of(category));
+
+        // When
+        dishService.updateDish(dishSaveDto, dishId);
+
+        // Then
+        assertThat(existingDish.getName()).isEqualTo("New Name");
+        verify(dishRepository, times(1)).save(existingDish);
+    }
 
 
 }
