@@ -1,8 +1,10 @@
 package pl.adamik.mealplanner.domain.dish;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 import pl.adamik.mealplanner.domain.category.Category;
 import pl.adamik.mealplanner.domain.category.CategoryRepository;
 import pl.adamik.mealplanner.domain.dish.dto.DishDto;
@@ -45,16 +47,7 @@ public class DishService {
     @Transactional
     public void addDish(DishSaveDto dishToSave) {
         Dish dish = new Dish();
-        dish.setName(dishToSave.getName());
-        dish.setIngredients(dishToSave.getIngredients());
-        dish.setRecipe(dishToSave.getRecipe());
-        Category category = categoryRepository.findByNameIgnoreCase(dishToSave.getCategory()).orElseThrow();
-        dish.setCategory(category);
-        if (dishToSave.getImage() != null && !dishToSave.getImage().isEmpty()) {
-            String savedFileName = fileStorageService.saveImage(dishToSave.getImage());
-            dish.setImage(savedFileName);
-        }
-        dishRepository.save(dish);
+        updateAndSaveDish(dishToSave, dish);
     }
 
     public List<DishDto> findTopDishes(int size) {
@@ -77,5 +70,24 @@ public class DishService {
     public boolean deleteDish(Long id) {
         dishRepository.deleteById(id);
         return true;
+    }
+
+    @Transactional
+    public void updateDish(DishSaveDto dishToSave, Long id) {
+        Dish dish = dishRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        updateAndSaveDish(dishToSave, dish);
+    }
+
+    private void updateAndSaveDish(DishSaveDto dishToSave, Dish dish) {
+        dish.setName(dishToSave.getName());
+        dish.setIngredients(dishToSave.getIngredients());
+        dish.setRecipe(dishToSave.getRecipe());
+        Category category = categoryRepository.findByNameIgnoreCase(dishToSave.getCategory()).orElseThrow();
+        dish.setCategory(category);
+        if (dishToSave.getImage() != null && !dishToSave.getImage().isEmpty()) {
+            String savedFileName = fileStorageService.saveImage(dishToSave.getImage());
+            dish.setImage(savedFileName);
+        }
+        dishRepository.save(dish);
     }
 }

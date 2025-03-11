@@ -5,20 +5,21 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Dodaj nowe danie - MealPlanner</title>
+    <title>Edytuj danie - MealPlanner</title>
 </head>
 <body>
 <div id="wrapper">
     <main class="main-content" layout:fragment="content">
         <div class="container mt-4">
-            <h2 class="list-heading text-center mb-3">Dodaj nowe danie</h2>
+            <h2 class="list-heading text-center mb-3">Edytuj danie</h2>
             <div class="row" >
                 <div class="col-md-9 mx-auto d-flex flex-column align-items-center">
                     <div class="row w-100">
                         <!-- Dane testowe -->
                         <div class="col-md-12 mb-4">
                             <!--                            <div class="card shadow-sm w-100">-->
-                            <form action="#" th:action="@{/admin/dodaj-danie}" method="post" class="mc-form" enctype="multipart/form-data" th:object="${dish}">
+                            <form action="#" th:action="@{/admin/edytuj-danie}" method="post" class="mc-form" enctype="multipart/form-data" th:object="${dish}">
+                                <input type="hidden" name="_method" value="put"/>
                                 <fieldset>
                                     <div class="mb-3">
                                         <label for="dishName" class="form-label">Nazwa dania</label>
@@ -42,9 +43,10 @@
                                         <label for="dishImage" class="form-label">Grafika</label>
                                         <input class="form-control" type="file" id="dishImage" th:field="*{image}" accept="image/png, image/jpeg">
                                     </div>
+                                    <input type="hidden" id="dishIdUpdate" name="dishId" th:value="*{id}"/>
 
                                     <div class="d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-primary w-50">Dodaj danie</button>
+                                        <button type="submit" class="btn btn-primary w-50">Zapisz zmiany</button>
                                     </div>
                                 </fieldset>
                             </form>

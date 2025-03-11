@@ -1,15 +1,15 @@
-document.getElementById('dishCat').addEventListener('change', function () {
-    let categoryName = this.value;
+function updateDishList(categorySelectId, dishSelectId, hiddenDishId) {
+    let categoryName = document.getElementById(categorySelectId).value;
 
     if (!categoryName) {
-        document.getElementById('dish').innerHTML = '<option value="" hidden>Wybierz danie</option>';
+        document.getElementById(dishSelectId).innerHTML = '<option value="" hidden>Wybierz danie</option>';
         return;
     }
 
     fetch('/admin/dishes?category=' + categoryName)
         .then(response => response.json())
         .then(dishes => {
-            let dishSelect = document.getElementById('dish');
+            let dishSelect = document.getElementById(dishSelectId);
             dishSelect.innerHTML = ''; // Wyczyść poprzednie opcje
 
             let option = document.createElement('option');
@@ -27,9 +27,21 @@ document.getElementById('dishCat').addEventListener('change', function () {
         .catch(error => {
             console.error('Błąd:', error);
         });
+}
+
+document.getElementById('dishCat').addEventListener('change', function () {
+    updateDishList('dishCat', 'dish', 'dishId');
+});
+
+document.getElementById('dishCatUpdate').addEventListener('change', function () {
+    updateDishList('dishCatUpdate', 'dishUpdate', 'dishIdUpdate');
 });
 
 document.getElementById('dish').addEventListener('change', function () {
-    const selectedDishId = this.value;
-    document.getElementById('dishId').value = selectedDishId;
+    document.getElementById('dishId').value = this.value;
+});
+
+document.getElementById('dishUpdate').addEventListener('change', function () {
+    let selectedDishId = this.value;
+    document.getElementById('dishIdUpdate').value = this.value;
 });
