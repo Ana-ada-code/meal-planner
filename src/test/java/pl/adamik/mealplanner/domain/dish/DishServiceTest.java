@@ -407,5 +407,72 @@ class DishServiceTest {
     }
 
 
+    @Test
+    void shouldReturnDishesByCategory_whenCategoryExists() {
+        // Given
+        Category italianCategory = new Category();
+        italianCategory.setId(1L);
+        italianCategory.setName("Italian");
+
+        Dish dish1 = new Dish();
+        dish1.setId(1L);
+        dish1.setName("Pizza");
+        dish1.setIngredients("mąka, oliwa");
+        dish1.setRecipe("połącz składniki");
+        dish1.setCategory(italianCategory);
+
+        when(dishRepository.findAllByCategory_NameIgnoreCase("Italian")).thenReturn(List.of(dish1));
+
+        // When
+        List<DishDto> result = dishService.findDishesByCategoryName("Italian");
+
+        // Then
+        assertThat(result).hasSize(1);
+        assertThat(result.get(0).getName()).isEqualTo("Pizza");
+        verify(dishRepository, times(1)).findAllByCategory_NameIgnoreCase("Italian");
+    }
+
+    @Test
+    void shouldReturnEmptyList_whenCategoryHasNoDishes() {
+        // Given
+        when(dishRepository.findAllByCategory_NameIgnoreCase("NonExistentCategory")).thenReturn(Collections.emptyList());
+
+        // When
+        List<DishDto> result = dishService.findDishesByCategoryName("NonExistentCategory");
+
+        // Then
+        assertThat(result).isEmpty();
+        verify(dishRepository, times(1)).findAllByCategory_NameIgnoreCase("NonExistentCategory");
+    }
+
+    @Test
+    void shouldDeleteDish_whenDishExists() {
+        // Given
+        Long dishId = 1L;
+        doNothing().when(dishRepository).deleteById(dishId);
+
+        // When
+        boolean result = dishService.deleteDish(dishId);
+
+        // Then
+        assertThat(result).isTrue();
+        verify(dishRepository, times(1)).deleteById(dishId);
+    }
+
+    @Test
+    void shouldHandleDeleteDish_whenDishDoesNotExist() {
+        // Given
+        Long dishId = 1L;
+        doNothing().when(dishRepository).deleteById(dishId);
+
+        // When
+        boolean result = dishService.deleteDish(dishId);
+
+        // Then
+        assertThat(result).isTrue();
+        verify(dishRepository, times(1)).deleteById(dishId);
+    }
+
+
 
 }
