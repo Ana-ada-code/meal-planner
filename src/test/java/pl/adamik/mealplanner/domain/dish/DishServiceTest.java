@@ -7,9 +7,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 import pl.adamik.mealplanner.domain.category.Category;
 import pl.adamik.mealplanner.domain.category.CategoryRepository;
 import pl.adamik.mealplanner.domain.dish.dto.DishDto;
@@ -22,6 +26,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -234,29 +239,35 @@ class DishServiceTest {
         dish2.setCategory(italianCategory);
         dish2.setImage("https://example.com/image2.jpg");
 
-        when(dishRepository.findTopByRating(Pageable.ofSize(2))).thenReturn(List.of(dish1, dish2));
+        Pageable pageable = PageRequest.of(0, 2);
+        Page<Dish> dishPage = new PageImpl<>(List.of(dish1, dish2));
+
+        when(dishRepository.findTopByRating(any(Pageable.class))).thenReturn(dishPage);
 
         // When
-        List<DishDto> result = dishService.findTopDishes(2);
+        Page<DishDto> result = dishService.findTopDishes(2, pageable);
 
         // Then
-        assertThat(result).hasSize(2);
-        assertThat(result.get(0).getName()).isEqualTo("Pizza");
-        assertThat(result.get(1).getName()).isEqualTo("Pasta");
-        verify(dishRepository, times(1)).findTopByRating(Pageable.ofSize(2));
+        assertThat(result.getTotalElements()).isEqualTo(2);
+        assertThat(result.getContent().get(0).getName()).isEqualTo("Pizza");
+        assertThat(result.getContent().get(1).getName()).isEqualTo("Pasta");
+        verify(dishRepository, times(1)).findTopByRating(any(Pageable.class));
     }
 
     @Test
-    void shouldReturnEmptyList_whenNoTopDishesExist() {
+    void shouldReturnEmptyPage_whenNoTopDishesExist() {
         // Given
-        when(dishRepository.findTopByRating(Pageable.ofSize(3))).thenReturn(Collections.emptyList());
+        Pageable pageable = PageRequest.of(0, 3);
+        Page<Dish> emptyPage = Page.empty(pageable);
+
+        when(dishRepository.findTopByRating(pageable)).thenReturn(emptyPage);
 
         // When
-        List<DishDto> result = dishService.findTopDishes(3);
+        Page<DishDto> result = dishService.findTopDishes(3, pageable);
 
         // Then
         assertThat(result).isEmpty();
-        verify(dishRepository, times(1)).findTopByRating(Pageable.ofSize(3));
+        verify(dishRepository, times(1)).findTopByRating(pageable);
     }
 
     @Test
@@ -274,15 +285,18 @@ class DishServiceTest {
         dish1.setCategory(italianCategory);
         dish1.setImage("https://example.com/image.jpg");
 
-        when(dishRepository.findTopByRating(Pageable.ofSize(1))).thenReturn(List.of(dish1));
+        Pageable pageable = PageRequest.of(0, 1);
+        Page<Dish> dishPage = new org.springframework.data.domain.PageImpl<>(List.of(dish1), pageable, 1);
+
+        when(dishRepository.findTopByRating(pageable)).thenReturn(dishPage);
 
         // When
-        List<DishDto> result = dishService.findTopDishes(1);
+        Page<DishDto> result = dishService.findTopDishes(1, pageable);
 
         // Then
-        assertThat(result).hasSize(1);
-        assertThat(result.get(0).getName()).isEqualTo("Pizza");
-        verify(dishRepository, times(1)).findTopByRating(Pageable.ofSize(1));
+        assertThat(result.getTotalElements()).isEqualTo(1);
+        assertThat(result.getContent().get(0).getName()).isEqualTo("Pizza");
+        verify(dishRepository, times(1)).findTopByRating(pageable);
     }
 
     @ParameterizedTest
@@ -309,17 +323,20 @@ class DishServiceTest {
         dish2.setCategory(italianCategory);
         dish2.setImage("https://example.com/image2.jpg");
 
-        when(dishRepository.findAll()).thenReturn(List.of(dish1, dish2));
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Dish> dishPage = new org.springframework.data.domain.PageImpl<>(List.of(dish1, dish2), pageable, 2);
+
+        when(dishRepository.findAll(pageable)).thenReturn(dishPage);
 
         // When
-        List<DishDto> result = dishService.searchDishes(keyword.equals("null") ? null : keyword);
+        Page<DishDto> result = dishService.searchDishes(keyword.equals("null") ? null : keyword, pageable);
 
         // Then
-        assertThat(result).hasSize(2);
-        assertThat(result.get(0).getName()).isEqualTo("Pizza");
-        assertThat(result.get(1).getName()).isEqualTo("Pasta");
+        assertThat(result.getTotalElements()).isEqualTo(2);
+        assertThat(result.getContent().get(0).getName()).isEqualTo("Pizza");
+        assertThat(result.getContent().get(1).getName()).isEqualTo("Pasta");
 
-        verify(dishRepository, times(1)).findAll();
+        verify(dishRepository, times(1)).findAll(pageable);
     }
 
 
@@ -338,37 +355,36 @@ class DishServiceTest {
         dish1.setCategory(italianCategory);
         dish1.setImage("https://example.com/image.jpg");
 
-        Dish dish2 = new Dish();
-        dish2.setId(2L);
-        dish2.setName("Pasta");
-        dish2.setIngredients("mąka, woda");
-        dish2.setRecipe("ugotuj makaron");
-        dish2.setCategory(italianCategory);
-        dish2.setImage("https://example.com/image2.jpg");
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Dish> dishPage = new org.springframework.data.domain.PageImpl<>(List.of(dish1), pageable, 1);
 
-        when(dishRepository.findByNameContainingIgnoreCase("Pi")).thenReturn(List.of(dish1));
+        when(dishRepository.findByNameContainingIgnoreCase("Pi", pageable)).thenReturn(dishPage);
 
         // When
-        List<DishDto> result = dishService.searchDishes("Pi");
+        Page<DishDto> result = dishService.searchDishes("Pi", pageable);
 
         // Then
-        assertThat(result).hasSize(1);
-        assertThat(result.get(0).getName()).isEqualTo("Pizza");
+        assertThat(result.getTotalElements()).isEqualTo(1);
+        assertThat(result.getContent().get(0).getName()).isEqualTo("Pizza");
 
-        verify(dishRepository, times(1)).findByNameContainingIgnoreCase("Pi");
+        verify(dishRepository, times(1)).findByNameContainingIgnoreCase("Pi", pageable);
     }
 
     @Test
     void shouldReturnEmptyList_whenNoDishesMatchKeyword() {
         // Given
-        when(dishRepository.findByNameContainingIgnoreCase("NonExistentDish")).thenReturn(Collections.emptyList());
+        Pageable pageable = PageRequest.of(0, 10);
+        when(dishRepository.findByNameContainingIgnoreCase("NonExistentDish", pageable))
+                .thenReturn(Page.empty());
 
         // When
-        List<DishDto> result = dishService.searchDishes("NonExistentDish");
+        Page<DishDto> result = dishService.searchDishes("NonExistentDish", pageable);
 
         // Then
-        assertThat(result).isEmpty();
-        verify(dishRepository, times(1)).findByNameContainingIgnoreCase("NonExistentDish");
+        assertThat(result.getTotalElements()).isEqualTo(0);
+        assertThat(result.getContent()).isEmpty();
+
+        verify(dishRepository, times(1)).findByNameContainingIgnoreCase("NonExistentDish", pageable);
     }
 
     @Test
@@ -394,16 +410,20 @@ class DishServiceTest {
         dish2.setCategory(italianCategory);
         dish2.setImage("https://example.com/image2.jpg");
 
-        when(dishRepository.findByNameContainingIgnoreCase("Pasta C")).thenReturn(List.of(dish2));
+        Pageable pageable = PageRequest.of(0, 10);
+
+        // Mocking the repository method
+        when(dishRepository.findByNameContainingIgnoreCase("Pasta C", pageable))
+                .thenReturn(new PageImpl<>(List.of(dish2), pageable, 1));
 
         // When
-        List<DishDto> result = dishService.searchDishes("Pasta C");
+        Page<DishDto> result = dishService.searchDishes("Pasta C", pageable);
 
         // Then
-        assertThat(result).hasSize(1);
-        assertThat(result.get(0).getName()).isEqualTo("Pasta Carbonara");
+        assertThat(result.getContent()).hasSize(1);
+        assertThat(result.getContent().get(0).getName()).isEqualTo("Pasta Carbonara");
 
-        verify(dishRepository, times(1)).findByNameContainingIgnoreCase("Pasta C");
+        verify(dishRepository, times(1)).findByNameContainingIgnoreCase("Pasta C", pageable);
     }
 
 
@@ -480,25 +500,64 @@ class DishServiceTest {
         Dish existingDish = new Dish();
         existingDish.setId(dishId);
         existingDish.setName("Old Name");
+        existingDish.setIngredients("Old Ingredients");
+        existingDish.setRecipe("Old Recipe");
+        existingDish.setCategory(new Category(1L, "Italian"));
 
         DishSaveDto dishSaveDto = new DishSaveDto();
         dishSaveDto.setName("New Name");
         dishSaveDto.setIngredients("New Ingredients");
         dishSaveDto.setRecipe("New Recipe");
         dishSaveDto.setCategory("Italian");
-
-        Category category = new Category(1L, "Italian");
+        dishSaveDto.setImage(null);
 
         when(dishRepository.findById(dishId)).thenReturn(Optional.of(existingDish));
-        when(categoryRepository.findByNameIgnoreCase("Italian")).thenReturn(Optional.of(category));
+        when(categoryRepository.findByNameIgnoreCase("Italian")).thenReturn(Optional.of(new Category(1L, "Italian")));
 
         // When
         dishService.updateDish(dishSaveDto, dishId);
 
         // Then
         assertThat(existingDish.getName()).isEqualTo("New Name");
+        assertThat(existingDish.getIngredients()).isEqualTo("New Ingredients");
+        assertThat(existingDish.getRecipe()).isEqualTo("New Recipe");
+        assertThat(existingDish.getCategory().getName()).isEqualTo("Italian");
         verify(dishRepository, times(1)).save(existingDish);
     }
+
+    @Test
+    void shouldThrowException_whenDishDoesNotExist() {
+        // Given
+        Long nonExistentDishId = 999L;
+        DishSaveDto dishToUpdate = new DishSaveDto();
+        dishToUpdate.setName("Updated Dish");
+        dishToUpdate.setIngredients("Updated Ingredients");
+        dishToUpdate.setRecipe("Updated Recipe");
+        dishToUpdate.setCategory("Category");
+        dishToUpdate.setImage(null);
+
+        // When & Then
+        assertThrows(ResponseStatusException.class, () -> {
+            dishService.updateDish(dishToUpdate, nonExistentDishId);
+        });
+    }
+
+//    @Test
+//    void shouldThrowException_whenDishDataIsInvalid() {
+//        // Given
+//        Long existingDishId = 1L;
+//        DishSaveDto invalidDish = new DishSaveDto();
+//        invalidDish.setName("");
+//        invalidDish.setIngredients("Some ingredients");
+//        invalidDish.setRecipe("Some recipe");
+//        invalidDish.setCategory("Category");
+//        invalidDish.setImage(null);
+//
+//        // When & Then
+//        assertThrows(IllegalArgumentException.class, () -> {
+//            dishService.updateDish(invalidDish, existingDishId);
+//        });
+//    }
 
 
 }

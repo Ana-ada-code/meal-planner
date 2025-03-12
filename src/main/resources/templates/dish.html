@@ -34,7 +34,7 @@
 
             <form action="#" th:action="@{/ocen-film}" method="post" sec:authorize="isAuthenticated()" class="text-center">
               <p class="fw-bold">Twoja ocena</p>
-              <input type="hidden" name="dish-Id" th:value="${dish.id}">
+              <input type="hidden" name="dishId" th:value="${dish.id}">
               <div class="d-flex justify-content-center gap-2" th:remove="all-but-first">
                 <button class="btn btn-primary" name="rating" th:each="i: ${#numbers.sequence(1, 5)}" th:value="${i}">
                   <i class="fa-star" th:classappend="${i <= userRating ? 'fa-solid' : 'fa-regular'}"></i>
