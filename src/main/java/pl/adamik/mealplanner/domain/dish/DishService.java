@@ -1,5 +1,7 @@
 package pl.adamik.mealplanner.domain.dish;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,11 @@ public class DishService {
     }
 
 
+    public Page<DishDto> findAllDishes(Pageable pageable) {
+        return dishRepository.findAll(pageable)
+                .map(DishDtoMapper::map);
+    }
+
     public List<DishDto> findAllDishes() {
         return StreamSupport.stream(dishRepository.findAll().spliterator(), false)
                 .map(DishDtoMapper::map)
@@ -36,6 +43,11 @@ public class DishService {
 
     public Optional<DishDto> findDishById(Long id) {
         return dishRepository.findById(id).map(DishDtoMapper::map);
+    }
+
+    public Page<DishDto> findDishesByCategoryName(String category, Pageable pageable) {
+        return dishRepository.findAllByCategory_NameIgnoreCase(category, pageable)
+                .map(DishDtoMapper::map);
     }
 
     public List<DishDto> findDishesByCategoryName(String category) {
@@ -50,20 +62,18 @@ public class DishService {
         updateAndSaveDish(dishToSave, dish);
     }
 
-    public List<DishDto> findTopDishes(int size) {
-        Pageable page = Pageable.ofSize(size);
-        return dishRepository.findTopByRating(page).stream()
-                .map(DishDtoMapper::map)
-                .toList();
+    public Page<DishDto> findTopDishes(int size, Pageable pageable) {
+        Pageable pageRequest = PageRequest.of(pageable.getPageNumber(), size);
+        return dishRepository.findTopByRating(pageRequest)
+                .map(DishDtoMapper::map);
     }
 
-    public List<DishDto> searchDishes(String keyword) {
+    public Page<DishDto> searchDishes(String keyword, Pageable pageable) {
         if (keyword == null || keyword.isBlank()) {
-            return findAllDishes();
+            return findAllDishes(pageable);
         }
-        return StreamSupport.stream(dishRepository.findByNameContainingIgnoreCase(keyword).spliterator(), false)
-                .map(DishDtoMapper::map)
-                .toList();
+        return dishRepository.findByNameContainingIgnoreCase(keyword, pageable)
+                .map(DishDtoMapper::map);
     }
 
     @Transactional

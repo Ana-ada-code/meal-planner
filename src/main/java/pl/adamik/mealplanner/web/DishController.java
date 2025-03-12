@@ -1,5 +1,8 @@
 package pl.adamik.mealplanner.web;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -13,12 +16,11 @@ import pl.adamik.mealplanner.domain.dish.dto.DishDto;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionSaveDto;
 import pl.adamik.mealplanner.domain.rating.RatingService;
 
-import java.util.List;
-
 @Controller
 public class DishController {
     private final DishService dishService;
     private final RatingService ratingService;
+    private final static int TOP_DISHES = 10;
 
     public DishController(DishService dishService, RatingService ratingService) {
         this.dishService = dishService;
@@ -40,20 +42,29 @@ public class DishController {
         return "dish";
     }
 
-    @GetMapping("/top10")
-    public String findTop10(Model model) {
-        List<DishDto> top10Dishes = dishService.findTopDishes(10);
+    @GetMapping("/top")
+    public String findTopDishes(@RequestParam(defaultValue = "0") int page,
+                                @RequestParam(defaultValue = "10") int size,
+                                Model model) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<DishDto> topDishes = dishService.findTopDishes(TOP_DISHES, pageable);
         model.addAttribute("heading", "Najlepsze 10 dań");
-        model.addAttribute("dishes", top10Dishes);
+        model.addAttribute("dishes", topDishes);
+        model.addAttribute("currentUrl", "/top");
         return "dish-listing";
     }
 
     @GetMapping("/szukaj")
-    public String searchDishes(@RequestParam(required = false) String keyword, Model model) {
-        List<DishDto> foundDishes = dishService.searchDishes(keyword);
+    public String searchDishes(@RequestParam(required = false) String keyword,
+                               @RequestParam(defaultValue = "0") int page,
+                               @RequestParam(defaultValue = "5") int size,
+                               Model model) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<DishDto> foundDishes = dishService.searchDishes(keyword, pageable);
         String heading = "Wyniki wyszukiwania dla:  " + keyword;
         model.addAttribute("dishes", foundDishes);
         model.addAttribute("heading", heading);
+        model.addAttribute("currentUrl", "/szukaj");
         return "dish-listing";
     }
 

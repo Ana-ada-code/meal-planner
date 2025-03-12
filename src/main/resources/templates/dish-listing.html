@@ -5,134 +5,171 @@
 
 <body>
 <div id="wrapper">
-<!-- Główna zawartość -->
+    <!-- Główna zawartość -->
 
-<main class="main-content" layout:fragment="content">
-
-
-
-  <div class="container mt-4">
-    <h2 class="list-heading text-center mb-3" th:text="${heading}">Lista dań</h2>
-  <div class="row" >
+    <main class="main-content" layout:fragment="content">
 
 
-    <div class="col-md-9 mx-auto d-flex flex-column align-items-center">
-      <div class="row w-100" th:remove="all-but-first">
-        <div th:each="dish : ${dishes}" class="col-md-12 mb-4">
-          <div class="card shadow-sm w-100">
-            <div class="row g-0 w-100">
-              <div class="col-md-2 d-flex align-items-center justify-content-center p-2">
-                <img  src="../static/img/dish-placeholder.png"
-                      th:src="${dish.image ne null} ? @{|/img/${dish.image}|} : @{/img/dish-placeholder.png}"
-                      class="img-fluid rounded"
-                     th:alt="${dish.name}"
-                      alt="Pizza">
-<!--                <img th:src="${dish.image}" src="../static/img/dish-placeholder.png" class="img-fluid rounded"-->
-<!--                     th:alt="${dish.name}" alt="Pizza">-->
+        <div class="container mt-4">
+            <h2 class="list-heading text-center mb-3" th:text="${heading}">Lista dań</h2>
+            <div class="row">
 
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h3 class="card-title">
-                    <a href="#" th:href="@{|/danie/${dish.id}|}" class="text-dark text-decoration-none"
-                       th:text="${dish.name}">Pizza Margherita</a>
-                  </h3>
-                  <p class="text-muted" th:text="${dish.category}">Danie główne</p>
-                  <p class="text-muted"><i class="fas fa-star"></i>
-                    <span class="text-muted" th:if="${dish.ratingCount}"
-                          th:text="${#numbers.formatDecimal(dish.avgRating, 1, 1)}">8.7</span>
-                    <span th:if="!${dish.ratingCount}">Brak ocen</span>
-                  </p>
+
+                <div class="col-md-9 mx-auto d-flex flex-column align-items-center">
+
+
+                    <div class="row w-100" th:remove="all-but-first">
+                        <div th:each="dish : ${dishes.content}" class="col-md-12 mb-4">
+                            <div class="card shadow-sm w-100">
+                                <div class="row g-0 w-100">
+                                    <div class="col-md-2 d-flex align-items-center justify-content-center p-2">
+                                        <img src="../static/img/dish-placeholder.png"
+                                             th:src="${dish.image ne null} ? @{|/img/${dish.image}|} : @{/img/dish-placeholder.png}"
+                                             class="img-fluid rounded"
+                                             th:alt="${dish.name}"
+                                             alt="Pizza">
+                                        <!--                <img th:src="${dish.image}" src="../static/img/dish-placeholder.png" class="img-fluid rounded"-->
+                                        <!--                     th:alt="${dish.name}" alt="Pizza">-->
+
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title">
+                                                <a href="#" th:href="@{|/danie/${dish.id}|}"
+                                                   class="text-dark text-decoration-none"
+                                                   th:text="${dish.name}">Pizza Margherita</a>
+                                            </h3>
+                                            <p class="text-muted" th:text="${dish.category}">Danie główne</p>
+                                            <p class="text-muted"><i class="fas fa-star"></i>
+                                                <span class="text-muted" th:if="${dish.ratingCount}"
+                                                      th:text="${#numbers.formatDecimal(dish.avgRating, 1, 1)}">8.7</span>
+                                                <span th:if="!${dish.ratingCount}">Brak ocen</span>
+                                            </p>
+
+
+                                        </div>
+                                        <!--                <div class="dish-list-item-rating">-->
+                                        <!--                  <i class="fas fa-star"></i>-->
+                                        <!--                  <span>8.7</span>-->
+                                        <!--                </div>-->
+                                    </div>
+                                    <!--              <div class="col-md-2 d-flex align-items-center justify-content-center">-->
+                                    <!--                <a th:href="@{/selected-dish/add/{name}(name=${dish.name})}"-->
+                                    <!--                   class="btn btn-secondary btn-sm">-->
+                                    <!--                  <i class="fas fa-plus"></i>-->
+                                    <!--                </a>-->
+                                    <!--              </div>  -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-4">
+                            <div class="card shadow-sm w-100">
+                                <div class="row g-0 w-100">
+                                    <div class="col-md-2 d-flex align-items-center justify-content-center p-2">
+                                        <img src="../static/img/dish-placeholder.png" class="img-fluid rounded"
+                                             alt="Sałatka Grecka">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title">
+                                                <a href="#" class="text-dark text-decoration-none">Sałatka Grecka</a>
+                                            </h3>
+                                            <p class="text-muted">Danie główne</p>
+                                            <p class="text-muted"><i class="fas fa-star"></i>8.3</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-4">
+                            <div class="card shadow-sm w-100">
+                                <div class="row g-0 w-100">
+                                    <div class="col-md-2 d-flex align-items-center justify-content-center p-2">
+                                        <img src="../static/img/dish-placeholder.png" class="img-fluid rounded"
+                                             alt="Spaghetti Carbonara">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title">
+                                                <a href="#" class="text-dark text-decoration-none">Spaghetti
+                                                    Carbonara</a>
+                                            </h3>
+                                            <p class="text-muted">Danie główne</p>
+                                            <p class="text-muted"><i class="fas fa-star"></i>7.3</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-4">
+                            <div class="card shadow-sm w-100">
+                                <div class="row g-0 w-100">
+                                    <div class="col-md-2 d-flex align-items-center justify-content-center p-2">
+                                        <img src="../static/img/dish-placeholder.png" class="img-fluid rounded"
+                                             alt="Stek wołowy">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title">
+                                                <a href="#" class="text-dark text-decoration-none">Stek wołowy</a>
+                                            </h3>
+                                            <p class="text-muted">Danie główne</p>
+                                            <p class="text-muted"><i class="fas fa-star"></i>5.8</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="container-fluid px-3">
+                        <div class="d-flex justify-content-between align-items-center w-100 col-md-12 mb-4 flex-wrap">
+
+                            <!-- Formularz zmiany liczby elementów na stronę -->
+                            <form method="get" th:action="@{${currentUrl}}"                                  class="d-flex align-items-center">
+                                <label for="size" class="me-2 fw-semibold">Elementów na stronę:</label>
+                                <input type="hidden" name="page" th:value="${dishes.number}"/>
+                                <select id="size" name="size" class="form-select w-auto" onchange="this.form.submit()">
+                                    <option value="5" th:selected="${dishes.size == 5}">5</option>
+                                    <option value="10" th:selected="${dishes.size == 10}">10</option>
+                                    <option value="20" th:selected="${dishes.size == 20}">20</option>
+                                </select>
+                            </form>
+
+                            <!-- Nawigacja paginacji -->
+                            <nav>
+                                <ul class="pagination mb-0">
+                                    <li class="page-item" th:classappend="${!dishes.hasPrevious()} ? 'disabled'">
+                                        <a class="page-link" th:href="@{${currentUrl} + '?page=' + ${dishes.number - 1} + '&size=' + ${dishes.size}}">Poprzednia</a>
+                                    </li>
+                                    <li class="page-item disabled">
+        <span class="page-link">
+          Strona <span th:text="${dishes.number + 1}"></span> z <span th:text="${dishes.totalPages}"></span>
+        </span>
+                                    </li>
+                                    <li class="page-item" th:classappend="${!dishes.hasNext()} ? 'disabled'">
+                                        <a class="page-link" th:href="@{${currentUrl} + '?page=' + ${dishes.number + 1} + '&size=' + ${dishes.size}}">Następna</a>
+
+
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
 
 
                 </div>
-<!--                <div class="dish-list-item-rating">-->
-<!--                  <i class="fas fa-star"></i>-->
-<!--                  <span>8.7</span>-->
-<!--                </div>-->
-              </div>
-<!--              <div class="col-md-2 d-flex align-items-center justify-content-center">-->
-<!--                <a th:href="@{/selected-dish/add/{name}(name=${dish.name})}"-->
-<!--                   class="btn btn-secondary btn-sm">-->
-<!--                  <i class="fas fa-plus"></i>-->
-<!--                </a>-->
-<!--              </div>  -->
-            </div>
-          </div>
-        </div>
+            </div> <!-- Koniec row -->
+        </div> <!-- Koniec container -->
 
-        <div class="col-md-12 mb-4">
-          <div class="card shadow-sm w-100">
-            <div class="row g-0 w-100">
-              <div class="col-md-2 d-flex align-items-center justify-content-center p-2">
-                <img src="../static/img/dish-placeholder.png" class="img-fluid rounded"
-                     alt="Sałatka Grecka">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h3 class="card-title">
-                    <a href="#" class="text-dark text-decoration-none">Sałatka Grecka</a>
-                  </h3>
-                  <p class="text-muted">Danie główne</p>
-                  <p class="text-muted"><i class="fas fa-star"></i>8.3</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-12 mb-4">
-          <div class="card shadow-sm w-100">
-            <div class="row g-0 w-100">
-              <div class="col-md-2 d-flex align-items-center justify-content-center p-2">
-                <img src="../static/img/dish-placeholder.png" class="img-fluid rounded"
-                     alt="Spaghetti Carbonara">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h3 class="card-title">
-                    <a href="#" class="text-dark text-decoration-none">Spaghetti Carbonara</a>
-                  </h3>
-                  <p class="text-muted">Danie główne</p>
-                  <p class="text-muted"><i class="fas fa-star"></i>7.3</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-12 mb-4">
-          <div class="card shadow-sm w-100">
-            <div class="row g-0 w-100">
-              <div class="col-md-2 d-flex align-items-center justify-content-center p-2">
-                <img src="../static/img/dish-placeholder.png" class="img-fluid rounded"
-                     alt="Stek wołowy">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h3 class="card-title">
-                    <a href="#" class="text-dark text-decoration-none">Stek wołowy</a>
-                  </h3>
-                  <p class="text-muted">Danie główne</p>
-                  <p class="text-muted"><i class="fas fa-star"></i>5.8</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-      </div>
-    </div>
-  </div> <!-- Koniec row -->
-</div> <!-- Koniec container -->
-
-</main>
+    </main>
 </div>
-
 
 
 </body>

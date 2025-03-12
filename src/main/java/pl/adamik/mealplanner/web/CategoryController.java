@@ -1,10 +1,14 @@
 package pl.adamik.mealplanner.web;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 import pl.adamik.mealplanner.domain.category.CategoryService;
 import pl.adamik.mealplanner.domain.category.dto.CategoryDto;
@@ -24,12 +28,18 @@ public class CategoryController {
     }
 
     @GetMapping("/kategoria/{name}")
-    public String getCategory(@PathVariable String name, Model model) {
+    public String getCategory(@PathVariable String name,
+                              @RequestParam(defaultValue = "0") int page,
+                              @RequestParam(defaultValue = "5") int size,
+                              Model model) {
         CategoryDto category = categoryService.findCategoryByName(name)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        List<DishDto> dishes = dishService.findDishesByCategoryName(name);
+        Pageable pageable = PageRequest.of(page, size);
+        Page<DishDto> dishes = dishService.findDishesByCategoryName(name, pageable);
+        String currentUrl = "/kategoria/" + name;
         model.addAttribute("heading", category.getName());
         model.addAttribute("dishes", dishes);
+        model.addAttribute("currentUrl", currentUrl);
         return "dish-listing";
     }
 
