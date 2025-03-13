@@ -18,25 +18,46 @@
                         <!-- Dane testowe -->
                         <div class="col-md-12 mb-4">
                             <!--                            <div class="card shadow-sm w-100">-->
-                            <form action="#" th:action="@{/admin/dodaj-danie}" method="post" class="mc-form" enctype="multipart/form-data" th:object="${dish}">
+                            <form action="#" th:action="@{/admin/dodaj-danie}" method="post" class="mc-form" enctype="multipart/form-data" th:object="${dishSaveDto}">
                                 <fieldset>
                                     <div class="mb-3">
                                         <label for="dishName" class="form-label">Nazwa dania</label>
                                         <input type="text" class="form-control" id="dishName" th:field="*{name}">
+                                        <div th:if="${#fields.hasErrors('name')}" class="error">
+                                            <div th:each="err : ${#fields.errors('name')}" class="alert alert-primary text-center py-1 mb-1">
+                                                <p class="m-0" th:text="${err}"></p>
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <div class="mb-3">
                                         <label for="dishIngredients" class="form-label">Składniki</label>
                                         <textarea class="form-control" id="dishIngredients" rows="5" th:field="*{ingredients}"></textarea>
+                                        <div th:if="${#fields.hasErrors('ingredients')}" class="error">
+                                            <div th:each="err : ${#fields.errors('ingredients')}" class="alert alert-primary text-center py-1 mb-1">
+                                                <p class="m-0" th:text="${err}"></p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="dishRecipe" class="form-label">Przepis</label>
                                         <textarea class="form-control" id="dishRecipe" rows="5" th:field="*{recipe}"></textarea>
+                                        <div th:if="${#fields.hasErrors('recipe')}" class="error">
+                                            <div th:each="err : ${#fields.errors('recipe')}" class="alert alert-primary text-center py-1 mb-1">
+                                                <p class="m-0" th:text="${err}"></p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <select id="dishCategory" class="form-select" aria-label="Wybór kategorii" th:field="*{category}" required>
                                             <option value="" hidden>Wybierz Kategorie</option>
                                             <option th:each="category: ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
                                         </select>
+                                        <div th:if="${#fields.hasErrors('category')}" class="error">
+                                            <div th:each="err : ${#fields.errors('category')}" class="alert alert-primary text-center py-1 mb-1">
+                                                <p class="m-0" th:text="${err}"></p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="dishImage" class="form-label">Grafika</label>

@@ -1,6 +1,7 @@
 package pl.adamik.mealplanner.domain.dish;
 
 import pl.adamik.mealplanner.domain.dish.dto.DishDto;
+import pl.adamik.mealplanner.domain.dish.dto.DishSaveDto;
 import pl.adamik.mealplanner.domain.rating.Rating;
 
 public class DishDtoMapper {
@@ -22,5 +23,16 @@ public class DishDtoMapper {
                 ratingCount,
                 favorite
         );
+    }
+
+    public static DishSaveDto map(DishDto dishDto) {
+        DishSaveDto dishSaveDto = new DishSaveDto();
+        dishSaveDto.setId(dishDto.getId());
+        dishSaveDto.setName(dishDto.getName());
+        dishSaveDto.setIngredients(dishDto.getIngredients());
+        dishSaveDto.setRecipe(dishDto.getRecipe());
+        dishSaveDto.setCategory(dishDto.getCategory());
+        dishSaveDto.setImage(dishSaveDto.getImage());
+        return dishSaveDto;
     }
 }

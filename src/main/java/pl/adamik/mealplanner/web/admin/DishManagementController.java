@@ -1,13 +1,16 @@
 package pl.adamik.mealplanner.web.admin;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.adamik.mealplanner.domain.category.CategoryService;
 import pl.adamik.mealplanner.domain.category.dto.CategoryDto;
+import pl.adamik.mealplanner.domain.dish.DishDtoMapper;
 import pl.adamik.mealplanner.domain.dish.DishService;
 import pl.adamik.mealplanner.domain.dish.dto.DishDto;
 import pl.adamik.mealplanner.domain.dish.dto.DishSaveDto;
@@ -29,17 +32,24 @@ public class DishManagementController {
     public String addDishForm(Model model) {
         List<CategoryDto> allCategories = categoryService.findAllCategories();
         model.addAttribute("categories", allCategories);
-        DishSaveDto dish = new DishSaveDto();
-        model.addAttribute("dish", dish);
+        DishSaveDto dishSaveDto = new DishSaveDto();
+        model.addAttribute("dishSaveDto", dishSaveDto);
         return "admin/dish-form";
     }
 
     @PostMapping("/dodaj-danie")
-    public String addDish(DishSaveDto dish, RedirectAttributes redirectAttributes) {
-        dishService.addDish(dish);
+    public String addDish(@Valid @ModelAttribute DishSaveDto dishSaveDto, BindingResult bindingResult,
+                          RedirectAttributes redirectAttributes, Model model) {
+        if (bindingResult.hasErrors()) {
+            List<CategoryDto> allCategories = categoryService.findAllCategories();
+            model.addAttribute("categories", allCategories);
+            return "admin/dish-form";
+        }
+
+        dishService.addDish(dishSaveDto);
         redirectAttributes.addFlashAttribute(
                 AdminController.NOTIFICATION_ATTRIBUTE,
-                "Danie %s zostało zapisane".formatted(dish.getName()));
+                "Danie %s zostało zapisane".formatted(dishSaveDto.getName()));
         return "redirect:/admin";
     }
 
@@ -56,18 +66,28 @@ public class DishManagementController {
     public String updateDishForm(@RequestParam Long dishId, Model model) {
         List<CategoryDto> allCategories = categoryService.findAllCategories();
         model.addAttribute("categories", allCategories);
-        DishDto dish = dishService.findDishById(dishId)
+        DishDto dishDto = dishService.findDishById(dishId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        model.addAttribute("dish", dish);
+        DishSaveDto dishSaveDto = DishDtoMapper.map(dishDto);
+        model.addAttribute("dishSaveDto", dishSaveDto);
         return "admin/dish-update-form";
     }
 
     @PutMapping("/edytuj-danie")
-    public String updateDish(DishSaveDto dish, @RequestParam Long dishId, RedirectAttributes redirectAttributes) {
-        dishService.updateDish(dish, dishId);
+    public String updateDish(@Valid @ModelAttribute DishSaveDto dishSaveDto, BindingResult bindingResult,
+                             @RequestParam Long dishId, RedirectAttributes redirectAttributes, Model model) {
+        if (bindingResult.hasErrors()) {
+            List<CategoryDto> allCategories = categoryService.findAllCategories();
+            model.addAttribute("categories", allCategories);
+            dishSaveDto.setId(dishId);
+            model.addAttribute("dishSaveDto", dishSaveDto);
+            return "admin/dish-update-form";
+        }
+
+        dishService.updateDish(dishSaveDto, dishId);
         redirectAttributes.addFlashAttribute(
                 AdminController.NOTIFICATION_ATTRIBUTE,
-                "Danie %s zostało zaktualizowane".formatted(dish.getName()));
+                "Danie %s zostało zaktualizowane".formatted(dishSaveDto.getName()));
         return "redirect:/admin";
     }
 }
