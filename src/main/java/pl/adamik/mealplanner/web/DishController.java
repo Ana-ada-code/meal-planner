@@ -14,17 +14,20 @@ import org.springframework.web.server.ResponseStatusException;
 import pl.adamik.mealplanner.domain.dish.DishService;
 import pl.adamik.mealplanner.domain.dish.dto.DishDto;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionSaveDto;
+import pl.adamik.mealplanner.domain.favorite.FavoriteService;
 import pl.adamik.mealplanner.domain.rating.RatingService;
 
 @Controller
 public class DishController {
     private final DishService dishService;
     private final RatingService ratingService;
+    private final FavoriteService favoriteService;
     private final static int TOP_DISHES = 10;
 
-    public DishController(DishService dishService, RatingService ratingService) {
+    public DishController(DishService dishService, RatingService ratingService, FavoriteService favoriteService) {
         this.dishService = dishService;
         this.ratingService = ratingService;
+        this.favoriteService = favoriteService;
     }
 
     @GetMapping("/danie/{id}")
@@ -35,7 +38,9 @@ public class DishController {
         if (authentication != null) {
             String currentUserEmail = authentication.getName();
             Integer rating = ratingService.getUserRatingForDish(currentUserEmail,id).orElse(0);
+            boolean userFavoriteForDish = favoriteService.getUserFavoriteForDish(currentUserEmail, id);
             model.addAttribute("userRating", rating);
+            model.addAttribute("userFavorite", userFavoriteForDish);
         }
         model.addAttribute("dishSelection", new DishSelectionSaveDto());
 
@@ -50,7 +55,7 @@ public class DishController {
         Page<DishDto> topDishes = dishService.findTopDishes(TOP_DISHES, pageable);
         model.addAttribute("heading", "Najlepsze 10 dań");
         model.addAttribute("dishes", topDishes);
-        model.addAttribute("currentUrl", "/top");
+        model.addAttribute("url", "/top");
         return "dish-listing";
     }
 
@@ -64,7 +69,7 @@ public class DishController {
         String heading = "Wyniki wyszukiwania dla:  " + keyword;
         model.addAttribute("dishes", foundDishes);
         model.addAttribute("heading", heading);
-        model.addAttribute("currentUrl", "/szukaj");
+        model.addAttribute("url", "/szukaj");
         return "dish-listing";
     }
 

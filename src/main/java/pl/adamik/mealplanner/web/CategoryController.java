@@ -36,10 +36,10 @@ public class CategoryController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Pageable pageable = PageRequest.of(page, size);
         Page<DishDto> dishes = dishService.findDishesByCategoryName(name, pageable);
-        String currentUrl = "/kategoria/" + name;
+        String url = "/kategoria/" + name;
         model.addAttribute("heading", category.getName());
         model.addAttribute("dishes", dishes);
-        model.addAttribute("currentUrl", currentUrl);
+        model.addAttribute("url", url);
         return "dish-listing";
     }
 

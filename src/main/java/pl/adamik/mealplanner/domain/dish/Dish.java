@@ -3,6 +3,7 @@ package pl.adamik.mealplanner.domain.dish;
 import jakarta.persistence.*;
 import pl.adamik.mealplanner.domain.category.Category;
 import pl.adamik.mealplanner.domain.dishselection.DishSelection;
+import pl.adamik.mealplanner.domain.favorite.Favorite;
 import pl.adamik.mealplanner.domain.rating.Rating;
 
 import java.util.HashSet;
@@ -24,6 +25,8 @@ public class Dish {
     private String image;
     @OneToMany(mappedBy = "dish", cascade = CascadeType.REMOVE)
     private Set<DishSelection> dishSelections = new HashSet<>();
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.REMOVE)
+    private Set<Favorite> favorites = new HashSet<>();
 
     public Dish() {
     }
@@ -90,5 +93,13 @@ public class Dish {
 
     public void setDishSelections(Set<DishSelection> dishSelections) {
         this.dishSelections = dishSelections;
+    }
+
+    public Set<Favorite> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Set<Favorite> favorites) {
+        this.favorites = favorites;
     }
 }

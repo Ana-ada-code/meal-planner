@@ -9,8 +9,10 @@ public class DishDto {
     private String image;
     private Double avgRating;
     private Integer ratingCount;
+    private Boolean favorite;
 
-    public DishDto(Long id, String name, String ingredients, String recipe, String category, String image, Double avgRating, Integer ratingCount) {
+    public DishDto(Long id, String name, String ingredients, String recipe, String category, String image,
+                   Double avgRating, Integer ratingCount, Boolean favorite) {
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
@@ -19,6 +21,7 @@ public class DishDto {
         this.image = image;
         this.avgRating = avgRating;
         this.ratingCount = ratingCount;
+        this.favorite = favorite;
     }
 
     public Long getId() {
@@ -83,5 +86,13 @@ public class DishDto {
 
     public void setRatingCount(Integer ratingCount) {
         this.ratingCount = ratingCount;
+    }
+
+    public Boolean getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        this.favorite = favorite;
     }
 }

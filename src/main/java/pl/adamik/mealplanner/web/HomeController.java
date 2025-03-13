@@ -26,21 +26,9 @@ public class HomeController {
         Page<DishDto> dishes = dishService.findAllDishes(pageable);
         model.addAttribute("heading", "Lista dań");
         model.addAttribute("dishes", dishes);
-        model.addAttribute("currentUrl", "/");
+        model.addAttribute("url", "/");
         return "dish-listing";
     }
-
-//    @GetMapping("/page")
-//    public String page(@RequestParam(defaultValue = "0") int page,
-//                       @RequestParam(defaultValue = "5") int size,
-//                       Model model) {
-//        Pageable pageable = PageRequest.of(page, size);
-//        Page<DishDto> dishes = dishService.findAllDishes(pageable);
-//        model.addAttribute("heading", "Lista dań");
-//        model.addAttribute("dishes", dishes);
-//        model.addAttribute("currentUrl", "/page");  // Przykład: "/page"
-//        return "dish-listing";
-//    }
 
 }
 

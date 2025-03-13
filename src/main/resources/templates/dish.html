@@ -60,7 +60,28 @@
           </div>
         </div>
         <div class="col-md-8">
+          <div class="d-flex">
           <h1 th:text="${dish.name}">Pizza Margherita</h1>
+
+            <form th:action="@{/ulubione}" method="post" th:if="${!userFavorite}" sec:authorize="isAuthenticated()"
+                  class="ms-auto" th:object="${favoriteDto}">
+              <button class="btn btn-white" name="favorite">
+                <i class="fa-heart text-primary fa-2x fa-regular"></i>
+              </button>
+              <input type="hidden" name="dishId" th:value="${dish.id}">
+            </form>
+
+            <form th:action="@{/ulubione}" method="post" th:if="${userFavorite}" sec:authorize="isAuthenticated()"
+                  class="ms-auto" th:object="${favoriteDto}">
+              <input type="hidden" name="_method" value="DELETE">
+              <button class="btn btn-white" name="favorite">
+                <i class="fa-heart text-primary fa-2x fa-solid"></i>
+              </button>
+              <input type="hidden" name="dishId" th:value="${dish.id}">
+            </form>
+
+
+          </div>
           <div class="mt-3">
             <h4 class="mt-2">Kategoria: <a th:href="@{|/kategoria/${dish.category}|}" href="#" th:text="${dish.category}" class="text-decoration-none">Obiad</a></h4>
             <h4 class="mt-2">Składniki</h4>

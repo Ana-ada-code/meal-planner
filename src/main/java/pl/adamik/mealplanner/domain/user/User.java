@@ -2,6 +2,7 @@ package pl.adamik.mealplanner.domain.user;
 
 import jakarta.persistence.*;
 import pl.adamik.mealplanner.domain.dishselection.DishSelection;
+import pl.adamik.mealplanner.domain.favorite.Favorite;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,6 +26,8 @@ public class User {
     private Set<UserRole> roles = new HashSet<>();
     @OneToMany(mappedBy = "user")
     private List<DishSelection> dishSelections = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Favorite> favorites = new ArrayList<>();
 
 
     public Long getId() {
@@ -65,5 +68,13 @@ public class User {
 
     public void setDishSelections(List<DishSelection> dishSelections) {
         this.dishSelections = dishSelections;
+    }
+
+    public List<Favorite> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(List<Favorite> favorites) {
+        this.favorites = favorites;
     }
 }

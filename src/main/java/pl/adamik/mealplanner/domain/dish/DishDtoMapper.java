@@ -3,13 +3,14 @@ package pl.adamik.mealplanner.domain.dish;
 import pl.adamik.mealplanner.domain.dish.dto.DishDto;
 import pl.adamik.mealplanner.domain.rating.Rating;
 
-class DishDtoMapper {
-    static DishDto map(Dish dish) {
+public class DishDtoMapper {
+    public static DishDto map(Dish dish) {
         double avgRating = dish.getRatings().stream()
                 .map(Rating::getRating)
                 .mapToDouble(val -> val)
                 .average().orElse(0);
         int ratingCount = dish.getRatings().size();
+        boolean favorite = !dish.getFavorites().isEmpty();
         return new DishDto(
                 dish.getId(),
                 dish.getName(),
@@ -18,7 +19,8 @@ class DishDtoMapper {
                 dish.getCategory().getName(),
                 dish.getImage(),
                 avgRating,
-                ratingCount
+                ratingCount,
+                favorite
         );
     }
 }
