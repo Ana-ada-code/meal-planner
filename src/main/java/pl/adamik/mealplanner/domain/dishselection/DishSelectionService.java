@@ -6,7 +6,6 @@ import pl.adamik.mealplanner.domain.category.Category;
 import pl.adamik.mealplanner.domain.category.CategoryRepository;
 import pl.adamik.mealplanner.domain.dish.Dish;
 import pl.adamik.mealplanner.domain.dish.DishRepository;
-import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionChangeDto;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionDto;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionSaveDto;
 import pl.adamik.mealplanner.domain.user.User;
@@ -76,8 +75,8 @@ public class DishSelectionService {
     }
 
     @Transactional
-    public boolean update(DishSelectionChangeDto dishSelectionDto) {
-        DishSelection dishSelection = dishSelectionRepository.findById(dishSelectionDto.getSelectedDishId()).orElseThrow();
+    public boolean update(DishSelectionSaveDto dishSelectionDto) {
+        DishSelection dishSelection = dishSelectionRepository.findById(dishSelectionDto.getDishId()).orElseThrow();
 
         if (dishSelectionDto.getSelectedDate() != null) {
             dishSelection.setDate(dishSelectionDto.getSelectedDate());

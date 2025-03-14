@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.adamik.mealplanner.domain.dishselection.DishSelectionService;
-import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionChangeDto;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionDto;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionSaveDto;
 
@@ -67,7 +66,7 @@ public class DishSelectionController {
     }
 
     @PatchMapping
-    public String change(DishSelectionChangeDto dishSelection, RedirectAttributes redirectAttributes) {
+    public String change(DishSelectionSaveDto dishSelection, RedirectAttributes redirectAttributes) {
         dishSelectionService.update(dishSelection);
         redirectAttributes.addFlashAttribute(NOTIFICATION_ATTRIBUTE, "Wybrana data została zmieniona");
         return "redirect:/planer";

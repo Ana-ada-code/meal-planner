@@ -9,7 +9,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import pl.adamik.mealplanner.domain.category.CategoryRepository;
 import pl.adamik.mealplanner.domain.dish.Dish;
 import pl.adamik.mealplanner.domain.dish.DishRepository;
-import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionChangeDto;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionDto;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionSaveDto;
 import pl.adamik.mealplanner.domain.user.User;
@@ -145,8 +144,8 @@ class DishSelectionServiceTest {
 
     @Test
     void testUpdate_Success() {
-        DishSelectionChangeDto dto = new DishSelectionChangeDto();
-        dto.setSelectedDishId(1L);
+        DishSelectionSaveDto dto = new DishSelectionSaveDto();
+        dto.setDishId(1L);
         dto.setSelectedDate(LocalDate.of(2025, 3, 20));
 
         DishSelection dishSelection = new DishSelection();
@@ -165,8 +164,8 @@ class DishSelectionServiceTest {
 
     @Test
     void testUpdate_DishSelectionNotFound() {
-        DishSelectionChangeDto dto = new DishSelectionChangeDto();
-        dto.setSelectedDishId(1L);
+        DishSelectionSaveDto dto = new DishSelectionSaveDto();
+        dto.setDishId(1L);
         dto.setSelectedDate(LocalDate.of(2025, 3, 20));
 
         when(dishSelectionRepository.findById(1L)).thenReturn(Optional.empty());
@@ -179,8 +178,8 @@ class DishSelectionServiceTest {
 
     @Test
     void testUpdate_NullDate_NoUpdate() {
-        DishSelectionChangeDto dto = new DishSelectionChangeDto();
-        dto.setSelectedDishId(1L);
+        DishSelectionSaveDto dto = new DishSelectionSaveDto();
+        dto.setDishId(1L);
         dto.setSelectedDate(null);
 
         DishSelection dishSelection = new DishSelection();
