@@ -50,7 +50,7 @@
 
                                 <div class="card-body">
                                     <div th:each="category : ${dishSelected.categories}" class="mb-3">
-                                        <h5 class="text-secondary" th:text="${category.name}">Kategoria</h5>
+                                        <h5 class="text-secondary" th:text="${category.categoryDto.name}">Kategoria</h5>
                                         <ul class="list-group">
                                             <li class="list-group-item d-flex align-items-center"
                                                 th:each="dish : ${category.dishes}">

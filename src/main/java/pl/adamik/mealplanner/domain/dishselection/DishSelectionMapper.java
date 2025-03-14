@@ -2,6 +2,7 @@ package pl.adamik.mealplanner.domain.dishselection;
 
 import org.springframework.stereotype.Component;
 import pl.adamik.mealplanner.domain.category.Category;
+import pl.adamik.mealplanner.domain.category.dto.CategoryDto;
 import pl.adamik.mealplanner.domain.category.dto.CategorySelectionDto;
 import pl.adamik.mealplanner.domain.dishselection.dto.DishSelectionDto;
 
@@ -50,7 +51,7 @@ public class DishSelectionMapper {
     }
 
     private CategorySelectionDto createCategoryDto(Category category, Map<Long, List<CategorySelectionDto.DishDto>> groupedByCategory) {
-        return new CategorySelectionDto(category.getId(), category.getName(), groupedByCategory.get(category.getId()));
+        return new CategorySelectionDto(new CategoryDto(category.getId(), category.getName()), groupedByCategory.get(category.getId()));
     }
 
     private CategorySelectionDto.DishDto createDishDto(DishSelection dishSelection) {

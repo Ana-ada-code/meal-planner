@@ -3,30 +3,20 @@ package pl.adamik.mealplanner.domain.category.dto;
 import java.util.List;
 
 public class CategorySelectionDto {
-    private Long id;
-    private String name;
+    CategoryDto categoryDto;
     private List<DishDto> dishes;
 
-    public CategorySelectionDto(Long id, String name, List<DishDto> dishes) {
-        this.id = id;
-        this.name = name;
+    public CategorySelectionDto(CategoryDto categoryDto, List<DishDto> dishes) {
+        this.categoryDto = categoryDto;
         this.dishes = dishes;
     }
 
-    public Long getId() {
-        return id;
+    public CategoryDto getCategoryDto() {
+        return categoryDto;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setCategoryDto(CategoryDto categoryDto) {
+        this.categoryDto = categoryDto;
     }
 
     public List<DishDto> getDishes() {
