@@ -28,11 +28,11 @@ class DishDtoMapperTest {
 
         // Then
         assertThat(dishDto).isNotNull();
-        assertThat(dishDto.getId()).isEqualTo(dish.getId());
-        assertThat(dishDto.getName()).isEqualTo(dish.getName());
-        assertThat(dishDto.getIngredients()).isEqualTo(dish.getIngredients());
-        assertThat(dishDto.getRecipe()).isEqualTo(dish.getRecipe());
-        assertThat(dishDto.getCategory()).isEqualTo(dish.getCategory().getName());
-        assertThat(dishDto.getImage()).isEqualTo(dish.getImage());
+        assertThat(dishDto.id()).isEqualTo(dish.getId());
+        assertThat(dishDto.name()).isEqualTo(dish.getName());
+        assertThat(dishDto.ingredients()).isEqualTo(dish.getIngredients());
+        assertThat(dishDto.recipe()).isEqualTo(dish.getRecipe());
+        assertThat(dishDto.category()).isEqualTo(dish.getCategory().getName());
+        assertThat(dishDto.image()).isEqualTo(dish.getImage());
     }
 }
