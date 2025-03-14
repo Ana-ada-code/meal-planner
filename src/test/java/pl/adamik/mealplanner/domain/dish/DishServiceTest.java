@@ -78,8 +78,8 @@ class DishServiceTest {
 
         // Then
         assertThat(result).hasSize(2);
-        assertThat(result.get(0).getName()).isEqualTo("Pizza");
-        assertThat(result.get(1).getName()).isEqualTo("Sushi");
+        assertThat(result.get(0).name()).isEqualTo("Pizza");
+        assertThat(result.get(1).name()).isEqualTo("Sushi");
         verify(dishRepository, times(1)).findAll();
     }
 
@@ -118,8 +118,8 @@ class DishServiceTest {
 
         // Then
         assertThat(result).isPresent();
-        assertThat(result.get().getName()).isEqualTo("Pizza");
-        assertThat(result.get().getCategory()).isEqualTo("Italian");
+        assertThat(result.get().name()).isEqualTo("Pizza");
+        assertThat(result.get().category()).isEqualTo("Italian");
         verify(dishRepository, times(1)).findById(1L);
     }
 
@@ -247,8 +247,8 @@ class DishServiceTest {
 
         // Then
         assertThat(result.getTotalElements()).isEqualTo(2);
-        assertThat(result.getContent().get(0).getName()).isEqualTo("Pizza");
-        assertThat(result.getContent().get(1).getName()).isEqualTo("Pasta");
+        assertThat(result.getContent().get(0).name()).isEqualTo("Pizza");
+        assertThat(result.getContent().get(1).name()).isEqualTo("Pasta");
         verify(dishRepository, times(1)).findTopByRating(any(Pageable.class));
     }
 
@@ -293,7 +293,7 @@ class DishServiceTest {
 
         // Then
         assertThat(result.getTotalElements()).isEqualTo(1);
-        assertThat(result.getContent().get(0).getName()).isEqualTo("Pizza");
+        assertThat(result.getContent().get(0).name()).isEqualTo("Pizza");
         verify(dishRepository, times(1)).findTopByRating(pageable);
     }
 
@@ -331,8 +331,8 @@ class DishServiceTest {
 
         // Then
         assertThat(result.getTotalElements()).isEqualTo(2);
-        assertThat(result.getContent().get(0).getName()).isEqualTo("Pizza");
-        assertThat(result.getContent().get(1).getName()).isEqualTo("Pasta");
+        assertThat(result.getContent().get(0).name()).isEqualTo("Pizza");
+        assertThat(result.getContent().get(1).name()).isEqualTo("Pasta");
 
         verify(dishRepository, times(1)).findAll(pageable);
     }
@@ -362,7 +362,7 @@ class DishServiceTest {
 
         // Then
         assertThat(result.getTotalElements()).isEqualTo(1);
-        assertThat(result.getContent().get(0).getName()).isEqualTo("Pizza");
+        assertThat(result.getContent().get(0).name()).isEqualTo("Pizza");
 
         verify(dishRepository, times(1)).findByNameContainingIgnoreCase("Pi", pageable);
     }
@@ -417,7 +417,7 @@ class DishServiceTest {
 
         // Then
         assertThat(result.getContent()).hasSize(1);
-        assertThat(result.getContent().get(0).getName()).isEqualTo("Pasta Carbonara");
+        assertThat(result.getContent().get(0).name()).isEqualTo("Pasta Carbonara");
 
         verify(dishRepository, times(1)).findByNameContainingIgnoreCase("Pasta C", pageable);
     }
@@ -443,7 +443,7 @@ class DishServiceTest {
 
         // Then
         assertThat(result).hasSize(1);
-        assertThat(result.get(0).getName()).isEqualTo("Pizza");
+        assertThat(result.get(0).name()).isEqualTo("Pizza");
         verify(dishRepository, times(1)).findAllByCategory_NameIgnoreCase("Italian");
     }
 

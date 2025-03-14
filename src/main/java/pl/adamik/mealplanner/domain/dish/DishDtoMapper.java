@@ -27,12 +27,12 @@ public class DishDtoMapper {
 
     public static DishSaveDto map(DishDto dishDto) {
         DishSaveDto dishSaveDto = new DishSaveDto();
-        dishSaveDto.setId(dishDto.getId());
-        dishSaveDto.setName(dishDto.getName());
-        dishSaveDto.setIngredients(dishDto.getIngredients());
-        dishSaveDto.setRecipe(dishDto.getRecipe());
-        dishSaveDto.setCategory(dishDto.getCategory());
-        dishSaveDto.setImage(dishSaveDto.getImage());
+        dishSaveDto.setId(dishDto.id());
+        dishSaveDto.setName(dishDto.name());
+        dishSaveDto.setIngredients(dishDto.ingredients());
+        dishSaveDto.setRecipe(dishDto.recipe());
+        dishSaveDto.setCategory(dishDto.category());
+        dishSaveDto.setImage(null);
         return dishSaveDto;
     }
 }
