@@ -44,8 +44,8 @@ class UserServiceTest {
 
         // Then
         assertThat(result).isPresent();
-        assertThat(result.get().getEmail()).isEqualTo("test@example.com");
-        assertThat(result.get().getPassword()).isEqualTo("encodedPassword");
+        assertThat(result.get().email()).isEqualTo("test@example.com");
+        assertThat(result.get().password()).isEqualTo("encodedPassword");
         verify(userRepository, times(1)).findByEmail("test@example.com");
     }
 
