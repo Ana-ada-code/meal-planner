@@ -12,32 +12,52 @@ import java.util.stream.Collectors;
 
 @Component
 public class DishSelectionMapper {
-    public List<DishSelectionDto> map(List<DishSelection> dishSelections, List<Category> categories) {
 
-        Map<LocalDate, List<DishSelection>> groupedByDate = dishSelections.stream()
-                .collect(Collectors.groupingBy(DishSelection::getDate));
+    public List<DishSelectionDto> map(List<DishSelection> dishSelections, List<Category> categories) {
+        Map<LocalDate, List<DishSelection>> groupedByDate = groupByDate(dishSelections);
 
         return groupedByDate.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
-                .map(entry -> new DishSelectionDto(
-                        entry.getKey(), // Data
-                        mapCategories(entry.getValue(), categories)
-                ))
+                .map(entry -> createDishSelectionDto(entry.getKey(), entry.getValue(), categories))
                 .collect(Collectors.toList());
+    }
+
+    private Map<LocalDate, List<DishSelection>> groupByDate(List<DishSelection> dishSelections) {
+        return dishSelections.stream()
+                .collect(Collectors.groupingBy(DishSelection::getDate));
+    }
+
+    private DishSelectionDto createDishSelectionDto(LocalDate date, List<DishSelection> dishSelections, List<Category> categories) {
+        List<CategorySelectionDto> categoryDtos = mapCategories(dishSelections, categories);
+        return new DishSelectionDto(date, categoryDtos);
     }
 
     private List<CategorySelectionDto> mapCategories(List<DishSelection> dishSelections, List<Category> categories) {
-
-        Map<Long, List<CategorySelectionDto.DishDto>> categoriesMap = dishSelections.stream()
-                .collect(Collectors.groupingBy(ds -> ds.getDish().getCategory().getId(),
-                        Collectors.mapping(ds -> new CategorySelectionDto.DishDto(
-                                ds.getDish().getId(), ds.getDish().getName(), ds.getId()), Collectors.toList())));
+        Map<Long, List<CategorySelectionDto.DishDto>> groupedByCategory = groupByCategory(dishSelections);
 
         return categories.stream()
-                .filter(category -> categoriesMap.containsKey(category.getId()))
-                .map(category -> new CategorySelectionDto(category.getId(), category.getName(), categoriesMap.get(category.getId())))
+                .filter(category -> groupedByCategory.containsKey(category.getId()))
+                .map(category -> createCategoryDto(category, groupedByCategory))
                 .collect(Collectors.toList());
     }
 
+    private Map<Long, List<CategorySelectionDto.DishDto>> groupByCategory(List<DishSelection> dishSelections) {
+        return dishSelections.stream()
+                .collect(Collectors.groupingBy(
+                        ds -> ds.getDish().getCategory().getId(),
+                        Collectors.mapping(this::createDishDto, Collectors.toList())
+                ));
+    }
 
+    private CategorySelectionDto createCategoryDto(Category category, Map<Long, List<CategorySelectionDto.DishDto>> groupedByCategory) {
+        return new CategorySelectionDto(category.getId(), category.getName(), groupedByCategory.get(category.getId()));
+    }
+
+    private CategorySelectionDto.DishDto createDishDto(DishSelection dishSelection) {
+        return new CategorySelectionDto.DishDto(
+                dishSelection.getDish().getId(),
+                dishSelection.getDish().getName(),
+                dishSelection.getId()
+        );
+    }
 }
