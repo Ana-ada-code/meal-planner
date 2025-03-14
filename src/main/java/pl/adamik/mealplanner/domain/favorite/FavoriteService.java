@@ -40,14 +40,14 @@ public class FavoriteService {
     public boolean addFavoriteToDish(FavoriteDto favoriteDto, String currentUserEmail) {
         Favorite favorite = new Favorite();
         favorite.setUser(userRepository.findByEmail(currentUserEmail).orElseThrow());
-        favorite.setDish(dishRepository.findById(favoriteDto.getDishId()).orElseThrow());
+        favorite.setDish(dishRepository.findById(favoriteDto.dishId()).orElseThrow());
         favoriteRepository.save(favorite);
         return true;
     }
 
     @Transactional
     public boolean removeFavoriteFromDish(FavoriteDto favoriteDto, String currentUserEmail) {
-        favoriteRepository.removeFavoriteByDish_IdAndUser_Email(favoriteDto.getDishId(), currentUserEmail);
+        favoriteRepository.removeFavoriteByDish_IdAndUser_Email(favoriteDto.dishId(), currentUserEmail);
         return true;
     }
 }

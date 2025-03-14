@@ -41,7 +41,7 @@ public class FavoriteController {
                               Authentication authentication) {
         String currentUserEmail = authentication.getName();
         boolean isAdded = favoriteService.addFavoriteToDish(favoriteDto, currentUserEmail);
-        Long id = favoriteDto.getDishId();
+        Long id = favoriteDto.dishId();
         return "redirect:" + referer;
     }
 
@@ -51,7 +51,7 @@ public class FavoriteController {
                                  Authentication authentication) {
         String currentUserEmail = authentication.getName();
         boolean isRemoved = favoriteService.removeFavoriteFromDish(favoriteDto, currentUserEmail);
-        Long id = favoriteDto.getDishId();
+        Long id = favoriteDto.dishId();
         return "redirect:" + referer;
     }
 }
