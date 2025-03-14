@@ -10,7 +10,7 @@ function updateDishList(categorySelectId, dishSelectId, hiddenDishId) {
         .then(response => response.json())
         .then(dishes => {
             let dishSelect = document.getElementById(dishSelectId);
-            dishSelect.innerHTML = ''; // Wyczyść poprzednie opcje
+            dishSelect.innerHTML = '';
 
             let option = document.createElement('option');
             option.text = 'Wybierz danie';
@@ -19,8 +19,8 @@ function updateDishList(categorySelectId, dishSelectId, hiddenDishId) {
 
             dishes.forEach(dish => {
                 let option = document.createElement('option');
-                option.text = dish.name;  // Wyświetlana nazwa dania
-                option.value = dish.id;   // ID dania jako wartość
+                option.text = dish.name;
+                option.value = dish.id;
                 dishSelect.appendChild(option);
             });
         })

@@ -12,22 +12,20 @@
     <main class="main-content" layout:fragment="content">
         <div class="container mt-4">
             <h2 class="list-heading text-center mb-3">Dodaj nową kategorię dań</h2>
-            <div class="row" >
+            <div class="row">
                 <div class="col-md-9 mx-auto d-flex flex-column align-items-center">
                     <div class="row w-100">
-                        <!-- Dane testowe -->
                         <div class="col-md-12 mb-4">
-<!--                            <div class="card shadow-sm w-100">-->
-                                <form action="#" th:action="@{/admin/dodaj-kategorie}" method="post" class="mc-form" th:object="${category}">
-                                    <div class="mb-3">
-                                        <label for="categoryName" class="form-label">Nazwa kategorii</label>
-                                        <input type="text" class="form-control w-50" id="categoryName" placeholder="np. Obiad" th:field="*{name}">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Dodaj kategorie</button>
-                                </form>
-<!--                            </div>-->
+                            <form action="#" th:action="@{/admin/dodaj-kategorie}" method="post" class="mc-form"
+                                  th:object="${category}">
+                                <div class="mb-3">
+                                    <label for="categoryName" class="form-label">Nazwa kategorii</label>
+                                    <input type="text" class="form-control w-50" id="categoryName"
+                                           placeholder="np. Obiad" th:field="*{name}">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Dodaj kategorie</button>
+                            </form>
                         </div>
-
                     </div>
                 </div>
             </div>

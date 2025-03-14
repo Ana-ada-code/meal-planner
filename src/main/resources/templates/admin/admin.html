@@ -50,22 +50,24 @@
                                         <form th:action="@{/admin/usun-danie}" method="post">
                                             <input type="hidden" name="_method" value="delete"/>
                                             <div class="mb-3">
-                                                <p class="alert alert-primary text-center">Wybrane danie zostanie usunięte</p>
+                                                <p class="alert alert-primary text-center">Wybrane danie zostanie
+                                                    usunięte</p>
                                                 <label for="dishCat" class="form-label">Wybierz kategorię:</label>
                                                 <select id="dishCat" class="form-select" name="categoryName" required>
                                                     <option value="" hidden>Wybierz Kategorie</option>
-                                                    <option th:each="category: ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
+                                                    <option th:each="category: ${categories}"
+                                                            th:value="${category.name}"
+                                                            th:text="${category.name}"></option>
                                                 </select>
-
 
                                                 <label for="dish" class="form-label">Wybierz danie:</label>
                                                 <select id="dish" class="form-select" name="dishName" required>
                                                     <option value="" hidden>Wybierz Danie</option>
                                                 </select>
 
-                                                <input type="hidden" id="dishId" name="dishId" />
-
+                                                <input type="hidden" id="dishId" name="dishId"/>
                                             </div>
+
                                             <div class="d-flex justify-content-center">
                                                 <button type="submit" class="btn btn-primary">Usuń danie</button>
                                             </div>
@@ -74,11 +76,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
 
 
                         <div class="col-md-12 mb-4">
@@ -102,19 +99,20 @@
                                         <form th:action="@{/admin/edytuj-danie}" method="get">
                                             <div class="mb-3">
                                                 <label for="dishCatUpdate" class="form-label">Wybierz kategorię:</label>
-                                                <select id="dishCatUpdate" class="form-select" name="categoryName" required>
+                                                <select id="dishCatUpdate" class="form-select" name="categoryName"
+                                                        required>
                                                     <option value="" hidden>Wybierz Kategorie</option>
-                                                    <option th:each="category: ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
+                                                    <option th:each="category: ${categories}"
+                                                            th:value="${category.name}"
+                                                            th:text="${category.name}"></option>
                                                 </select>
-
 
                                                 <label for="dishUpdate" class="form-label">Wybierz danie:</label>
                                                 <select id="dishUpdate" class="form-select" name="dishName" required>
                                                     <option value="" hidden>Wybierz Danie</option>
                                                 </select>
 
-                                                <input type="hidden" id="dishIdUpdate" name="dishId" />
-
+                                                <input type="hidden" id="dishIdUpdate" name="dishId"/>
                                             </div>
                                             <div class="d-flex justify-content-center">
                                                 <button type="submit" class="btn btn-primary">Edytuj danie</button>
@@ -124,17 +122,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
-
-
-
-
-
 
                         <div class="col-md-12 mb-4">
                             <div class="card shadow-sm w-100">
@@ -168,11 +155,15 @@
                                         <form th:action="@{/admin/usun-kategorie}" method="post">
                                             <input type="hidden" name="_method" value="delete"/>
                                             <div class="mb-3">
-                                                <p class="alert alert-primary text-center">Wybrana kategoria oraz wszystkie przypisane do niej dania zostaną usunięte</p>
+                                                <p class="alert alert-primary text-center">Wybrana kategoria oraz
+                                                    wszystkie przypisane do niej dania zostaną usunięte</p>
                                                 <label for="dishCategory" class="form-label">Wybierz kategorię:</label>
-                                                <select id="dishCategory" class="form-select" name="categoryName" required>
+                                                <select id="dishCategory" class="form-select" name="categoryName"
+                                                        required>
                                                     <option value="" hidden>Wybierz Kategorie</option>
-                                                    <option th:each="category: ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
+                                                    <option th:each="category: ${categories}"
+                                                            th:value="${category.name}"
+                                                            th:text="${category.name}"></option>
                                                 </select>
                                             </div>
                                             <div class="d-flex justify-content-center">
@@ -183,7 +174,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="col-md-12 mb-4">
                             <button class="card shadow-sm w-100"
@@ -206,16 +196,20 @@
                                         <form th:action="@{/admin/aktualizuj-kategorie}" method="post">
                                             <input type="hidden" name="_method" value="patch"/>
                                             <div class="mb-3">
-                                                <label for="categoryUpdate" class="form-label">Wybierz kategorię:</label>
-                                                <select id="categoryUpdate" class="form-select" name="categoryId" required>
+                                                <label for="categoryUpdate" class="form-label">Wybierz
+                                                    kategorię:</label>
+                                                <select id="categoryUpdate" class="form-select" name="categoryId"
+                                                        required>
                                                     <option value="" hidden>Wybierz Kategorie</option>
                                                     <option th:each="category: ${categories}" th:text="${category.name}"
-                                                            th:value="${category.id}" ></option>
+                                                            th:value="${category.id}"></option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="categoryName" class="form-label">Nowa nazwa kategorii</label>
-                                                <input type="text" class="form-control" id="categoryName" name="categoryName" required>
+                                                <label for="categoryName" class="form-label">Nowa nazwa
+                                                    kategorii</label>
+                                                <input type="text" class="form-control" id="categoryName"
+                                                       name="categoryName" required>
                                             </div>
                                             <div class="d-flex justify-content-center">
                                                 <button type="submit" class="btn btn-primary">Zmień nazwę</button>
@@ -225,9 +219,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
 
                     </div>
                 </div>

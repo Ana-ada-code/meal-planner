@@ -9,16 +9,13 @@ import java.util.List;
 
 public interface DishSelectionRepository extends CrudRepository<DishSelection, Long> {
     @Query("""
-    SELECT ds FROM DishSelection ds
-    WHERE ds.user.id = :userId
-    AND ds.date >= CURRENT_DATE
-""")
-    List<DishSelection> findDishSelectionByUser_IdFromToday(
-            @Param("userId") Long userId
-    );
+                SELECT ds FROM DishSelection ds
+                WHERE ds.user.id = :userId
+                AND ds.date >= CURRENT_DATE
+            """)
+    List<DishSelection> findDishSelectionByUser_IdFromToday(@Param("userId") Long userId);
 
     void deleteAllByDate(LocalDate date);
-
 }
 
 

@@ -3,6 +3,7 @@ package pl.adamik.mealplanner.domain.favorite;
 import jakarta.persistence.*;
 import pl.adamik.mealplanner.domain.dish.Dish;
 import pl.adamik.mealplanner.domain.user.User;
+
 @Entity
 public class Favorite {
     @Id

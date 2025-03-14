@@ -33,11 +33,11 @@ public class DishController {
     @GetMapping("/danie/{id}")
     public String getDish(@PathVariable long id, Model model, Authentication authentication) {
         DishDto dish = dishService.findDishById(id)
-                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         model.addAttribute("dish", dish);
         if (authentication != null) {
             String currentUserEmail = authentication.getName();
-            Integer rating = ratingService.getUserRatingForDish(currentUserEmail,id).orElse(0);
+            Integer rating = ratingService.getUserRatingForDish(currentUserEmail, id).orElse(0);
             boolean userFavoriteForDish = favoriteService.getUserFavoriteForDish(currentUserEmail, id);
             model.addAttribute("userRating", rating);
             model.addAttribute("userFavorite", userFavoriteForDish);
@@ -72,6 +72,4 @@ public class DishController {
         model.addAttribute("url", "/szukaj");
         return "dish-listing";
     }
-
-
 }

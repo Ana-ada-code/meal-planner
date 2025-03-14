@@ -11,7 +11,7 @@
     <main class="main-content" layout:fragment="content">
         <div class="container mt-4">
             <h2 class="list-heading text-center mb-3">Zaloguj się</h2>
-            <div class="row" >
+            <div class="row">
                 <div class="col-md-6 mx-auto d-flex flex-column align-items-center">
                     <div class="row w-100">
                         <div class="col-md-12 mb-4">
@@ -19,15 +19,18 @@
                                 <div class="row g-0 w-100">
                                     <div class="d-flex align-items-center justify-content-center p-2">
                                         <form action="" th:action="@{/login}" method="post" class="mc-form">
-                                            <p class="alert alert-primary text-center mc-form-message" th:if="${param.error}"
+                                            <p class="alert alert-primary text-center mc-form-message"
+                                               th:if="${param.error}"
                                                th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
                                                 Belka z powiadomieniami
                                             </p>
-                                            <p class="alert alert-primary text-center mc-form-message" th:if="${param.logout}"
-                                               >
+                                            <p class="alert alert-primary text-center mc-form-message"
+                                               th:if="${param.logout}"
+                                            >
                                                 Zostałeś wylogowany
                                             </p>
-                                            <p class="alert alert-primary text-center mc-form-message" th:if="${param.register}"
+                                            <p class="alert alert-primary text-center mc-form-message"
+                                               th:if="${param.register}"
                                             >
                                                 Zostałeś zarejestrowany, możesz się teraz zalogować
                                             </p>
@@ -38,21 +41,23 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="password" class="form-label">Hasło</label>
-                                                <input type="password" class="form-control" id="password" name="password"
+                                                <input type="password" class="form-control" id="password"
+                                                       name="password"
                                                        placeholder="hasło">
                                             </div>
                                             <div class="mb-3">
                                                 <button type="submit" class="btn btn-primary">Zaloguj się</button>
                                             </div>
                                             <div class="mb-3">
-                                                <p class="registration-link">Nie masz jeszcze konta? <a href="#" th:href="@{/rejestracja}">Zarejestruj się</a></p>
+                                                <p class="registration-link">Nie masz jeszcze konta? <a href="#"
+                                                                                                        th:href="@{/rejestracja}">Zarejestruj
+                                                    się</a></p>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

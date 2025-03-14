@@ -29,6 +29,5 @@ public class HomeController {
         model.addAttribute("url", "/");
         return "dish-listing";
     }
-
 }
 

@@ -9,5 +9,4 @@ class MealDishSelectionApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

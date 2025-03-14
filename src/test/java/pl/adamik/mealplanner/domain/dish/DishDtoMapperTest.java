@@ -35,6 +35,4 @@ class DishDtoMapperTest {
         assertThat(dishDto.getCategory()).isEqualTo(dish.getCategory().getName());
         assertThat(dishDto.getImage()).isEqualTo(dish.getImage());
     }
-
-
 }

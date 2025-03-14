@@ -25,8 +25,8 @@ public class DishSelectionController {
     }
 
     @GetMapping
-    public String findDishSelection (Model model,
-                                     Authentication authentication) {
+    public String findDishSelection(Model model,
+                                    Authentication authentication) {
         String currentUserEmail = authentication.getName();
         List<DishSelectionDto> dishSelection = dishSelectionService.getSelectionsGroupedByDateAndCategory(currentUserEmail);
 
@@ -72,8 +72,4 @@ public class DishSelectionController {
         redirectAttributes.addFlashAttribute(NOTIFICATION_ATTRIBUTE, "Wybrana data została zmieniona");
         return "redirect:/planer";
     }
-
-
-
-
 }

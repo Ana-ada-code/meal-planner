@@ -76,7 +76,6 @@ class DishSelectionMapperTest {
         assertEquals("Spaghetti", dto2.getCategories().get(0).getDishes().get(0).getName());
     }
 
-
     @Test
     void shouldReturnEmptyListWhenNoDishSelections() {
         // When

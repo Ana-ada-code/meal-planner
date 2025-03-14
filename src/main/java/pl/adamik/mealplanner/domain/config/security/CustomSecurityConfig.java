@@ -17,6 +17,7 @@ public class CustomSecurityConfig {
     private static final String USER_ROLE = "USER";
     private static final String EDITOR_ROLE = "EDITOR";
     private static final String ADMIN_ROLE = "ADMIN";
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authz) -> authz
@@ -42,8 +43,7 @@ public class CustomSecurityConfig {
         return web -> web.ignoring().requestMatchers(
                 "/img/**",
                 "/scripts/**",
-                "/styles/**"
-        );
+                "/styles/**");
     }
 
     @Bean

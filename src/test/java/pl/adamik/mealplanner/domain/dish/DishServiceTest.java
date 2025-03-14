@@ -96,7 +96,6 @@ class DishServiceTest {
         verify(dishRepository, times(1)).findAll();
     }
 
-
     @Test
     void shouldReturnDish_whenDishExists() {
         // Given
@@ -137,7 +136,6 @@ class DishServiceTest {
         assertThat(result).isEmpty();
         verify(dishRepository, times(1)).findById(1L);
     }
-
 
     @Test
     void shouldAddDish_whenDishIsValid() {
@@ -339,7 +337,6 @@ class DishServiceTest {
         verify(dishRepository, times(1)).findAll(pageable);
     }
 
-
     @Test
     void shouldReturnFilteredDishes_whenKeywordMatchesPartOfName() {
         // Given
@@ -412,7 +409,6 @@ class DishServiceTest {
 
         Pageable pageable = PageRequest.of(0, 10);
 
-        // Mocking the repository method
         when(dishRepository.findByNameContainingIgnoreCase("Pasta C", pageable))
                 .thenReturn(new PageImpl<>(List.of(dish2), pageable, 1));
 
@@ -425,7 +421,6 @@ class DishServiceTest {
 
         verify(dishRepository, times(1)).findByNameContainingIgnoreCase("Pasta C", pageable);
     }
-
 
     @Test
     void shouldReturnDishesByCategory_whenCategoryExists() {
@@ -541,23 +536,4 @@ class DishServiceTest {
             dishService.updateDish(dishToUpdate, nonExistentDishId);
         });
     }
-
-//    @Test
-//    void shouldThrowException_whenDishDataIsInvalid() {
-//        // Given
-//        Long existingDishId = 1L;
-//        DishSaveDto invalidDish = new DishSaveDto();
-//        invalidDish.setName("");
-//        invalidDish.setIngredients("Some ingredients");
-//        invalidDish.setRecipe("Some recipe");
-//        invalidDish.setCategory("Category");
-//        invalidDish.setImage(null);
-//
-//        // When & Then
-//        assertThrows(IllegalArgumentException.class, () -> {
-//            dishService.updateDish(invalidDish, existingDishId);
-//        });
-//    }
-
-
 }

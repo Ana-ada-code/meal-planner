@@ -143,7 +143,6 @@ class DishSelectionServiceTest {
         verify(dishSelectionRepository).deleteById(dishId);
     }
 
-
     @Test
     void testUpdate_Success() {
         DishSelectionChangeDto dto = new DishSelectionChangeDto();

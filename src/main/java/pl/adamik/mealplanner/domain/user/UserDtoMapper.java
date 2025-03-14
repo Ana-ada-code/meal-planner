@@ -15,5 +15,4 @@ class UserDtoMapper {
                 .collect(Collectors.toSet());
         return new UserCredentialsDto(email, password, roles);
     }
-
 }

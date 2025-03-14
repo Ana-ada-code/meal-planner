@@ -21,10 +21,10 @@ public class FavoriteController {
     }
 
     @GetMapping
-    public String findFavorite (@RequestParam(defaultValue = "0") int page,
-                                @RequestParam(defaultValue = "5") int size,
-                                Model model,
-                                Authentication authentication) {
+    public String findFavorite(@RequestParam(defaultValue = "0") int page,
+                               @RequestParam(defaultValue = "5") int size,
+                               Model model,
+                               Authentication authentication) {
         String currentUserEmail = authentication.getName();
         Pageable pageable = PageRequest.of(page, size);
         Page<DishDto> favorite = favoriteService.findFavorite(currentUserEmail, pageable);
@@ -45,15 +45,13 @@ public class FavoriteController {
         return "redirect:" + referer;
     }
 
-
     @DeleteMapping
     public String removeFavorite(FavoriteDto favoriteDto,
-                              @RequestHeader String referer,
-                              Authentication authentication) {
+                                 @RequestHeader String referer,
+                                 Authentication authentication) {
         String currentUserEmail = authentication.getName();
         boolean isRemoved = favoriteService.removeFavoriteFromDish(favoriteDto, currentUserEmail);
         Long id = favoriteDto.getDishId();
         return "redirect:" + referer;
     }
-
 }

@@ -206,5 +206,4 @@ class CategoryServiceTest {
         verify(categoryRepository, times(1)).findById(categoryId);
         verify(categoryRepository, never()).save(any());
     }
-
 }

@@ -11,107 +11,116 @@
 
             <div class="row">
                 <div class="col-md-9 mx-auto d-flex flex-column align-items-center">
-                <p class="alert alert-primary text-center" th:if="${notification}" th:text="${notification}">
-                    Belka z powiadomieniami
-                </p>
+                    <p class="alert alert-primary text-center" th:if="${notification}" th:text="${notification}">
+                        Belka z powiadomieniami
+                    </p>
 
-                <p class="alert alert-primary text-center" th:if="${dishSelection.isEmpty()}">
-                    Nie zaplanowałeś jeszcze żadnego posiłku
-                </p>
+                    <p class="alert alert-primary text-center" th:if="${dishSelection.isEmpty()}">
+                        Nie zaplanowałeś jeszcze żadnego posiłku
+                    </p>
 
-                <div class="col-md-12 mx-auto">
+                    <div class="col-md-12 mx-auto">
 
-                    <div th:if="${!dishSelection.isEmpty()}" class="mt-3 dropdown text-end">
-                        <form action="#" th:action="@{/planer}" method="post">
-                            <input type="hidden" name="_method" value="delete"/>
-                            <button type="submit" class="btn btn-primary">Usuń wszystkie dania</button>
-                        </form>
-                    </div>
+                        <div th:if="${!dishSelection.isEmpty()}" class="mt-3 dropdown text-end">
+                            <form action="#" th:action="@{/planer}" method="post">
+                                <input type="hidden" name="_method" value="delete"/>
+                                <button type="submit" class="btn btn-primary">Usuń wszystkie dania</button>
+                            </form>
+                        </div>
 
+                        <div th:each="dishSelected : ${dishSelection}" class="mb-4">
 
-                    <div th:each="dishSelected : ${dishSelection}" class="mb-4">
-
-                        <div class="card shadow-sm w-100">
-                            <div class="card-header bg-primary text-white d-flex align-items-center">
-                                <h4 class="mb-0" th:text="${#temporals.format(dishSelected.date, 'EEEE, dd MMMM yyyy')}">
-                                    Data
-                                </h4>
-                                <div class="ms-auto">
-                                    <form action="#" th:action="@{/planer/{date}(date=${#temporals.format(dishSelected.date, 'yyyy-MM-dd')})}" method="post">
-                                        <input type="hidden" name="_method" value="delete"/>
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="remove-day fa-solid fa-circle-minus text-white"></i>
-                                        </button>
-                                    </form>
+                            <div class="card shadow-sm w-100">
+                                <div class="card-header bg-primary text-white d-flex align-items-center">
+                                    <h4 class="mb-0"
+                                        th:text="${#temporals.format(dishSelected.date, 'EEEE, dd MMMM yyyy')}">
+                                        Data
+                                    </h4>
+                                    <div class="ms-auto">
+                                        <form action="#"
+                                              th:action="@{/planer/{date}(date=${#temporals.format(dishSelected.date, 'yyyy-MM-dd')})}"
+                                              method="post">
+                                            <input type="hidden" name="_method" value="delete"/>
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="remove-day fa-solid fa-circle-minus text-white"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
 
-
-                            </div>
-
-                            <div class="card-body">
-                                <div th:each="category : ${dishSelected.categories}" class="mb-3">
-                                    <h5 class="text-secondary" th:text="${category.name}">Kategoria</h5>
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex align-items-center" th:each="dish : ${category.dishes}">
-                                            <a class="text-dark text-decoration-none" th:href="@{|/danie/${dish.id}|}"
-                                               th:text="${dish.name} ">Nazwa dania</a>
-                                            <div class="ms-auto d-flex gap-2 align-items-center">
+                                <div class="card-body">
+                                    <div th:each="category : ${dishSelected.categories}" class="mb-3">
+                                        <h5 class="text-secondary" th:text="${category.name}">Kategoria</h5>
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex align-items-center"
+                                                th:each="dish : ${category.dishes}">
+                                                <a class="text-dark text-decoration-none"
+                                                   th:href="@{|/danie/${dish.id}|}"
+                                                   th:text="${dish.name} ">Nazwa dania</a>
+                                                <div class="ms-auto d-flex gap-2 align-items-center">
                                                     <button type="submit" class="btn btn-white" data-bs-toggle="modal"
                                                             th:data-bs-target="'#calendarModal-' + ${dish.selectionId}">
                                                         <i class="fa-solid fa-calendar-days text-primary"></i>
                                                     </button>
 
-                                                <div class="modal fade" th:id="'calendarModal-' + ${dish.selectionId}"
-                                                     tabindex="-1" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">Wybierz datę</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="" th:action="@{/planer}" method="post"
-                                                                      onsubmit="event.preventDefault(); this.submit();">
-                                                                    <input type="hidden" name="_method" value="patch"/>
-                                                                    <div class="mb-3">
-                                                                        <label for="selectedDate" class="form-label">Wybierz datę:</label>
-                                                                        <input type="date" class="form-control" name="selectedDate" id="selectedDate" required >
-                                                                    </div>
-                                                                    <input type="hidden" name="selectedDishId" id="selectedDishId"  th:value="${dish.selectionId}">
-                                                                    <div class="d-flex justify-content-center">
-                                                                        <button type="submit" class="btn btn-primary">Zmień datę</button>
-                                                                    </div>
-                                                                </form>
+                                                    <div class="modal fade"
+                                                         th:id="'calendarModal-' + ${dish.selectionId}"
+                                                         tabindex="-1" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Wybierz datę</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="" th:action="@{/planer}" method="post"
+                                                                          onsubmit="event.preventDefault(); this.submit();">
+                                                                        <input type="hidden" name="_method"
+                                                                               value="patch"/>
+                                                                        <div class="mb-3">
+                                                                            <label for="selectedDate"
+                                                                                   class="form-label">Wybierz
+                                                                                datę:</label>
+                                                                            <input type="date" class="form-control"
+                                                                                   name="selectedDate" id="selectedDate"
+                                                                                   required>
+                                                                        </div>
+                                                                        <input type="hidden" name="selectedDishId"
+                                                                               id="selectedDishId"
+                                                                               th:value="${dish.selectionId}">
+                                                                        <div class="d-flex justify-content-center">
+                                                                            <button type="submit"
+                                                                                    class="btn btn-primary">Zmień datę
+                                                                            </button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <form th:action="@{/planer/remove/{id}(id=${dish.selectionId})}"
+                                                          method="post"
+                                                          onsubmit="event.preventDefault(); this.submit();">
+
+                                                        <input type="hidden" name="_method" value="delete"/>
+                                                        <button type="submit" class="btn btn-white">
+                                                            <i class="remove-dish fa-solid fa-circle-minus text-primary "></i>
+                                                        </button>
+                                                    </form>
                                                 </div>
-
-
-
-                                                <form th:action="@{/planer/remove/{id}(id=${dish.selectionId})}"
-                                                      method="post" onsubmit="event.preventDefault(); this.submit();">
-
-                                                    <input type="hidden" name="_method" value="delete"/>
-                                                    <button type="submit" class="btn btn-white">
-                                                        <i class="remove-dish fa-solid fa-circle-minus text-primary "></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
         </div>
     </main>
 </div>
-
-
-
 </body>
 </html>
