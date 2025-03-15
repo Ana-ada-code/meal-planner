@@ -26,7 +26,11 @@ class CategoryServiceTest {
     @Test
     void shouldReturnCategory_whenCategoryExists() {
         // Given
-        Category category = new Category(1L, "Italian");
+        Category category = Category.builder()
+                .id(1L)
+                .name("Italian")
+                .build();
+
         when(categoryRepository.findByNameIgnoreCase("Italian")).thenReturn(Optional.of(category));
 
         // When
@@ -54,8 +58,15 @@ class CategoryServiceTest {
     @Test
     void shouldReturnAllCategories_whenCategoriesExist() {
         // Given
-        Category category1 = new Category(1L, "Italian");
-        Category category2 = new Category(2L, "Japanese");
+        Category category1 = Category.builder()
+                .id(1L)
+                .name("Italian")
+                .build();
+        Category category2 = Category.builder()
+                .id(2L)
+                .name("Japanese")
+                .build();
+
         when(categoryRepository.findAll()).thenReturn(List.of(category1, category2));
 
         // When
@@ -115,7 +126,10 @@ class CategoryServiceTest {
     @Test
     void shouldRemoveCategory_whenCategoryExists() {
         // Given
-        Category category = new Category(1L, "Italian");
+        Category category = Category.builder()
+                .id(1L)
+                .name("Italian")
+                .build();
         when(categoryRepository.findByNameIgnoreCase("Italian")).thenReturn(Optional.of(category));
 
         // When
@@ -159,7 +173,10 @@ class CategoryServiceTest {
         // Given
         Long categoryId = 1L;
         String newName = "Updated Name";
-        Category category = new Category(categoryId, "Old Name");
+        Category category = Category.builder()
+                .id(categoryId)
+                .name("Old Name")
+                .build();
 
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
 
@@ -194,7 +211,10 @@ class CategoryServiceTest {
     void shouldReturnFalse_whenNewNameIsNull() {
         // Given
         Long categoryId = 1L;
-        Category category = new Category(categoryId, "Old Name");
+        Category category = Category.builder()
+                .id(categoryId)
+                .name("Old Name")
+                .build();
 
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
 

@@ -29,8 +29,15 @@ class DishSelectionMapperTest {
         LocalDate date1 = LocalDate.of(2025, 3, 5);
         LocalDate date2 = LocalDate.of(2025, 3, 6);
 
-        Category category1 = new Category(1L, "Śniadanie");
-        Category category2 = new Category(2L, "Obiad");
+        Category category1 = Category.builder()
+                .id(1L)
+                .name("Śniadanie")
+                .build();
+
+        Category category2 = Category.builder()
+                .id(2L)
+                .name("Obiad")
+                .build();
 
         Dish dish1 = new Dish();
         dish1.setId(101L);

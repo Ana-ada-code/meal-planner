@@ -10,7 +10,10 @@ class CategoryDtoMapperTest {
     @Test
     void shouldMapCategoryToCategoryDto() {
         // Given
-        Category category = new Category(1L, "Italian");
+        Category category = Category.builder()
+                .id(1L)
+                .name("Italian")
+                .build();
 
         // When
         CategoryDto categoryDto = CategoryDtoMapper.map(category);

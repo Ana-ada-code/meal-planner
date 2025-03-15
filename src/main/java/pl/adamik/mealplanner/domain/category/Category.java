@@ -1,10 +1,7 @@
 package pl.adamik.mealplanner.domain.category;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import pl.adamik.mealplanner.domain.dish.Dish;
 
 import java.util.ArrayList;
@@ -14,6 +11,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class Category {
     @Id
@@ -21,5 +19,6 @@ public class Category {
     private Long id;
     private String name;
     @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
+    @Builder.Default
     private List<Dish> dishes = new ArrayList<>();
 }

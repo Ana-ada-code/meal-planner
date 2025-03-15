@@ -147,7 +147,10 @@ class DishServiceTest {
         dishSaveDto.setRecipe("połącz składniki");
         dishSaveDto.setCategory("Italian");
         dishSaveDto.setImage(mockImage);
-        Category category = new Category(1L, "Italian");
+        Category category = Category.builder()
+                .id(1L)
+                .name("Italian")
+                .build();
 
         when(categoryRepository.findByNameIgnoreCase("Italian")).thenReturn(Optional.of(category));
         when(fileStorageService.saveImage(mockImage)).thenReturn("saved_image.jpg");
@@ -195,7 +198,10 @@ class DishServiceTest {
         dishSaveDto.setRecipe("połącz składniki");
         dishSaveDto.setCategory("Italian");
         dishSaveDto.setImage(null);
-        Category category = new Category(1L, "Italian");
+        Category category = Category.builder()
+                .id(1L)
+                .name("Italian")
+                .build();
 
         when(categoryRepository.findByNameIgnoreCase("Italian")).thenReturn(Optional.of(category));
 
@@ -497,7 +503,7 @@ class DishServiceTest {
         existingDish.setName("Old Name");
         existingDish.setIngredients("Old Ingredients");
         existingDish.setRecipe("Old Recipe");
-        existingDish.setCategory(new Category(1L, "Italian"));
+        existingDish.setCategory(Category.builder().id(1L).name("Italian").build());
 
         DishSaveDto dishSaveDto = new DishSaveDto();
         dishSaveDto.setName("New Name");
@@ -507,7 +513,7 @@ class DishServiceTest {
         dishSaveDto.setImage(null);
 
         when(dishRepository.findById(dishId)).thenReturn(Optional.of(existingDish));
-        when(categoryRepository.findByNameIgnoreCase("Italian")).thenReturn(Optional.of(new Category(1L, "Italian")));
+        when(categoryRepository.findByNameIgnoreCase("Italian")).thenReturn(Optional.of(Category.builder().id(1L).name("Italian").build()));
 
         // When
         dishService.updateDish(dishSaveDto, dishId);
