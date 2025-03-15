@@ -1,11 +1,19 @@
 package pl.adamik.mealplanner.domain.category;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.adamik.mealplanner.domain.dish.Dish;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Category {
     @Id
@@ -14,36 +22,4 @@ public class Category {
     private String name;
     @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
     private List<Dish> dishes = new ArrayList<>();
-
-    public Category() {
-    }
-
-    public Category(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Dish> getDishes() {
-        return dishes;
-    }
-
-    public void setDishes(List<Dish> dishes) {
-        this.dishes = dishes;
-    }
 }
