@@ -53,8 +53,8 @@ class DishSelectionMapperTest {
         user.setId(1L);
         user.setEmail("test@example.com");
 
-        DishSelection dishSelection1 = new DishSelection(user, dish1, date1);
-        DishSelection dishSelection2 = new DishSelection(user, dish2, date2);
+        DishSelection dishSelection1 = DishSelection.builder().user(user).dish(dish1).date(date1).build();
+        DishSelection dishSelection2 = DishSelection.builder().user(user).dish(dish2).date(date2).build();
 
         List<DishSelection> dishSelections = List.of(dishSelection1, dishSelection2);
         List<Category> categories = List.of(category1, category2);
