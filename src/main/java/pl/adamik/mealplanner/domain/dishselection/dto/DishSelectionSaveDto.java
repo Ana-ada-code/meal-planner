@@ -1,24 +1,13 @@
 package pl.adamik.mealplanner.domain.dishselection.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+@Getter
+@Setter
 public class DishSelectionSaveDto {
     private Long dishId;
     private LocalDate selectedDate;
-
-    public Long getDishId() {
-        return dishId;
-    }
-
-    public void setDishId(Long dishId) {
-        this.dishId = dishId;
-    }
-
-    public LocalDate getSelectedDate() {
-        return selectedDate;
-    }
-
-    public void setSelectedDate(LocalDate selectedDate) {
-        this.selectedDate = selectedDate;
-    }
 }
