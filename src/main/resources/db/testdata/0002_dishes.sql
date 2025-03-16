@@ -1,137 +1,131 @@
 insert into dish (name, ingredients, recipe, category_id)
-values ('tempus semper est', 'pharetra magna vestibulum aliquet ultrices erat tortor',
-        'in congue etiam justo etiam pretium iaculis justo in hac habitasse platea dictumst etiam faucibus cursus urna ut tellus nulla ut erat id mauris vulputate elementum nullam varius nulla facilisi cras non velit nec nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus vel nulla eget eros elementum pellentesque quisque porta volutpat erat quisque erat eros viverra eget congue eget semper',
-        3);
+values ('Jajecznica na maśle', 'jajka, masło, sól, pieprz',
+        'Rozpuść masło na patelni, wbij jajka, smaż na małym ogniu, mieszając.', 1);
 insert into dish (name, ingredients, recipe, category_id)
-values ('in', 'nibh in quis justo maecenas rhoncus aliquam lacus',
-        'euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec',
-        2);
+values ('Owsianka z owocami', 'płatki owsiane, mleko, miód, owoce',
+        'Zagotuj mleko, dodaj płatki, gotuj 5 min. Podawaj z owocami i miodem.', 1);
 insert into dish (name, ingredients, recipe, category_id)
-values ('felis donec semper',
-        'lacus morbi sem mauris laoreet ut rhoncus aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in',
-        'arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in hac habitasse platea dictumst etiam faucibus cursus urna ut tellus nulla ut erat id mauris',
-        3);
+values ('Kanapka z jajkiem i awokado', 'chleb pełnoziarnisty, jajko, awokado, sól, pieprz',
+        'Ugotuj jajko na twardo, rozgnieć awokado, podawaj na chlebie.', 1);
 insert into dish (name, ingredients, recipe, category_id)
-values ('felis', 'volutpat eleifend donec ut dolor morbi vel lectus in quam fringilla rhoncus mauris enim leo rhoncus',
-        'ipsum integer a nibh in quis justo maecenas rhoncus aliquam lacus morbi quis tortor id nulla ultrices aliquet maecenas leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam cras pellentesque volutpat dui maecenas tristique est et tempus semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae',
-        4);
+values ('Jogurt z granolą', 'jogurt naturalny, granola, miód, owoce',
+        'Wymieszaj jogurt z granolą i owocami, polej miodem.', 1);
 insert into dish (name, ingredients, recipe, category_id)
-values ('elementum in hac',
-        'ullamcorper augue a suscipit nulla elit ac nulla sed vel enim sit amet nunc viverra dapibus nulla suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus sit amet',
-        'parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet justo morbi ut odio cras mi pede malesuada in imperdiet et commodo vulputate justo in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien in sapien iaculis congue vivamus metus arcu adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula condimentum curabitur in libero ut massa volutpat convallis',
-        9);
+values ('Pancakes z syropem klonowym', 'mąka, mleko, jajka, proszek do pieczenia, syrop klonowy',
+        'Wymieszaj składniki, smaż placuszki na patelni, polej syropem.', 1);
 insert into dish (name, ingredients, recipe, category_id)
-values ('luctus et ultrices',
-        'consequat nulla nisl nunc nisl duis bibendum felis sed interdum venenatis turpis enim blandit mi in porttitor pede justo eu massa donec dapibus duis at velit eu est congue elementum in hac habitasse platea',
-        'phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae donec',
-        7);
+values ('Spaghetti Bolognese', 'makaron, mięso mielone, pomidory, cebula, czosnek',
+        'Podsmaż mięso, dodaj cebulę i czosnek, wlej sos pomidorowy, duś 20 min.', 2);
 insert into dish (name, ingredients, recipe, category_id)
-values ('congue diam', 'eu nibh quisque id justo sit amet sapien dignissim',
-        'convallis duis consequat dui nec nisi volutpat eleifend donec ut', 1);
+values ('Schabowy z ziemniakami', 'schab, bułka tarta, jajko, mąka, ziemniaki',
+        'Rozbij mięso, obtocz w mące, jajku i bułce tartej. Smaż na złoto.', 2);
 insert into dish (name, ingredients, recipe, category_id)
-values ('in hac habitasse',
-        'eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu mi nulla',
-        'nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum ac est lacinia nisi venenatis tristique fusce congue diam id ornare imperdiet sapien urna pretium nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in hac habitasse platea dictumst',
-        4);
+values ('Zupa pomidorowa', 'pomidory, cebula, marchew, ryż, śmietana',
+        'Podsmaż cebulę i marchew, dodaj pomidory i gotuj 20 min.', 2);
 insert into dish (name, ingredients, recipe, category_id)
-values ('sit amet', 'turpis enim blandit mi in porttitor pede justo eu massa donec dapibus duis at velit eu',
-        'pretium iaculis diam erat fermentum justo nec condimentum neque sapien placerat ante nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim',
-        3);
+values ('Pierogi ruskie', 'mąka, jajka, twaróg, ziemniaki, cebula',
+        'Zagnieć ciasto, nadziej farszem z twarogu i ziemniaków, ugotuj.', 2);
 insert into dish (name, ingredients, recipe, category_id)
-values ('lorem ipsum dolor', 'ullamcorper purus sit amet nulla',
-        'donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum ac est lacinia nisi venenatis tristique fusce congue diam id ornare imperdiet sapien urna pretium nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in',
-        1);
+values ('Kurczak curry', 'kurczak, mleko kokosowe, curry, cebula, ryż',
+        'Podsmaż kurczaka, dodaj mleko kokosowe i curry, gotuj 15 min.', 2);
 insert into dish (name, ingredients, recipe, category_id)
-values ('mattis pulvinar nulla', 'sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis',
-        'at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet justo morbi ut odio cras mi pede malesuada in imperdiet et commodo vulputate justo in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien',
-        6);
+values ('Łosoś pieczony', 'łosoś, cytryna, oliwa, pieprz, sól',
+        'Skrop łososia cytryną, piecz w 180 stopniach przez 20 min.', 2);
 insert into dish (name, ingredients, recipe, category_id)
-values ('duis bibendum morbi',
-        'lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit donec diam',
-        'tincidunt eu felis fusce posuere felis sed lacus morbi sem mauris laoreet ut rhoncus aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent',
-        7);
+values ('Kanapka z awokado', 'chleb, awokado, sól, pieprz, oliwa',
+        'Rozgnieć awokado, dopraw, rozsmaruj na chlebie.', 3);
 insert into dish (name, ingredients, recipe, category_id)
-values ('nulla',
-        'donec ut dolor morbi vel lectus in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa id lobortis convallis',
-        'id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel est',
-        5);
+values ('Sałatka grecka', 'sałata, ogórek, pomidor, feta, oliwki, oliwa',
+        'Pokrój składniki, wymieszaj, skrop oliwą.', 3);
 insert into dish (name, ingredients, recipe, category_id)
-values ('suscipit a feugiat', 'quam pharetra magna ac consequat',
-        'mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis',
-        3);
+values ('Tosty z serem', 'chleb tostowy, ser, masło',
+        'Nałóż ser na chleb, podsmaż na maśle.', 3);
 insert into dish (name, ingredients, recipe, category_id)
-values ('odio', 'erat id mauris vulputate elementum nullam varius nulla facilisi cras',
-        'massa volutpat convallis morbi odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum',
-        2);
+values ('Omlet warzywny', 'jajka, papryka, cebula, ser',
+        'Roztrzep jajka, dodaj warzywa, smaż na patelni.', 3);
 insert into dish (name, ingredients, recipe, category_id)
-values ('turpis a pede',
-        'id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis libero',
-        'ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean', 7);
+values ('Sernik na zimno', 'twaróg, cukier, śmietana, żelatyna, biszkopty',
+        'Wymieszaj twaróg ze śmietaną i cukrem, dodaj żelatynę, przełóż na biszkopty.', 4);
 insert into dish (name, ingredients, recipe, category_id)
-values ('erat volutpat in',
-        'egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum',
-        'non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum aliquet ultrices erat tortor',
-        6);
+values ('Brownie czekoladowe', 'czekolada, masło, cukier, jajka, mąka',
+        'Rozpuść czekoladę z masłem, wymieszaj z resztą składników, piecz 30 min.', 4);
 insert into dish (name, ingredients, recipe, category_id)
-values ('habitasse', 'ut erat id mauris vulputate elementum nullam varius nulla facilisi cras non velit nec',
-        'orci luctus et ultrices posuere cubilia curae duis faucibus accumsan odio curabitur convallis duis consequat dui nec nisi volutpat eleifend donec ut dolor morbi vel lectus in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer a nibh in quis justo maecenas rhoncus aliquam lacus morbi quis tortor id nulla ultrices aliquet maecenas leo odio condimentum id luctus nec',
+values ('Pudding chia', 'nasiona chia, mleko kokosowe, miód, owoce',
+        'Wymieszaj składniki, odstaw na noc do lodówki.', 4);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Szarlotka', 'jabłka, cynamon, mąka, cukier, masło',
+        'Ugotuj jabłka z cynamonem, przełóż do ciasta, piecz 40 min.', 4);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Mus czekoladowy', 'czekolada, śmietana, jajka, cukier',
+        'Ubij śmietanę, wymieszaj z roztopioną czekoladą.', 4);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Hummus', 'ciecierzyca, tahini, cytryna, czosnek, oliwa',
+        'Zblenduj wszystkie składniki na gładką pastę.', 5);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Guacamole', 'awokado, cebula, pomidor, limonka, sól, pieprz',
+        'Rozgnieć awokado, dodaj posiekane składniki, dopraw.', 5);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Orzechy w miodzie', 'orzechy, miód',
+        'Wymieszaj orzechy z miodem, podawaj w miseczce.', 5);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Kabanosy', 'kabanosy',
+        'Pokrój kabanosy i podawaj jako przekąskę.', 5);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Leczo warzywne', 'papryka, cukinia, pomidory, cebula, czosnek',
+        'Podsmaż warzywa, duś z pomidorami przez 20 min.', 6);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Tofu z warzywami', 'tofu, papryka, brokuł, sos sojowy, sezam',
+        'Podsmaż tofu, dodaj warzywa, smaż 5 min, polej sosem sojowym.', 6);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Risotto grzybowe', 'ryż, grzyby, cebula, parmezan, bulion',
+        'Podsmaż cebulę, dodaj ryż, bulion i gotuj 20 min.', 6);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Fasolka po bretońsku', 'fasola, pomidory, cebula, majeranek',
+        'Ugotuj fasolę, dodaj pomidory i przyprawy, gotuj 30 min.', 6);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Placki ziemniaczane', 'ziemniaki, cebula, jajka, mąka',
+        'Zetrzyj ziemniaki, wymieszaj z resztą składników, smaż na patelni.', 6);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Curry z ciecierzycy', 'ciecierzyca, mleko kokosowe, pomidory, cebula, czosnek',
+        'Podsmaż cebulę i czosnek, dodaj pomidory i ciecierzycę, duś 15 min.', 7);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Burger wegański', 'bułka, kotlet roślinny, sałata, pomidor, ketchup',
+        'Usmaż kotlet, włóż do bułki z warzywami i ketchupem.', 7);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Kasza jaglana z warzywami', 'kasza jaglana, marchew, cukinia, pietruszka',
+        'Ugotuj kaszę, podsmaż warzywa, wymieszaj.', 8);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Placuszki bananowe', 'banany, jajka, mąka kokosowa',
+        'Rozgnieć banany, dodaj jajka i mąkę, smaż na patelni.', 8);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Wrap z kurczakiem i warzywami', 'tortilla, pierś z kurczaka, sałata, pomidor, jogurt naturalny',
+        'Usmaż kurczaka, pokrój go i wymieszaj z warzywami. Zawiń w tortillę i skrop jogurtem.', 9);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Kanapka z awokado i jajkiem', 'chleb pełnoziarnisty, awokado, jajko na twardo, sól, pieprz',
+        'Rozgnieć awokado, dopraw, rozsmaruj na chlebie i połóż plasterki jajka.', 9);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Baton owsiany z bakaliami', 'płatki owsiane, miód, orzechy, suszone owoce',
+        'Wymieszaj składniki, przełóż do formy i piecz w 160°C przez 20 minut.', 9);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Sałatka makaronowa z tuńczykiem', 'makaron pełnoziarnisty, tuńczyk, kukurydza, jogurt naturalny',
+        'Wymieszaj ugotowany makaron z tuńczykiem, kukurydzą i jogurtem naturalnym.', 9);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Kuleczki energetyczne', 'daktyle, orzechy, kakao, płatki owsiane',
+        'Zblenduj składniki, uformuj kulki i wstaw do lodówki na 30 minut.', 9);
+insert into dish (name, ingredients, recipe, category_id)
+values ('Sałatka z kurczakiem i rukolą', 'rukola, pierś z kurczaka, pomidory, oliwa, ocet balsamiczny',
+        'Usmaż kurczaka bez tłuszczu, pokrój go i wymieszaj z rukolą oraz pomidorami. Skrop oliwą i octem balsamicznym.',
         10);
 insert into dish (name, ingredients, recipe, category_id)
-values ('dictumst', 'congue risus semper porta volutpat quam pede lobortis ligula sit amet',
-        'sapien varius ut blandit non interdum in ante vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae duis faucibus accumsan odio curabitur convallis duis consequat dui nec nisi volutpat eleifend donec ut dolor morbi vel lectus in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis libero',
-        3);
+values ('Zupa krem z brokułów', 'brokuły, cebula, bulion warzywny, jogurt naturalny',
+        'Ugotuj brokuły w bulionie, zblenduj na gładki krem, dodaj jogurt naturalny.', 10);
 insert into dish (name, ingredients, recipe, category_id)
-values ('morbi',
-        'eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est risus auctor sed tristique in tempus sit amet sem fusce consequat nulla nisl nunc nisl duis bibendum',
-        'vulputate justo in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien in sapien iaculis congue vivamus metus arcu adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula condimentum curabitur in libero ut massa volutpat convallis morbi odio odio elementum eu interdum eu',
-        1);
+values ('Grillowana pierś z kurczaka', 'pierś z kurczaka, sok z cytryny, pieprz, sól',
+        'Skrop pierś z kurczaka sokiem z cytryny, przypraw, grilluj po 5 min z każdej strony.', 10);
 insert into dish (name, ingredients, recipe, category_id)
-values ('at nunc commodo',
-        'leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam cras pellentesque',
-        'iaculis congue vivamus metus arcu adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula condimentum curabitur in libero ut massa volutpat convallis morbi odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non',
-        8);
+values ('Pieczone warzywa', 'cukinia, papryka, bakłażan, oliwa, zioła prowansalskie',
+        'Pokrój warzywa, skrop oliwą, posyp ziołami i piecz w 180°C przez 20 minut.', 10);
 insert into dish (name, ingredients, recipe, category_id)
-values ('sapien',
-        'parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent',
-        'hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est risus auctor sed tristique in tempus sit amet sem fusce consequat nulla nisl nunc nisl duis bibendum',
-        4);
-insert into dish (name, ingredients, recipe, category_id)
-values ('in',
-        'duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh',
-        'at nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est risus auctor sed tristique in tempus sit amet sem fusce consequat nulla nisl nunc nisl duis bibendum felis sed interdum venenatis turpis enim blandit mi in porttitor pede justo eu',
-        3);
-insert into dish (name, ingredients, recipe, category_id)
-values ('aenean fermentum donec',
-        'nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis',
-        'natoque penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet justo morbi ut odio cras mi pede malesuada in imperdiet et commodo',
-        2);
-insert into dish (name, ingredients, recipe, category_id)
-values ('donec',
-        'potenti in eleifend quam a odio in hac habitasse platea dictumst maecenas ut massa quis augue luctus tincidunt nulla mollis molestie lorem quisque ut erat curabitur',
-        'eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est risus auctor sed tristique in tempus sit amet sem fusce consequat nulla nisl nunc nisl',
-        5);
-insert into dish (name, ingredients, recipe, category_id)
-values ('convallis',
-        'penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet',
-        'sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet justo morbi ut odio cras mi pede malesuada in imperdiet et commodo vulputate justo in blandit ultrices enim lorem ipsum dolor sit',
-        1);
-insert into dish (name, ingredients, recipe, category_id)
-values ('sit amet',
-        'praesent id massa id nisl venenatis lacinia aenean sit amet justo morbi ut odio cras mi pede malesuada in imperdiet et commodo vulputate justo in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit',
-        'interdum venenatis turpis enim blandit mi in porttitor pede justo eu massa donec dapibus duis at velit eu est congue elementum in hac habitasse platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien placerat ante nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis',
-        2);
-insert into dish (name, ingredients, recipe, category_id)
-values ('ligula pellentesque ultrices',
-        'faucibus orci luctus et ultrices posuere cubilia curae duis faucibus accumsan odio curabitur convallis duis consequat dui nec nisi volutpat eleifend donec ut dolor morbi vel lectus in quam fringilla rhoncus mauris',
-        'diam cras pellentesque volutpat dui maecenas tristique est et tempus semper est quam pharetra magna ac consequat metus sapien',
-        3);
-insert into dish (name, ingredients, recipe, category_id)
-values ('quam sollicitudin vitae',
-        'placerat ante nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis',
-        'a libero nam dui proin leo odio porttitor id consequat in consequat ut nulla sed accumsan felis ut at dolor quis odio consequat varius integer ac leo pellentesque ultrices mattis odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed vel enim',
-        4);
-insert into dish (name, ingredients, recipe, category_id)
-values ('tellus',
-        'dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit',
-        'id sapien in sapien iaculis congue vivamus metus arcu adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula condimentum curabitur in libero ut massa volutpat convallis morbi odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede',
-        7);
+values ('Smoothie szpinakowo-bananowe', 'szpinak, banan, mleko roślinne, nasiona chia',
+        'Zblenduj wszystkie składniki na gładki koktajl.', 10);
+

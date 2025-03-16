@@ -1,7 +1,7 @@
 insert into users (email, password)
-values ('admin@example.pl', '{noop}adminpass'),
-       ('user@example.pl', '{noop}userpass'),
-       ('editor@example.pl', '{noop}editorpass');
+values ('admin@planer.pl', '{noop}adminpass'),
+       ('user@planer.pl', '{noop}userpass'),
+       ('editor@planer.pl', '{noop}editorpass');
 
 insert into user_role (name, description)
 values ('ADMIN', 'pełne uprawnienia'),

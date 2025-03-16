@@ -1,21 +1,21 @@
 insert into category (name)
-values ('Śniadania');
+values ('Śniadanie');
 insert into category (name)
-values ('Obiady');
+values ('Obiad');
 insert into category (name)
-values ('Kolacje');
+values ('Kolacja');
 insert into category (name)
-values ('Desery');
+values ('Deser');
 insert into category (name)
-values ('Przekąski');
+values ('Przekąska');
 insert into category (name)
-values ('Dania wegetariańskie');
+values ('Danie wegetariańskie');
 insert into category (name)
-values ('Dania wegańskie');
+values ('Danie wegańskie');
 insert into category (name)
-values ('Dania bezglutenowe');
+values ('Danie bezglutenowe');
 insert into category (name)
-values ('Przekąski na wynos');
+values ('Przekąska na wynos');
 insert into category (name)
-values ('Dania niskokaloryczne');
+values ('Danie niskokaloryczne');
 
