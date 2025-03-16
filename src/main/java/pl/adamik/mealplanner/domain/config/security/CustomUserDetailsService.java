@@ -25,9 +25,9 @@ class CustomUserDetailsService implements UserDetailsService {
 
     private UserDetails createUserDetails(UserCredentialsDto credentials) {
         return User.builder()
-                .username(credentials.registrationDto().getEmail())
-                .password(credentials.registrationDto().getPassword())
-                .roles(credentials.roles().toArray(String[]::new))
+                .username(credentials.getRegistrationDto().getEmail())
+                .password(credentials.getRegistrationDto().getPassword())
+                .roles(credentials.getRoles().toArray(String[]::new))
                 .build();
     }
 }
