@@ -14,10 +14,6 @@ import java.util.stream.Collectors;
 @Component
 public class DishSelectionMapper {
 
-    private DishSelectionMapper() {
-        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
-    }
-
     public List<DishSelectionDto> map(List<DishSelection> dishSelections, List<Category> categories) {
         Map<LocalDate, List<DishSelection>> groupedByDate = groupByDate(dishSelections);
 
