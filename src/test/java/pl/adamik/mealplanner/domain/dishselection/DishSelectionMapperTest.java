@@ -67,18 +67,18 @@ class DishSelectionMapperTest {
         assertEquals(2, result.size());
 
         DishSelectionDto dto1 = result.get(0);
-        assertEquals(date1, dto1.date());
-        assertEquals(1, dto1.categories().size());
-        assertEquals("Śniadanie", dto1.categories().get(0).getCategoryDto().getName());
-        assertEquals(1, dto1.categories().get(0).getDishes().size());
-        assertEquals("Jajecznica", dto1.categories().get(0).getDishes().get(0).name());
+        assertEquals(date1, dto1.getDate());
+        assertEquals(1, dto1.getCategories().size());
+        assertEquals("Śniadanie", dto1.getCategories().get(0).getCategoryDto().getName());
+        assertEquals(1, dto1.getCategories().get(0).getDishes().size());
+        assertEquals("Jajecznica", dto1.getCategories().get(0).getDishes().get(0).name());
 
         DishSelectionDto dto2 = result.get(1);
-        assertEquals(date2, dto2.date());
-        assertEquals(1, dto2.categories().size());
-        assertEquals("Obiad", dto2.categories().get(0).getCategoryDto().getName());
-        assertEquals(1, dto2.categories().get(0).getDishes().size());
-        assertEquals("Spaghetti", dto2.categories().get(0).getDishes().get(0).name());
+        assertEquals(date2, dto2.getDate());
+        assertEquals(1, dto2.getCategories().size());
+        assertEquals("Obiad", dto2.getCategories().get(0).getCategoryDto().getName());
+        assertEquals(1, dto2.getCategories().get(0).getDishes().size());
+        assertEquals("Spaghetti", dto2.getCategories().get(0).getDishes().get(0).name());
     }
 
     @Test
