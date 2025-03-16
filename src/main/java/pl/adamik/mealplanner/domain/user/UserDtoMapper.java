@@ -7,6 +7,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 class UserDtoMapper {
+
+    private UserDtoMapper() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
+
     static UserCredentialsDto mapCredentials(User user) {
         String email = user.getEmail();
         String password = user.getPassword();

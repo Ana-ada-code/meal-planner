@@ -5,6 +5,11 @@ import pl.adamik.mealplanner.domain.dish.dto.DishSaveDto;
 import pl.adamik.mealplanner.domain.rating.Rating;
 
 public class DishDtoMapper {
+
+    private DishDtoMapper() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
+
     public static DishDto map(Dish dish) {
         double avgRating = dish.getRatings().stream()
                 .map(Rating::getRating)
