@@ -10,6 +10,9 @@
             <h2 class="list-heading text-center mb-3" th:text="${heading}">Lista dań</h2>
             <div class="row">
                 <div class="col-md-9 mx-auto d-flex flex-column align-items-center">
+                    <p class="alert alert-primary text-center" th:if="${dishes.isEmpty()}">
+                        Lista jest pusta
+                    </p>
                     <div class="row w-100" th:remove="all-but-first">
                         <div th:each="dish : ${dishes.content}" class="col-md-12 mb-4">
                             <div class="card shadow-sm w-100">
