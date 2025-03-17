@@ -15,7 +15,6 @@ public class UserService {
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
 
-
     public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository,
                        PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
