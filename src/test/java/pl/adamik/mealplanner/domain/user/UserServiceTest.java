@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.adamik.mealplanner.domain.user.dto.UserCredentialsDto;
-import pl.adamik.mealplanner.domain.user.dto.UserRegistrationDto;
+import pl.adamik.mealplanner.domain.user.dto.UserDto;
 
 import java.util.Optional;
 
@@ -44,8 +44,8 @@ class UserServiceTest {
 
         // Then
         assertThat(result).isPresent();
-        assertThat(result.get().getRegistrationDto().getEmail()).isEqualTo("test@example.com");
-        assertThat(result.get().getRegistrationDto().getPassword()).isEqualTo("encodedPassword");
+        assertThat(result.get().getUserDto().getEmail()).isEqualTo("test@example.com");
+        assertThat(result.get().getUserDto().getPassword()).isEqualTo("encodedPassword");
         verify(userRepository, times(1)).findByEmail("test@example.com");
     }
 
@@ -65,7 +65,7 @@ class UserServiceTest {
     @Test
     void shouldRegisterUserWithDefaultRole_whenRoleExists() {
         // Given
-        UserRegistrationDto userRegistration = new UserRegistrationDto();
+        UserDto userRegistration = new UserDto();
         userRegistration.setEmail("newuser@example.com");
         userRegistration.setPassword("plainPassword");
 
@@ -91,7 +91,7 @@ class UserServiceTest {
     @Test
     void shouldThrowException_whenDefaultRoleDoesNotExist() {
         // Given
-        UserRegistrationDto userRegistration = new UserRegistrationDto();
+        UserDto userRegistration = new UserDto();
         userRegistration.setEmail("newuser@example.com");
         userRegistration.setPassword("plainPassword");
 

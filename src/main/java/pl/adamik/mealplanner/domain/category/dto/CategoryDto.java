@@ -12,6 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CategoryDto {
     private Long id;
-    @NotBlank(message = "Nazwa Kategorii nie może być pusta")
+    @NotBlank(message = "Nazwa kategorii nie może być pusta")
     private String name;
 }

@@ -1,7 +1,7 @@
 package pl.adamik.mealplanner.domain.user;
 
 import pl.adamik.mealplanner.domain.user.dto.UserCredentialsDto;
-import pl.adamik.mealplanner.domain.user.dto.UserRegistrationDto;
+import pl.adamik.mealplanner.domain.user.dto.UserDto;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,6 +19,6 @@ class UserDtoMapper {
                 .stream()
                 .map(UserRole::getName)
                 .collect(Collectors.toSet());
-        return new UserCredentialsDto(new UserRegistrationDto(email, password), roles);
+        return new UserCredentialsDto(new UserDto(email, password), roles);
     }
 }

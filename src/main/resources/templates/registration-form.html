@@ -19,27 +19,38 @@
                                 <div class="row g-0 w-100">
                                     <div class="d-flex align-items-center justify-content-center p-2">
                                         <form action="" th:action="@{/rejestracja}" method="post" class="mc-form"
-                                              th:object="${user}">
+                                              th:object="${userDto}">
                                             <p class="alert alert-primary text-center mc-form-message"
                                                th:if="${param.error}"
                                                th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
                                                 Belka z powiadomieniami
                                             </p>
                                             <p class="alert alert-primary text-center mc-form-message"
-                                               th:if="${param.logout}"
-                                            >
+                                               th:if="${param.logout}">
                                                 Zostałeś wylogowany
                                             </p>
                                             <div class="mb-3">
                                                 <label for="username" class="form-label">Adres email</label>
                                                 <input type="email" class="form-control" id="username" name="username"
                                                        placeholder="nazwa użytkownika" th:field="*{email}">
+                                                <div th:if="${#fields.hasErrors('email')}" class="error">
+                                                    <div th:each="err : ${#fields.errors('email')}"
+                                                         class="alert alert-primary text-center py-1 mb-1">
+                                                        <p class="m-0" th:text="${err}"></p>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="password" class="form-label">Hasło</label>
                                                 <input type="password" class="form-control" id="password"
                                                        name="password"
                                                        placeholder="hasło" th:field="*{password}">
+                                                <div th:if="${#fields.hasErrors('password')}" class="error">
+                                                    <div th:each="err : ${#fields.errors('password')}"
+                                                         class="alert alert-primary text-center py-1 mb-1">
+                                                        <p class="m-0" th:text="${err}"></p>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="mb-3">
                                                 <button type="submit" class="btn btn-primary">Zarejestruj się</button>

@@ -4,7 +4,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.adamik.mealplanner.domain.user.dto.UserCredentialsDto;
-import pl.adamik.mealplanner.domain.user.dto.UserRegistrationDto;
+import pl.adamik.mealplanner.domain.user.dto.UserDto;
 
 import java.util.Optional;
 
@@ -29,7 +29,7 @@ public class UserService {
     }
 
     @Transactional
-    public void registerUserWithDefaultRole(UserRegistrationDto userRegistration) {
+    public void registerUserWithDefaultRole(UserDto userRegistration) {
         UserRole defaultRole = userRoleRepository.findByName(DEFAULT_USER_ROLE).orElseThrow();
         User user = new User();
         user.setEmail(userRegistration.getEmail());
