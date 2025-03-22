@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-md-4 text-center">
                     <img src="../static/img/dish-placeholder.png"
-                         th:src="${dish.image ne null} ? @{|/img/${dish.image}|} : @{/img/dish-placeholder.png}"
+                         th:src="${dish.image ne null} ? @{|${@environment.getProperty('app.storage.image-prefix')}${dish.image}|} : @{/img/dish-placeholder.png}"
                          alt="Nazwa dania"
                          th:alt="${dish.name}"
                          class="img-fluid">

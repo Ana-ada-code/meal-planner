@@ -29,7 +29,6 @@ public class DishService {
         this.fileStorageService = fileStorageService;
     }
 
-
     public Page<DishDto> findAllDishes(Pageable pageable) {
         return dishRepository.findAll(pageable)
                 .map(DishDtoMapper::map);
@@ -92,12 +91,16 @@ public class DishService {
         dish.setName(dishToSave.getName());
         dish.setIngredients(dishToSave.getIngredients());
         dish.setRecipe(dishToSave.getRecipe());
-        Category category = categoryRepository.findByNameIgnoreCase(dishToSave.getCategory()).orElseThrow();
+
+        Category category = categoryRepository.findByNameIgnoreCase(dishToSave.getCategory())
+                .orElseThrow(() -> new IllegalArgumentException("Category not found" + dishToSave.getCategory()));
         dish.setCategory(category);
+
         if (dishToSave.getImage() != null && !dishToSave.getImage().isEmpty()) {
-            String savedFileName = fileStorageService.saveImage(dishToSave.getImage());
-            dish.setImage(savedFileName);
+            String image = fileStorageService.saveFile(dishToSave.getImage());
+            dish.setImage(image);
         }
         dishRepository.save(dish);
     }
 }
+

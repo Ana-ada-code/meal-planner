@@ -153,14 +153,14 @@ class DishServiceTest {
                 .build();
 
         when(categoryRepository.findByNameIgnoreCase("Italian")).thenReturn(Optional.of(category));
-        when(fileStorageService.saveImage(mockImage)).thenReturn("saved_image.jpg");
+        when(fileStorageService.saveFile(mockImage)).thenReturn("saved_image.jpg");
 
         // When
         dishService.addDish(dishSaveDto);
 
         // Then
         verify(categoryRepository, times(1)).findByNameIgnoreCase("Italian");
-        verify(fileStorageService, times(1)).saveImage(mockImage);
+        verify(fileStorageService, times(1)).saveFile(mockImage);
         verify(dishRepository, times(1)).save(argThat(dish ->
                 dish.getName().equals("Pizza") &&
                         dish.getIngredients().equals("mąka, oliwa") &&
@@ -210,7 +210,7 @@ class DishServiceTest {
 
         // Then
         verify(categoryRepository, times(1)).findByNameIgnoreCase("Italian");
-        verify(fileStorageService, never()).saveImage(any());
+        verify(fileStorageService, never()).saveFile(any());
         verify(dishRepository, times(1)).save(argThat(dish ->
                 dish.getName().equals("Pizza") &&
                         dish.getIngredients().equals("mąka, oliwa") &&

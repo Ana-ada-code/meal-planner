@@ -19,10 +19,10 @@
                                 <div class="row g-0 w-100">
                                     <div class="col-md-2 d-flex align-items-center justify-content-center p-2">
                                         <img src="../static/img/dish-placeholder.png"
-                                             th:src="${dish.image ne null} ? @{|/img/${dish.image}|} : @{/img/dish-placeholder.png}"
-                                             class="img-fluid rounded"
+                                             th:src="${dish.image ne null} ? @{|${@environment.getProperty('app.storage.image-prefix')}${dish.image}|} : @{/img/dish-placeholder.png}"
+                                             alt="Nazwa dania"
                                              th:alt="${dish.name}"
-                                             alt="Pizza">
+                                             class="img-fluid">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
