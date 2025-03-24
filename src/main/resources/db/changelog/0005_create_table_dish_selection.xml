@@ -7,9 +7,6 @@
 
     <changeSet id="0005-1" author="adamik">
         <createTable tableName="dish_selection">
-            <column name="id" type="BIGINT" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false"
                              foreignKeyName="fk_dish_selection_user"
@@ -27,4 +24,36 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet id="0005-2" author="adamik">
+        <preConditions onFail="MARK_RAN">
+            <dbms type="postgresql"/>
+        </preConditions>
+        <addColumn tableName="dish_selection">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </addColumn>
+
+        <createSequence sequenceName="dish_selection_id_seq" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="0005-3" author="adamik">
+        <preConditions onFail="MARK_RAN">
+            <dbms type="postgresql"/>
+        </preConditions>
+        <addDefaultValue tableName="dish_selection" columnName="id" defaultValueSequenceNext="dish_selection_id_seq"/>
+    </changeSet>
+
+    <changeSet id="0005-4" author="adamik">
+        <preConditions onFail="MARK_RAN">
+            <dbms type="h2"/>
+        </preConditions>
+        <addColumn tableName="dish_selection">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

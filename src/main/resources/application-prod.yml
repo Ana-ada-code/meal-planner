@@ -1,12 +1,19 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/mealplanner
-    username: root
-    password: admin
+    url: ${db.url}
+    username: ${db.username}
+    password: ${db.password}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
   liquibase:
     contexts: prod
   config:
-    import: cloud.properties
+    import: optional:cloud.properties, optional:db.properties
+
 app:
   cloudinary:
     cloud-name: ${cloud_name}
