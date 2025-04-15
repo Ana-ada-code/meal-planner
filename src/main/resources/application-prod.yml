@@ -11,8 +11,6 @@ spring:
       ddl-auto: validate
   liquibase:
     contexts: prod
-  config:
-    import: optional:cloud.properties, optional:db.properties
 
 app:
   cloudinary:
