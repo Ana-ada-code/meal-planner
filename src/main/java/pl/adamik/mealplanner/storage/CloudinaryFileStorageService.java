@@ -30,7 +30,7 @@ public class CloudinaryFileStorageService implements FileStorageService {
     public String saveFile(MultipartFile file) {
         try {
             Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-            return uploadResult.get("secure_url").toString(); // Zwraca URL pliku
+            return uploadResult.get("secure_url").toString();
         } catch (IOException e) {
             throw new RuntimeException("Błąd przesyłania pliku do Cloudinary", e);
         }

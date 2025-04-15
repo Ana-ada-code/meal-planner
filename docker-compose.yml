@@ -24,6 +24,10 @@ services:
       DB_URL: ${DB_URL}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
+      cloud_name: ${cloud_name}
+      api_key: ${api_key}
+      api_secret: ${api_secret}
+
     ports:
       - "8080:8080"
     depends_on:
