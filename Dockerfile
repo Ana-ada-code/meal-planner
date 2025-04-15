@@ -1,17 +1,16 @@
-FROM openjdk:17-jdk-slim
-
-COPY . /app
+FROM maven:3.9.4-eclipse-temurin-17 AS build
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y maven
-
+COPY pom.xml .
+COPY src ./src
 RUN mvn clean package -DskipTests
 
-COPY start.sh /start.sh
+FROM eclipse-temurin:17-jdk-alpine
 
-RUN chmod +x /start.sh
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 
-EXPOSE 8080
+ENV SPRING_PROFILES_ACTIVE=prod
 
-CMD ["/start.sh"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
