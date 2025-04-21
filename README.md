@@ -23,12 +23,14 @@ Dla wszystkich:
 - możliwość wyszukiwania dań po nazwie
 - możliwość podglądu konkretnego dania (składników, przepisu, oceny)
 - możliwość rejestracji i logowania
+
 Dla zalogowanych:
 - możliwość dodania dania do swojego plannera
 - możliwość zobaczenia pełnej listy wybranych dań oraz jej edycji (usuwania poszczególnych pozycji, konkretnego dnia, wszystkich)
 - możliwość oceniania dań
 - możliwość dodania dania do ulubionych
 - możliwość zobaczenia listy ulubionych dań
+
 Dla administratorów:
 - możliwość dodawania, edytowania oraz usuwania dań
 - możliwość dodawania, edytowania nazwy oraz usuwania kategorii wraz ze wszystkim przypisanymi do niej daniami
