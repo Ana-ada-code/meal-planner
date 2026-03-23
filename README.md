@@ -4,7 +4,7 @@
 Aplikacja webowa umożliwiająca planowanie codziennych posiłków, zarządzanie przepisami kulinarnymi oraz tworzenie spersonalizowanych list dań i ulubionych. Projekt został stworzony w celu ułatwienia organizacji codziennego gotowania.
 
 ### Link do strony
-https://meal-planner.pl/
+https://meal-planner.ovh/
 
 ### Funkcjonalności
 - Tworzenie i zarządzanie przepisami kulinarnymi
@@ -73,20 +73,20 @@ Dla administratorów:
 4. W przeglądarce internetowej wejść na stronę: http://localhost:8080/
 
 ### Pierwsze uruchomienie online
-1. W przeglądarce internetowej wejść na stronę: https://meal-planner.pl/
+1. W przeglądarce internetowej wejść na stronę: https://meal-planner.ovh/
 
 ### Wyświetlanie listy dań
-1. W przeglądarce internetowej wejść na stronę: http://localhost:8080/ (https://meal-planner.pl/) lub skorzystać z przycisku "Meal Planner" w pasku na górze strony.
+1. W przeglądarce internetowej wejść na stronę: http://localhost:8080/ (https://meal-planner.ovh/) lub skorzystać z przycisku "Meal Planner" w pasku na górze strony.
 
 ### Wyświetlanie listy kategorii
-1. W przeglądarce internetowej wejść na stronę: http://localhost:8080/kategorie-dan (https://meal-planner.pl/kategorie-dan) lub skorzystać z przycisku "Kategorie" w pasku na górze strony.
+1. W przeglądarce internetowej wejść na stronę: http://localhost:8080/kategorie-dan (https://meal-planner.ovh/kategorie-dan) lub skorzystać z przycisku "Kategorie" w pasku na górze strony.
 
 ### Wyświetlanie listy dań z danej kategorii
-1. W przeglądarce internetowej wejść na stronę: http://localhost:8080/kategorie-dan (https://meal-planner.pl/kategorie-dan) lub skorzystać z przycisku "Kategorie" w pasku na górze strony.
+1. W przeglądarce internetowej wejść na stronę: http://localhost:8080/kategorie-dan (https://meal-planner.ovh/kategorie-dan) lub skorzystać z przycisku "Kategorie" w pasku na górze strony.
 2. Kliknąć na nazwę danej kategorii.
 
 ### Wyświetlanie listy 10 najwyżej ocenianych dań
-1. W przeglądarce internetowej wejść na stronę: http://localhost:8080/top (https://meal-planner.pl/top) lub skorzystać z przycisku "Top10" w pasku na górze strony.
+1. W przeglądarce internetowej wejść na stronę: http://localhost:8080/top (https://meal-planner.ovh/top) lub skorzystać z przycisku "Top10" w pasku na górze strony.
 
 ### Wyświetlanie wyszukiwanych dań
 1. Wpisać nazwę wyszukiwanego dania w polu wyszukiwania w pasku na górze strony.
@@ -94,12 +94,12 @@ Dla administratorów:
 
 ### 🔑 Rejestracja i logowanie
 ### Logowanie
-1. W przeglądarce internetowej wejść na stronę: http://localhost:8080/login (https://meal-planner.pl/login).
+1. W przeglądarce internetowej wejść na stronę: http://localhost:8080/login (https://meal-planner.ovh/login).
 2. Uzupełnić dane logowania.
 3. Kliknąć Enter lub przycisk "Zaloguj się".
 
 ### Rejestracja
-1. W przeglądarce internetowej wejść na stronę: http://localhost:8080/rejestracja (https://meal-planner.pl/rejestracja) lub na stronie logowania kliknąć przycisk "Zarejestruj się".
+1. W przeglądarce internetowej wejść na stronę: http://localhost:8080/rejestracja (https://meal-planner.ovh/rejestracja) lub na stronie logowania kliknąć przycisk "Zarejestruj się".
 2. Uzupełnić dane rejestracji. Uwaga: Nie podawaj prawdziwych danych!
 3. Kliknąć Enter lub przycisk "Zarejestruj się".
 
@@ -109,31 +109,31 @@ Dla administratorów:
 ### 🍽 Korzystanie z Planera - dla zalogowanych
 ### Wyświetlanie listy ulubionych dań
 1. Zalogować się na konto użytkownika.
-2. W przeglądarce internetowej wejść na stronę: http://localhost:8080/ulubione (https://meal-planner.pl/ulubione) lub skorzystać z przycisku "Ulubione" w pasku na górze strony.
+2. W przeglądarce internetowej wejść na stronę: http://localhost:8080/ulubione (https://meal-planner.ovh/ulubione) lub skorzystać z przycisku "Ulubione" w pasku na górze strony.
 
 ### Wyświetlanie listy wybranych dań
 1. Zalogować się na konto użytkownika.
-2. W przeglądarce internetowej wejść na stronę: http://localhost:8080/planer (https://meal-planner.pl/planer) lub skorzystać z przycisku "Planer" w pasku na górze strony.
+2. W przeglądarce internetowej wejść na stronę: http://localhost:8080/planer (https://meal-planner.ovh/planer) lub skorzystać z przycisku "Planer" w pasku na górze strony.
 
 ### Zmiana daty zaplanowanego dania
 1. Zalogować się na konto użytkownika.
-2. W przeglądarce internetowej wejść na stronę: http://localhost:8080/planer (https://meal-planner.pl/planer) lub skorzystać z przycisku "Planer" w pasku na górze strony.
+2. W przeglądarce internetowej wejść na stronę: http://localhost:8080/planer (https://meal-planner.ovh/planer) lub skorzystać z przycisku "Planer" w pasku na górze strony.
 3. Kliknąć ikonkę kalendarza przy nazwie dania którego datę chce się zmienić.
 4. Wybrać nową datę i kliknąć "Zmień datę".
 
 ### Usunięcie z planera danego dania
 1. Zalogować się na konto użytkownika.
-2. W przeglądarce internetowej wejść na stronę: http://localhost:8080/planer (https://meal-planner.pl/planer) lub skorzystać z przycisku "Planer" w pasku na górze strony.
+2. W przeglądarce internetowej wejść na stronę: http://localhost:8080/planer (https://meal-planner.ovh/planer) lub skorzystać z przycisku "Planer" w pasku na górze strony.
 3. Kliknąć ikonkę "-" przy nazwie dania.
 
 ### Usunięcie z planera danego dnia
 1. Zalogować się na konto użytkownika.
-2. W przeglądarce internetowej wejść na stronę: http://localhost:8080/planer (https://meal-planner.pl/planer) lub skorzystać z przycisku "Planer" w pasku na górze strony.
+2. W przeglądarce internetowej wejść na stronę: http://localhost:8080/planer (https://meal-planner.ovh/planer) lub skorzystać z przycisku "Planer" w pasku na górze strony.
 3. Kliknąć ikonkę "-" przy konkretnej dacie.
 
 ### Usunięcie z planera wszystkich dań
 1. Zalogować się na konto użytkownika.
-2. W przeglądarce internetowej wejść na stronę: http://localhost:8080/planer (https://meal-planner.pl/planer) lub skorzystać z przycisku "Planer" w pasku na górze strony.
+2. W przeglądarce internetowej wejść na stronę: http://localhost:8080/planer (https://meal-planner.ovh/planer) lub skorzystać z przycisku "Planer" w pasku na górze strony.
 3. Kliknąć przycisk "Usuń wszystkie dania".
 
 ### Podgląd szczegółowy danego dania
